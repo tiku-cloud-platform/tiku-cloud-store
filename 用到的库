@@ -1,0 +1,4 @@
+npm install --save js-md5
+npm i vue-ueditor-wrap@2.x
+npm install --save js-base64
+npm install node-sass
