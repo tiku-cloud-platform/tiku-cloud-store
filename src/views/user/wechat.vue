@@ -72,7 +72,7 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <span>{{ row.group.title }}</span>
+            <span>{{ row.group.title || "" }}</span>
           </template>
         </el-table-column>
         <el-table-column label="头像" width="70" align="center">
