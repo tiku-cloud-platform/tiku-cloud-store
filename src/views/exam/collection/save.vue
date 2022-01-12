@@ -169,7 +169,7 @@ export default {
         is_recommend: 1,
         is_show: 1,
         content: '',
-        level: '',
+        level: 1,
         author: getName(),
         audit_author: getName()
       },

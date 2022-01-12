@@ -194,6 +194,7 @@ export default {
         uuid: '',
         title: '',
         file_uuid: '',
+        level: 1,
         tips_expend_score: 0,
         answer_income_score: 1.00,
         analysis: '',
