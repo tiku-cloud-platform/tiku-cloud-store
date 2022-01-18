@@ -91,6 +91,16 @@
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
+            <el-form-item label="试题出处：" prop="source_author" label-for="source_author">
+              <el-input v-model.trim="formValidate.source_author" placeholder="请输入" maxlength="32" style="width: 90%" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="试题链接：" prop="source_url" label-for="source_url">
+              <el-input v-model.trim="formValidate.source_url" placeholder="请输入" maxlength="32" style="width: 90%" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio v-for="item in this.$store.getters.isShow" :key="item.label" :label="item.value">{{ item.label }}</el-radio>
@@ -242,6 +252,8 @@ export default {
       formValidate: {
         uuid: '',
         title: '',
+        source_url: '',
+        source_author: '',
         tips_expend_score: 0,
         answer_income_score: 1.00,
         analysis: '',
@@ -382,7 +394,9 @@ export default {
           tag: data.tag,
           collection: data.collection,
           analysis: data.analysis,
-          content: data.content
+          content: data.content,
+          source_url: data.source_url,
+          source_author: data.source_author
         }
       })
     }
