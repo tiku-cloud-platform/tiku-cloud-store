@@ -75,36 +75,14 @@
             <span>{{ row.group !== null ? row.group.title : "" }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="头像" width="70" align="center">
-          <template slot-scope="scope">
-            <viewer><img
-              :src="scope.row.avatar_url"
-              width="50"
-              height="50"
-            ></viewer>
-          </template>
-        </el-table-column>
         <el-table-column
-          label="昵称"
+          label="姓名"
           width="auto"
           align="center"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
             <span>{{ row.nickname }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="性别" width="auto" align="center">
-          <template slot-scope="{ row }">
-            <span>{{
-              row.gender == 1
-                ? "男"
-                : row.gender == 2
-                  ? "女"
-                  : row.gender == 0
-                    ? "未知"
-                    : ""
-            }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -115,25 +93,6 @@
         >
           <template slot-scope="{ row }">
             <span>{{ row.mobile }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="状态"
-          width="auto"
-          align="center"
-          :show-overflow-tooltip="true"
-        >
-          <template slot-scope="{ row }">
-            <el-button
-              v-if="row.is_forbidden == 1"
-              size="mini"
-              type="text"
-            >启用</el-button>
-            <el-button
-              v-if="row.is_forbidden == 2"
-              size="mini"
-              type="text"
-            >禁用</el-button>
           </template>
         </el-table-column>
         <el-table-column
