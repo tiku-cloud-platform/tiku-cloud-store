@@ -82,7 +82,7 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <span>{{ row.nickname }}</span>
+            <span>{{ row.real_name }}</span>
           </template>
         </el-table-column>
         <el-table-column
