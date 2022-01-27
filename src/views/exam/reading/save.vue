@@ -254,7 +254,7 @@ export default {
         title: '',
         source_url: '',
         source_author: '',
-        tips_expend_score: 0,
+        tips_expend_score: 1.00,
         answer_income_score: 1.00,
         analysis: '',
         level: 1,
