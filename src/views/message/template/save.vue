@@ -68,6 +68,23 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
+          <span class="title">其他设置</span>
+          <el-divider />
+        </div>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="显示排序：">
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
+            </el-form-item>
+            <el-form-item label="启用状态：">
+              <el-radio-group v-model="formValidate.is_show">
+                <el-radio :label="1" class="radio">启用</el-radio>
+                <el-radio :label="0">禁用</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="dividerTitle">
           <span class="title">模板参数</span><span class="small-title">(请严格按照微信小程序的订阅消息格式进行配置，否则无法发送订阅消息给用户)</span>
           <el-divider />
           <el-row>
@@ -112,23 +129,6 @@
             <el-button v-if="index >= 1" icon="el-icon-delete" size="mini" type="danger" @click.prevent="removeOptions(item)">移除</el-button>
           </el-row>
         </div>
-        <div class="dividerTitle">
-          <span class="title">其他设置</span>
-          <el-divider />
-        </div>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="显示排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
-            </el-form-item>
-            <el-form-item label="启用状态：">
-              <el-radio-group v-model="formValidate.is_show">
-                <el-radio :label="1" class="radio">启用</el-radio>
-                <el-radio :label="0">禁用</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-        </el-row>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
     </el-card>

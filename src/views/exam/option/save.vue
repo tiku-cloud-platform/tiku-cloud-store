@@ -97,6 +97,24 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
+          <span class="title">其他设置</span>
+          <el-divider />
+        </div>
+        <el-row :gutter="10">
+          <el-col v-bind="grid">
+            <el-form-item label="显示状态：">
+              <el-radio-group v-model="formValidate.is_show">
+                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="试题解析：">
+              <el-input v-model="formValidate.analysis" autosize type="textarea" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="dividerTitle">
           <span class="title mr10">试题选项</span>
           <el-divider />
         </div>
@@ -125,24 +143,6 @@
           <el-col>
             <el-form-item>
               <el-button type="primary" icon="el-icon-plus" @click="addOptions">新增</el-button>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <div class="dividerTitle">
-          <span class="title">其他设置</span>
-          <el-divider />
-        </div>
-        <el-row :gutter="10">
-          <el-col v-bind="grid">
-            <el-form-item label="显示状态：">
-              <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
-            <el-form-item label="试题解析：">
-              <el-input v-model="formValidate.analysis" autosize type="textarea" />
             </el-form-item>
           </el-col>
         </el-row>

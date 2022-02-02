@@ -66,13 +66,6 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">试卷介绍</span>
-          <el-divider />
-        </div>
-        <el-form-item label="试卷介绍：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
-        </el-form-item>
-        <div class="dividerTitle">
           <span class="title">其他设置</span>
           <el-divider />
         </div>
@@ -107,6 +100,13 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <div class="dividerTitle">
+          <span class="title">试卷介绍</span>
+          <el-divider />
+        </div>
+        <el-form-item label="试卷介绍：" prop="content">
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+        </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
     </el-card>
