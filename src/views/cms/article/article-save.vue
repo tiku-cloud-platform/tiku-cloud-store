@@ -59,13 +59,6 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">文章内容</span>
-          <el-divider />
-        </div>
-        <el-form-item label="文章内容：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
-        </el-form-item>
-        <div class="dividerTitle">
           <span class="title">其他设置</span>
           <el-divider />
         </div>
@@ -81,7 +74,7 @@
                 placeholder="选择日期"
               />
             </el-form-item>
-            <el-form-item label="新闻排序：">
+            <el-form-item label="文章排序：">
               <el-input-number v-model="formValidate.orders" :min="0" :max="10" />
             </el-form-item>
           </el-col>
@@ -100,6 +93,13 @@
             </el-form-item>
           </el-col>
         </el-row>
+        <div class="dividerTitle">
+          <span class="title">文章内容</span>
+          <el-divider />
+        </div>
+        <el-form-item label="文章内容：" prop="content">
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+        </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
     </el-card>
