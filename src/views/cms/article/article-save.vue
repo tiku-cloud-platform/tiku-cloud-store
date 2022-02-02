@@ -75,7 +75,8 @@
               />
             </el-form-item>
             <el-form-item label="文章排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10" />
+              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
+              <div class="image-size-require">最大顺序为1,000,000,000</div>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">

@@ -240,7 +240,4 @@ export default {
 .el-divider--horizontal {
   margin: 19px 0;
 }
-.image-size-require {
-  color: red;
-}
 </style>

@@ -28,4 +28,7 @@ export default {
 .button-warning-text {
   color: #e6a23c;
 }
+.image-size-require {
+  color: red;
+}
 </style>
