@@ -228,7 +228,7 @@ import { list as knowledgeList } from '@/api/exam/knowledge'
 // 试题试卷
 import { list as collectionList } from '@/api/exam/collection'
 import Pagination from '@/components/Pagination'
-
+import { getName } from '@/utils/auth'
 export default {
   name: 'SaveExamReading',
   components: { Pagination, ueditorFrom },
@@ -253,7 +253,7 @@ export default {
         uuid: '',
         title: '',
         source_url: '',
-        source_author: '',
+        source_author: getName(),
         tips_expend_score: 1.00,
         answer_income_score: 1.00,
         analysis: '',
