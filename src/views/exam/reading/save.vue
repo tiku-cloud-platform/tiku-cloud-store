@@ -36,7 +36,7 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试题分类：" prop="category">
-              <el-select v-model="formValidate.category" multiple clearable placeholder="请选择" style="width: 90%">
+              <el-select v-model="formValidate.category" multiple filterable clearable placeholder="请选择" style="width: 90%">
                 <el-option-group
                   v-for="group in categoryData"
                   :key="group.title"
@@ -55,7 +55,7 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试题知识点：" prop="tag">
-              <el-select v-model="formValidate.tag" multiple clearable placeholder="请选择" style="width: 90%">
+              <el-select v-model="formValidate.tag" multiple clearable filterable placeholder="请选择" style="width: 90%">
                 <el-option-group
                   v-for="group in knowledgeData"
                   :key="group.title"
