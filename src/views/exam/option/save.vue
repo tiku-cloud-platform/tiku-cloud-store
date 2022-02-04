@@ -195,7 +195,7 @@ export default {
         title: '',
         file_uuid: '',
         level: 1,
-        tips_expend_score: 0,
+        tips_expend_score: 1.00,
         answer_income_score: 1.00,
         analysis: '',
         option_item: [
