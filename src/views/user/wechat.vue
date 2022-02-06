@@ -48,7 +48,7 @@
                     size="small"
                     @click="reset('searchFormList')"
                   >重置</el-button>
-                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
+                  <!-- <el-button type="danger" @click="handleBatchDel()">删除</el-button> -->
                 </el-form-item>
               </el-col>
             </el-row>
@@ -508,9 +508,9 @@
                           <el-select v-model="userScoreDetail.listQuery.score_key" clearable placeholder="请选择">
                             <el-option
                               v-for="item in userScoreDetail.scoreData"
-                              :key="item.value"
-                              :label="item.describe"
-                              :value="item.value"
+                              :key="item.key"
+                              :label="item.title"
+                              :value="item.key"
                             />
                           </el-select>
                         </el-form-item>
@@ -563,7 +563,7 @@
                         >重置</el-button>
                       </el-form-item>
                     </el-col>
-                  </el-row>
+                    </el-col></el-row>
                 </el-form>
               </div>
             </div>
@@ -709,7 +709,7 @@ import { examSecondaryList } from '@/api/exam/category'
 import Pagination from '@/components/Pagination'
 import { history } from '@/api/score/index'
 // 常量配置
-import { list as constantList } from '@/api/system/const'
+import { list as scoreConfigList } from '@/api/score/index'
 import { getList, getShow } from '@/api/user/wechat'
 export default {
   name: 'Wechat',
@@ -833,9 +833,16 @@ export default {
     },
     reset(formName) {
       this.$refs[formName].resetFields()
+      console.log(formName, this.active)
       if (this.active === 'exam') {
         this.getExamDetail()
       } else if (this.active === 'userScore') {
+        this.userScoreDetail.listQuery.score_key = ''
+        this.userScoreDetail.listQuery.client_type = ''
+        this.userScoreDetail.listQuery.start_time = ''
+        this.userScoreDetail.listQuery.end_time = ''
+        this.userScoreDetail.listQuery.page = 1
+        this.userScoreDetail.listQuery.size = 20
         this.getUserScore()
       } else if (this.active === 'detail') {
         this.getUserDetail()
@@ -885,7 +892,7 @@ export default {
     openScore(uuid) {
       this.active = 'userScore'
       this.userScoreDetail.listQuery.user_id = uuid
-      constantList({ title: 'system_score' }).then(res => {
+      scoreConfigList({ page: 1, size: 20 }).then(res => {
         this.userScoreDetail.scoreData = res.data.items
       })
       this.getUserScore()
