@@ -84,12 +84,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-col v-bind="grid">
-          <el-form-item label="视频链接：" prop="video_url" label-for="video_url">
-            <el-input v-model.trim="formValidate.video_url" type="text" autosize placeholder="相关视频链接" maxlength="500" style="width: 90%" />
-            <div class="">直接放入第三方平台的视频链接，支持.mp4格式。</div>
-          </el-form-item>
-        </el-col>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
           <el-divider />
