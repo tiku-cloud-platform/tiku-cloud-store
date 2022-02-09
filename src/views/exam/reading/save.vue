@@ -403,7 +403,8 @@ export default {
           analysis: data.analysis,
           content: data.content,
           source_url: data.source_url,
-          source_author: data.source_author
+          source_author: data.source_author,
+          video_url: data.video_url
         }
       })
     }
