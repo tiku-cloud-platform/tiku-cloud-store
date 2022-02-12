@@ -419,7 +419,8 @@ export default {
           content: data.content,
           source_url: data.source_url,
           source_author: data.source_author,
-          video_url: data.video_url
+          video_url: data.video_url,
+          is_search: data.is_search
         }
       })
     }
