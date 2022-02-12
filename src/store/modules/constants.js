@@ -4,6 +4,10 @@ const getDefaultConstants = () => {
       { label: '启用', value: 1 },
       { label: '禁用', value: 2 }
     ],
+    isSearch: [
+      { label: '启用', value: 1 },
+      { label: '禁用', value: 2 }
+    ],
     isTop: [
       { label: '置顶', value: 1 },
       { label: '不置顶', value: 2 }

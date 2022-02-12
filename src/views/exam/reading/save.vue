@@ -80,7 +80,7 @@
           <el-col v-bind="grid">
             <el-form-item label="视频链接：" prop="video_url" label-for="video_url">
               <el-input v-model.trim="formValidate.video_url" type="text" autosize placeholder="相关视频链接" maxlength="500" style="width: 90%" />
-              <div class="">直接放入第三方平台的视频链接，支持.mp4格式。</div>
+              <div class="input-alter">直接放入第三方平台的视频链接，支持.mp4格式。</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -107,8 +107,11 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="试题解析：">
-              <el-input v-model="formValidate.analysis" autosize type="textarea" />
+            <el-form-item label="搜索状态：">
+              <el-radio-group v-model="formValidate.is_search">
+                <el-radio v-for="item in this.$store.getters.isSearch" :key="item.label" :label="item.value">{{ item.label }}</el-radio>
+              </el-radio-group>
+              <div class="input-alter">设置为显示状态，将在试题搜索页中展现；设置为禁用，则只会在时间的试题列表页中显示。</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -116,9 +119,20 @@
           <span class="title mr10">试题内容</span>
           <el-divider />
         </div>
-        <el-form-item label="试题描述：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
-        </el-form-item>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="试题解析：">
+              <el-input v-model="formValidate.analysis" autosize type="textarea" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="试题描述：" prop="content">
+              <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+            </el-form-item>
+          </el-col>
+        </el-row>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
     </el-card>
@@ -267,6 +281,7 @@ export default {
         collection: [],
         tag: [],
         is_show: 1,
+        is_search: 2,
         category: [],
         content: '',
         video_url: ''

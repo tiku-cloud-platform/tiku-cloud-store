@@ -34,9 +34,9 @@ const examRouter = {
     },
     {
       path: 'collection/list',
-      name: '试卷管理',
+      name: '试题集',
       component: () => import('@/views/exam/collection/list'),
-      meta: { title: '试卷管理', icon: 'table' }
+      meta: { title: '试题集', icon: 'table' }
     },
     {
       path: 'collection/save/:uuid?',
