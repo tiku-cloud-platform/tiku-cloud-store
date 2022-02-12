@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: '智慧云知识平台',
+      title: '云题库平台平台',
       logo: 'https://youpaiyun.qqdeveloper.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }
