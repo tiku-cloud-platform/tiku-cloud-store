@@ -31,4 +31,7 @@ export default {
 .image-size-require {
   color: red;
 }
+.input-alter {
+    color: red;
+}
 </style>

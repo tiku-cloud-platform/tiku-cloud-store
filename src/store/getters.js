@@ -5,6 +5,7 @@ const getters = {
   avatar: state => state.user.avatar,
   name: state => state.user.name,
   isShow: state => state.constants.isShow,
+  isSearch: state => state.constants.isSearch,
   isTop: state => state.constants.isTop,
   isRecommend: state => state.constants.isRecommend,
   visitedViews: state => state.tagsView.visitedViews,

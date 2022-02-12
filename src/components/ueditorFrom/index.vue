@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-ueditor-wrap v-model="contents" :config="myConfig" style="width: 90%;" @beforeInit="addCustomDialog" />
+    <vue-ueditor-wrap v-model="contents" :config="myConfig" style="width: 100%;" @beforeInit="addCustomDialog" />
   </div>
 </template>
 

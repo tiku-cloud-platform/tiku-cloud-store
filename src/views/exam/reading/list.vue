@@ -129,6 +129,17 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="搜索状态"
+          width="auto"
+          align="center"
+          :show-overflow-tooltip="true"
+        >
+          <template slot-scope="{ row }">
+            <el-button v-if="row.is_search === 2" size="mini" type="text" style="color:red;">禁用</el-button>
+            <el-button v-if="row.is_search === 1" size="mini" type="text">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="操作"
           align="center"
           width="150"
@@ -175,7 +186,8 @@ export default {
         title: '',
         position: '',
         type: '',
-        is_show: ''
+        is_show: '',
+        is_search: ''
       },
       tableData: {
         data: [],
