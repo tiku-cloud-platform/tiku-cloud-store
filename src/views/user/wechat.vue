@@ -287,6 +287,16 @@
                 </template>
               </el-table-column>
               <el-table-column
+                label="注册来源"
+                width="auto"
+                align="center"
+                :show-overflow-tooltip="true"
+              >
+                <template slot-scope="{ row }">
+                  <span>{{ row.channel }}</span>
+                </template>
+              </el-table-column>
+              <el-table-column
                 label="昵称"
                 width="auto"
                 align="center"
@@ -563,7 +573,7 @@
                         >重置</el-button>
                       </el-form-item>
                     </el-col>
-                    </el-col></el-row>
+                  </el-row>
                 </el-form>
               </div>
             </div>
