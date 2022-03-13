@@ -79,7 +79,7 @@
             <el-form-item label="启用状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio :label="1" class="radio">启用</el-radio>
-                <el-radio :label="0">禁用</el-radio>
+                <el-radio :label="2">禁用</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
