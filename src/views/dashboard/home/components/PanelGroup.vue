@@ -1,50 +1,50 @@
 <template>
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-<!--      <div class="card-panel" @click="handleSetLineChartData('incr_people_number_list')">-->
+      <!--      <div class="card-panel" @click="handleSetLineChartData('incr_people_number_list')">-->
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people" style="background: #40c9c6;">
           <svg-icon icon-class="xinzeng" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">新增人数</div>
-          <count-to :start-val="0" :end-val=nowIncrNumber :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="nowIncrNumber" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-<!--      <div class="card-panel" @click="handleSetLineChartData('register_people_number_list')">-->
+      <!--      <div class="card-panel" @click="handleSetLineChartData('register_people_number_list')">-->
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-message" style="background: #36a3f7;">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">注册人数</div>
-          <count-to :start-val="0" :end-val=registerNumber :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="registerNumber" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-<!--      <div class="card-panel" @click="handleSetLineChartData('incr_exam_number_list')">-->
+      <!--      <div class="card-panel" @click="handleSetLineChartData('incr_exam_number_list')">-->
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-money" style="background: #f4516c;">
           <svg-icon icon-class="message" class-name="card-panel-icon" style="color: #FFF;" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">试题总数</div>
-          <count-to :start-val="0" :end-val=examNumber :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="examNumber" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-<!--      <div class="card-panel" @click="handleSetLineChartData('exam_submit_number_list')">-->
+      <!--      <div class="card-panel" @click="handleSetLineChartData('exam_submit_number_list')">-->
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-shopping" style="background: #34bfa3;">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">答题人数</div>
-          <count-to :start-val="0" :end-val=examSubmitNumber :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="examSubmitNumber" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -86,10 +86,10 @@ export default {
 
 <style lang="scss" scoped>
 .panel-group {
-  margin-top: 18px;
+  margin-top: 10px;
 
   .card-panel-col {
-    margin-bottom: 32px;
+    margin-bottom: 10px;
   }
 
   .card-panel {
