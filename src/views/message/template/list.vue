@@ -5,14 +5,14 @@
         <div class="container">
           <el-form ref="searchFrom" inline size="small" label-position="right">
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="标题：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr10" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="resetForm()">重置</el-button>

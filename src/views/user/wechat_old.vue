@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="divBox">
     <div slot="header" class="clearfix">
       <div class="container">
         <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right" label-width="100px">

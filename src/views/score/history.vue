@@ -5,7 +5,7 @@
         <div class="container">
           <el-form ref="searchForm" :model="listQuery" inline label-position="right">
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="积分渠道：" prop="score_key">
                     <el-select v-model="listQuery.score_key" clearable placeholder="请选择" style="width: 150px;">
@@ -51,7 +51,7 @@
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="mini" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="mini" @click="reset('searchForm')">重置</el-button>

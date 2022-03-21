@@ -11,7 +11,7 @@
             label-position="right"
           >
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="试题名称：" prop="title">
                     <el-input
@@ -39,7 +39,7 @@
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button
                     type="primary"

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="divBox">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <div class="container">
@@ -11,7 +11,7 @@
             label-position="right"
           >
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示位置：" prop="type">
                     <el-select
@@ -47,7 +47,7 @@
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col v-bind="grid">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button
                     v-prevent-re-click
