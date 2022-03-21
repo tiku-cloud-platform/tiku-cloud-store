@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="divBox">
     <el-tabs tab-position="left" style="height: 350px;">
       <el-tab-pane label="七牛云存储">
         <el-form ref="form" :model="form" label-width="150px" label-position="right">
@@ -66,9 +66,9 @@
       </el-tab-pane>
     </el-tabs>
 
-<!--    <el-dialog :visible.sync="dialogFormVisible" title="图片库" style="">-->
-<!--      <ImgBox />-->
-<!--    </el-dialog>-->
+    <!--    <el-dialog :visible.sync="dialogFormVisible" title="图片库" style="">-->
+    <!--      <ImgBox />-->
+    <!--    </el-dialog>-->
   </div>
 </template>
 

@@ -11,7 +11,7 @@
             label-position="right"
           >
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="用户昵称：" class="width100">
                     <el-input
@@ -33,7 +33,7 @@
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button
                     type="primary"
@@ -160,7 +160,7 @@
         size="80%"
         style="margin-bottom:0px;"
       >
-        <div class="app-container" style="max-height:20%;">
+        <div class="divBox" style="max-height:20%;">
           <!-------------------------------------- 详情 -------------------------------------->
           <div v-if="active === 'detail'">
             <div slot="header" class="clearfix">

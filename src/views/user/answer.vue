@@ -5,7 +5,7 @@
         <div class="container">
           <el-form ref="searchForm" :model="listQuery" inline size="mini" label-position="right">
             <el-row>
-              <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18" style="width: 70%;">
+              <el-col :span="19">
                 <el-col v-bind="grid" style="width: 250px;">
                   <el-form-item label="试题类型：" prop="collection_type_uuid">
                     <el-select v-model="listQuery.collection_type_uuid" clearable placeholder="请选择" style="width: 150px;">
@@ -39,7 +39,7 @@
                   </el-form-item>
                 </el-col>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6" style="margin-left: -18%;">
+              <el-col :span="5">
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="mini" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="mini" @click="reset('searchForm')">重置</el-button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="divBox">
     <Upload />
   </div>
 </template>

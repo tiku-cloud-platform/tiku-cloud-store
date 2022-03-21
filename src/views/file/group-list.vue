@@ -5,12 +5,12 @@
         <div class="container">
           <el-form ref="searchFrom" :model="listQuery" inline size="small" label-position="left">
             <el-row>
-              <el-col style="width: auto;" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col style="width: auto;">
                 <el-form-item label="名称：">
                   <el-input v-model="listQuery.title" placeholder="请输入名称" clearable />
                 </el-form-item>
               </el-col>
-              <el-col v-bind="grid" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+              <el-col v-bind="grid" :span="5">
                 <el-form-item>
                   <el-button v-prevent-re-click type="primary" icon="el-icon-search" label="default" class="mr15" size="small" @click="search">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="resetForm('searchFrom')">重置</el-button>
