@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row :gutter="30">
+    <el-row :gutter="40">
       <el-col v-bind="grid">
         <div class="Nav">
           <div class="input">
@@ -363,12 +363,16 @@ export default {
   height: 100%;
 }
 
+.Nav {
+  height: auto;
+}
+
 .upload-demo {
   display: inline-block !important;
 }
 
 .tree_w {
-  padding: 20px 30px
+  padding: 20px 10px;
 }
 
 .custom-tree-node {
@@ -489,13 +493,14 @@ export default {
 .conter {
   width: 99%;
   height: 100%;
+  background-color: #fff;
   .bnt {
     width: 100%;
     padding: 0 13px 10px 15px;
     box-sizing: border-box;
   }
   .pictrueList {
-    padding-left: 15px;
+    padding-left: 0px;
     width: 100%;
     el-image {
       width: 100%;
