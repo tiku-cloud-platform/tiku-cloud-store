@@ -30,13 +30,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-col v-bind="grid" style="display:flex;">
+                <el-col v-bind="grid" style="display:flex;width: auto;">
                   <el-form-item label="获取时间：" prop="start_time">
                     <el-date-picker
                       v-model="listQuery.start_time"
                       style="width: 190px;"
                       type="datetime"
-                      placeholder="开始日期"
+                      placeholder="获取开始日期"
                       value-format="yyyy-MM-dd HH:mm:ss"
                     />
                   </el-form-item>
@@ -45,7 +45,7 @@
                       v-model="listQuery.end_time"
                       style="width: 190px;"
                       type="datetime"
-                      placeholder="结束日期"
+                      placeholder="获取结束日期"
                       value-format="yyyy-MM-dd HH:mm:ss"
                     />
                   </el-form-item>
@@ -126,7 +126,7 @@ export default {
       ],
       listQuery: {
         page: 1,
-        size: 10,
+        size: 20,
         score_key: '',
         client_type: '',
         start_time: '',
@@ -156,6 +156,8 @@ export default {
   methods: {
     reset(formName) {
       this.$refs[formName].resetFields()
+      this.listQuery.start_time = ''
+      this.listQuery.end_time = ''
       this.getList()
     },
     // 列表
