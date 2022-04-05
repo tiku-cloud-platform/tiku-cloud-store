@@ -121,7 +121,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/score/conf/list` })
+      this.$router.push({ path: `/marketing/score/conf/list` })
     },
     // 提交数据
     onsubmit(name) {

@@ -6,13 +6,12 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import examRouter from './modules/exam'
-import miniProgramRouter from './modules/mini-program'
-import systemConfig from './modules/system-config'
-import scoreRouter from './modules/score'
+import systemConfigRouter from './modules/system-config'
 import userRouter from './modules/user'
 import articleRouter from './modules/article'
 import fileRouter from './modules/file'
 import messageRouter from './modules/message'
+import marketingRouter from './modules/marketing'
 
 export const constantRoutes = [
   {
@@ -52,22 +51,13 @@ export const constantRoutes = [
       meta: { title: '个人中心', icon: 'dashboard' }
     }]
   },
-
   userRouter,
-
   examRouter,
-
   articleRouter,
-
   fileRouter,
-
   messageRouter,
-
-  scoreRouter,
-
-  systemConfig,
-
-  miniProgramRouter,
+  marketingRouter,
+  systemConfigRouter,
 
   {
     path: '/setting/uploadPicture',
