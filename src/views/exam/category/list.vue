@@ -108,7 +108,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 10,
+        size: 20,
         title: '',
         is_recommend: '',
         is_show: ''
