@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: '云题库平台',
-      logo: 'https://youpaiyun.qqdeveloper.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '题库云平台',
+      logo: 'http://qiniucloud.qqdeveloper.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }
 }
