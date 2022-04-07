@@ -89,7 +89,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 20,
+        size: 10,
         title: '',
         platform_message_category_uuid: ''
       },

@@ -104,7 +104,7 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        size: 10,
+        size: 20,
         title: '',
         position: '',
         type: '',
