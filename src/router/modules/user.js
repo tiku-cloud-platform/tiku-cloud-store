@@ -7,9 +7,9 @@ const userRouter = {
   children: [
     {
       path: 'wechat_user',
-      name: '微信用户',
+      name: '用户列表',
       component: () => import('@/views/user/wechat'),
-      meta: { title: '微信用户', icon: 'table' }
+      meta: { title: '用户列表', icon: 'table' }
     },
     {
       path: 'group',
