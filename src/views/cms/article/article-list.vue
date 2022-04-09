@@ -78,7 +78,7 @@
         </el-table-column> -->
         <el-table-column label="文章图片" width="70" align="center">
           <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+            <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
         </el-table-column>
         <el-table-column label="文章标题" width="auto" align="center" :show-overflow-tooltip="true">

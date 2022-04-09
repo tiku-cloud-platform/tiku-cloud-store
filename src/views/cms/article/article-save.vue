@@ -248,7 +248,7 @@ export default {
       list({ uuid: this.$route.params.uuid }).then(async res => {
         const data = res.data.items[0]
         this.formValidate = {
-          file_url: data.cover_file_info.file_url + data.cover_file_info.file_name,
+          file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
           file_uuid: data.file_uuid,
           uuid: data.uuid,
           title: data.title,
