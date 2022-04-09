@@ -97,7 +97,7 @@ export default {
         is_show: 1
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入标题', trigger: 'blur' }]
         // parent_uuid: [{ required: true, validator: validateCategoryUuid, trigger: 'change' }],
         // file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
@@ -185,7 +185,7 @@ export default {
         console.log(data)
         this.formValidate = {
           file_uuid: data.file_uuid,
-          file_url: data.cover_file_info.file_url + data.cover_file_info.file_name,
+          file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
           orders: data.orders,
           parent_uuid: data.parent_uuid,
           uuid: data.uuid,
