@@ -57,7 +57,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
   </div>
 </template>
 
@@ -75,7 +75,7 @@ export default {
       txTrueVideoUrl: null,
       listQuery: {
         page: 1,
-        limit: 10,
+        size: 20,
         nickname: ''
       },
       dialogPvVisible: false,

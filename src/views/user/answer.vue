@@ -110,7 +110,7 @@ export default {
       total_score: '',
       listQuery: {
         page: 1,
-        size: 10,
+        size: 20,
         collection_type_uuid: '',
         start_time: '',
         end_time: ''

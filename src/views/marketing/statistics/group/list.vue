@@ -52,6 +52,11 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="注册人数" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.register }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <el-button v-if="row.is_show === 2" size="text" type="text" style="color:red;">禁用</el-button>
@@ -84,7 +89,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 20,
+        size: 20,
         title: '',
         is_show: ''
       },

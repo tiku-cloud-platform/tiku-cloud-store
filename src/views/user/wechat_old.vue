@@ -229,7 +229,7 @@ export default {
           start_time: '',
           end_time: '',
           page: 1,
-          size: 10
+          size: 20
         }
       },
       userDetail: {},
