@@ -96,8 +96,8 @@
       </el-table>
       <div style="display: flex;">
         <div style="margin-top: 38px;">
-          <span style="color:#1890ff;">总积分：{{ expend ? expend : '暂无' }}</span>
-          <span style="margin-left:20px;color:red;">消耗积分：{{ income ? income : '暂无' }}</span>
+          <span style="color:#1890ff;">消耗积分：{{ expend }}</span>
+          <span style="margin-left:20px;color:red;">获取积分：{{ income }}</span>
         </div>
         <pagination v-show="tableData.total>0" class="page" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
       </div>

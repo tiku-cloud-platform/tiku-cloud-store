@@ -3,23 +3,21 @@
     <el-col :span="24">
       <el-card class="box-card">
         <div class="clearfix">
-          <el-text
-            style="font-weight: 500; color: rgb(29 33 41); font-size: 16px"
-          >系统公告</el-text>
+          <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px">系统公告</div>
           <span class="text" style="float: right">
             <el-link type="primary" :underline="false">查看更多</el-link>
           </span>
         </div>
         <div style="padding-top: 10px">
-          <div v-for="item in noticeData" :key="item" class="text item">
-            <el-text
+          <div v-for="item,key in noticeData" :key="key" class="text item">
+            <span
               class="waring-text"
               underline="false"
-            >活动</el-text>
-            <el-text
+            >活动</span>
+            <span
               style="padding-left: 5px; color: rgb(29 33 41)"
               :underline="false"
-            >{{ item.title }}</el-text>
+            >{{ item.title }}</span>
           </div>
         </div>
       </el-card>
@@ -33,7 +31,11 @@ export default {
   components: {},
   data() {
     return {
-      noticeData: []
+      noticeData: [],
+      listQuery: {
+        size: 10,
+        page: 1
+      }
     }
   },
   mounted() {
@@ -41,9 +43,11 @@ export default {
   },
   methods: {
     getNotice() {
-      list().then((res) => {
+      list(this.listQuery).then((res) => {
         console.log(res.data.items)
         this.noticeData = res.data.items
+        this.listQuery.page = res.data.page
+        this.listQuery.size = res.data.size
       })
     }
   }

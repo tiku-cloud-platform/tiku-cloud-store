@@ -98,6 +98,11 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="注册人数" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.register }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="自定义推广码" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.file_info != null"><img :src="scope.row.file_info.file_url+scope.row.file_info.file_name" width="50" height="50"></viewer>
@@ -136,7 +141,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 20,
+        size: 20,
         title: ''
       },
       tableData: {

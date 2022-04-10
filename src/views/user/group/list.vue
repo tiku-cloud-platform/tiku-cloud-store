@@ -83,7 +83,7 @@ export default {
     return {
       listQuery: {
         page: 1,
-        limit: 20,
+        size: 20,
         title: '',
         is_show: ''
       },

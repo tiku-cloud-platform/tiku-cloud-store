@@ -738,7 +738,7 @@ export default {
         data: null,
         listQuery: {
           page: 1,
-          size: 10,
+          size: 20,
           nickname: '',
           mobile: ''
         },
@@ -769,7 +769,7 @@ export default {
         listQuery: {
           user_id: '',
           page: 1,
-          size: 10,
+          size: 20,
           collection_type_uuid: '',
           start_time: '',
           end_time: ''
@@ -796,7 +796,7 @@ export default {
         },
         listQuery: {
           page: 1,
-          size: 10,
+          size: 20,
           score_key: '',
           client_type: '',
           start_time: '',
