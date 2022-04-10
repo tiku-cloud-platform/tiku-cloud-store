@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-left:5px;">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people" style="background: #40c9c6;">
           <svg-icon icon-class="xinzeng" class-name="card-panel-icon" />
@@ -11,7 +11,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-left:5px;">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-message" style="background: #36a3f7;">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
@@ -22,7 +22,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-left:5px;">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-money" style="background: #f4516c;">
           <svg-icon icon-class="message" class-name="card-panel-icon" style="color: #FFF;" />
@@ -33,7 +33,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-left:5px;">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-shopping" style="background: #34bfa3;">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
