@@ -1,5 +1,53 @@
 <template>
   <div class="divBox">
+    <div class="collect" style="padding:0px;">
+      <el-row :gutter="40" class="panel-group">
+        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper icon-people" style="background: #3689F5;">
+              <svg-icon icon-class="system_count" class-name="card-panel-icon" />
+            </div>
+            <div class="card-panel-description">
+              <div class="card-panel-text">系统用户</div>
+              <count-to :start-val="0" :end-val="tableData.collect.systemCount" :duration="2600" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper icon-message" style="background: #FF7F65;">
+              <svg-icon icon-class="channel_system_count" class-name="card-panel-icon" />
+            </div>
+            <div class="card-panel-description">
+              <div class="card-panel-text">渠道用户</div>
+              <count-to :start-val="0" :end-val="tableData.collect.channelSystemCount" :duration="3000" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper icon-money" style="background: #f4516c;">
+              <svg-icon icon-class="system_today_count" class-name="card-panel-icon" style="color: #FFF;" />
+            </div>
+            <div class="card-panel-description">
+              <div class="card-panel-text">系统用户</div>
+              <count-to :start-val="0" :end-val="tableData.collect.todaySystemTotal" :duration="3200" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+          <div class="card-panel">
+            <div class="card-panel-icon-wrapper icon-shopping" style="background: #FF8B38;">
+              <svg-icon icon-class="channel_today_count" class-name="card-panel-icon" />
+            </div>
+            <div class="card-panel-description">
+              <div class="card-panel-text">渠道用户</div>
+              <count-to :start-val="0" :end-val="tableData.collect.todayChannelSystemTotal" :duration="3600" class="card-panel-num" />
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <div class="container">
@@ -80,9 +128,10 @@
 <script>
 import { list, del } from '@/api/statistics/channel'
 import Pagination from '@/components/Pagination'
+import CountTo from 'vue-count-to'
 export default {
   name: 'MessageInfo',
-  components: { Pagination },
+  components: { Pagination, CountTo },
   data() {
     return {
       listQuery: {
@@ -92,7 +141,13 @@ export default {
       },
       tableData: {
         data: [],
-        total: 0
+        total: 0,
+        collect: {
+          systemCount: 0,
+          todaySystemTotal: 0,
+          channelSystemCount: 0,
+          todayChannelSystemTotal: 0
+        }
       },
       listLoading: true,
       grid: {
@@ -117,6 +172,10 @@ export default {
         console.log(res)
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.tableData.collect.systemCount = res.data.systemCount
+        this.tableData.collect.channelSystemCount = res.data.channelSystemCount
+        this.tableData.collect.todaySystemTotal = res.data.todaySystemTotal
+        this.tableData.collect.todayChannelSystemTotal = res.data.todayChannelSystemTotal
       })
       this.listLoading = false
     },
@@ -162,6 +221,76 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.panel-group {
+  margin-top: 5px;
+
+  .card-panel-col {
+    margin-bottom: 5px;
+  }
+
+  .card-panel {
+    height: 108px;
+    cursor: pointer;
+    font-size: 12px;
+    position: relative;
+    overflow: hidden;
+    color: #666;
+    background: #fff;
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
+    border-color: rgba(0, 0, 0, .05);
+
+    .card-panel-icon-wrapper {
+      float: left;
+      margin: 14px 0 0 14px;
+      padding: 16px;
+      transition: all 0.38s ease-out;
+      border-radius: 6px;
+    }
+
+    .card-panel-icon {
+      float: left;
+      font-size: 48px;
+      color: #fff;
+    }
+
+    .card-panel-description {
+      float: right;
+      font-weight: bold;
+      margin: 26px;
+      margin-left: 0px;
+
+      .card-panel-text {
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+
+      .card-panel-num {
+        font-size: 20px;
+      }
+    }
+  }
+}
+@media (max-width:550px) {
+  .card-panel-description {
+    display: none;
+  }
+
+  .card-panel-icon-wrapper {
+    float: none !important;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+
+    .svg-icon {
+      display: block;
+      margin: 14px auto !important;
+      float: none !important;
+    }
+  }
+}
+
 .selWidth{
   width: 300px;
 }
