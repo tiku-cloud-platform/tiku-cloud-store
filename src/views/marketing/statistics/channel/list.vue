@@ -90,7 +90,11 @@
         <el-table-column label="推广渠道编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.id }}</span>
-            <i class="el-icon-copy-document" @click="copyChannelId(row.id)" />
+            <svg-icon
+              icon-class="copy"
+              style="font-size: 20px; cursor: pointer"
+              @click="copyChannelId(row.id)"
+            />
           </template>
         </el-table-column>
         <el-table-column label="渠道名称" width="auto" align="center">
@@ -179,16 +183,15 @@ export default {
   methods: {
     // copy渠道编号
     copyChannelId(id) {
-      this.$copyText(id).then(
-        function(e) {
-          console.log('copy arguments e:', e)
-          alert('复制成功!')
-        },
-        function(e) {
-          console.log('copy arguments e:', e)
-          alert('复制失败!')
+      (function() {
+        document.oncopy = function(e) {
+          e.clipboardData.setData('text', id)
+          e.preventDefault()
+          document.oncopy = null
         }
-      )
+      })(id)
+      document.execCommand('Copy')
+      this.$message.success('复制成功')
     },
     download(url) {
       this.getUrlBase64(url).then(base64 => {
