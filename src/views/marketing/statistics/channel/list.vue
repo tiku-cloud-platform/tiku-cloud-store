@@ -90,7 +90,11 @@
         <el-table-column label="推广渠道编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.id }}</span>
-            <i class="el-icon-copy-document" />
+            <svg-icon
+              icon-class="copy"
+              style="font-size: 20px; cursor: pointer"
+              @click="copyChannelId(row.id)"
+            />
           </template>
         </el-table-column>
         <el-table-column label="渠道名称" width="auto" align="center">
@@ -105,7 +109,14 @@
         </el-table-column>
         <el-table-column label="自定义推广码" align="center">
           <template slot-scope="scope">
-            <viewer v-if="scope.row.file_info != null"><img :src="scope.row.file_info.file_url+scope.row.file_info.file_name" width="50" height="50"></viewer>
+            <viewer v-if="scope.row.file_info != null" style="display: flex;align-items: flex-end;left: 50%;position: relative;margin-left: -25px;">
+              <img :src="scope.row.file_info.file_url+scope.row.file_info.file_name" width="50" height="50">
+              <svg-icon
+                icon-class="download"
+                style="font-size: 20px; cursor: pointer;"
+                @click="download(scope.row.file_info.file_url+scope.row.file_info.file_name)"
+              />
+            </viewer>
           </template>
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -170,11 +181,48 @@ export default {
     this.getList()
   },
   methods: {
+    // copy渠道编号
+    copyChannelId(id) {
+      (function() {
+        document.oncopy = function(e) {
+          e.clipboardData.setData('text', id)
+          e.preventDefault()
+          document.oncopy = null
+        }
+      })(id)
+      document.execCommand('Copy')
+      this.$message.success('复制成功')
+    },
+    download(url) {
+      this.getUrlBase64(url).then(base64 => {
+        const a = document.createElement('a')
+        a.style.display = 'none'
+        a.download = '图片名称'
+        a.href = base64
+        document.body.appendChild(a)
+        a.click()
+      })
+    },
+    getUrlBase64(url) {
+      return new Promise(resolve => {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        const img = new Image()
+        img.crossOrigin = 'Anonymous' // 允许跨域
+        img.src = url
+        img.onload = function() {
+          canvas.height = 300
+          canvas.width = 300
+          ctx.drawImage(img, 0, 0, 300, 300)
+          const dataURL = canvas.toDataURL('image/png')
+          resolve(dataURL)
+        }
+      })
+    },
     // 列表
     getList() {
       this.listLoading = true
       list(this.listQuery).then(res => {
-        console.log(res)
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
         this.tableData.collect.systemCount = res.data.systemCount
