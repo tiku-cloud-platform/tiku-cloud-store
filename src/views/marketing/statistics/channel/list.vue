@@ -109,11 +109,11 @@
         </el-table-column>
         <el-table-column label="自定义推广码" align="center">
           <template slot-scope="scope">
-            <viewer v-if="scope.row.file_info != null" style="display: flex;align-items: center;left: 50%;position: relative;margin-left: -25px;">
+            <viewer v-if="scope.row.file_info != null" style="display: flex;align-items: flex-end;left: 50%;position: relative;margin-left: -25px;">
               <img :src="scope.row.file_info.file_url+scope.row.file_info.file_name" width="50" height="50">
               <svg-icon
-                icon-class="copy"
-                style="font-size: 20px; cursor: pointer"
+                icon-class="download"
+                style="font-size: 20px; cursor: pointer;"
                 @click="download(scope.row.file_info.file_url+scope.row.file_info.file_name)"
               />
             </viewer>
@@ -223,7 +223,6 @@ export default {
     getList() {
       this.listLoading = true
       list(this.listQuery).then(res => {
-        console.log(res)
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
         this.tableData.collect.systemCount = res.data.systemCount
