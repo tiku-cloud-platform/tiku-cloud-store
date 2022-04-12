@@ -11,6 +11,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <el-button type="primary" size="mini" style="height:30px;">跳转</el-button>
   </div>
 </template>
 
@@ -30,12 +31,12 @@ export default {
     },
     limit: {
       type: Number,
-      default: 20
+      default: 10
     },
     pageSizes: {
       type: Array,
       default() {
-        return [20, 25, 30, 35, 40]
+        return [10, 15, 20, 25, 30]
       }
     },
     layout: {
@@ -92,8 +93,11 @@ export default {
 
 <style scoped>
 .pagination-container {
+  display: flex;
   background: #fff;
   padding: 32px 16px;
+  justify-content: right;
+  align-items: flex-end;
 }
 .pagination-container.hidden {
   display: none;

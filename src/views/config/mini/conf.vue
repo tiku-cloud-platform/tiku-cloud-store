@@ -1,6 +1,6 @@
 <template>
   <div class="divBox">
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="never">
       <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
         <div class="dividerTitle">
           <span class="title mr10">小程序信息</span>

@@ -1,6 +1,6 @@
 <template>
   <div class="divBox">
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="never">
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
       <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
         <div class="dividerTitle">

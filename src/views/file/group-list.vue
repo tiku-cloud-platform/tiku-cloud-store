@@ -1,6 +1,6 @@
 <template>
   <div class="divBox">
-    <el-card>
+    <el-card shadow="never">
       <div slot="header" class="clearfix">
         <div class="container">
           <el-form ref="searchFrom" :model="listQuery" inline size="small" label-position="left">
