@@ -15,7 +15,7 @@
           :now-incr-number="lineChartData.now_incr_number"
         />
 
-        <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+        <el-row style="background:#fff;padding-top:16px;margin-bottom:15px;">
           <line-chart v-if="lineChartData.register_people_number_list !== ''" :chart-data="lineChartData.register_people_number_list" />
         </el-row>
         <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">

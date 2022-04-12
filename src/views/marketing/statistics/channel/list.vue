@@ -48,7 +48,7 @@
         </el-col>
       </el-row>
     </div>
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <div class="container">
           <el-form ref="searchFrom" inline size="small" label-position="right">

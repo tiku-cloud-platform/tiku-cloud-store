@@ -1,5 +1,5 @@
 <template>
-  <el-row :gutter="40" class="panel-group">
+  <el-row :gutter="40" class="panel-group" style="margin-left: -4px;">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" style="padding-left:5px;">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people" style="background: #40c9c6;">

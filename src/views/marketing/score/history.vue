@@ -1,6 +1,6 @@
 <template>
   <div class="divBox">
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <div class="container">
           <el-form ref="searchForm" :model="listQuery" inline label-position="right">
@@ -96,8 +96,8 @@
       </el-table>
       <div style="display: flex;">
         <div style="margin-top: 38px;">
-          <span style="color:#1890ff;">消耗积分：{{ expend }}</span>
-          <span style="margin-left:20px;color:red;">获取积分：{{ income }}</span>
+          <span style="color:red;">消耗积分：{{ expend }}</span>
+          <span style="margin-left:20px;color:#1890ff;">获取积分：{{ income }}</span>
         </div>
         <pagination v-show="tableData.total>0" class="page" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
       </div>
@@ -126,7 +126,7 @@ export default {
       ],
       listQuery: {
         page: 1,
-        size: 20,
+        size: 15,
         score_key: '',
         client_type: '',
         start_time: '',

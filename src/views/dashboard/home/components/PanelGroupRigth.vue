@@ -2,24 +2,27 @@
   <el-row class="panel-group-right">
     <el-col :span="24">
       <el-card class="box-card">
-        <div class="clearfix">
+        <el-row class="clearfix">
           <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px">系统公告</div>
           <span class="text" style="float: right">
             <el-link type="primary" :underline="false">查看更多</el-link>
           </span>
-        </div>
-        <div style="padding-top: 10px">
-          <div v-for="item,key in noticeData" :key="key" class="text item">
-            <span
-              class="waring-text"
+        </el-row>
+        <el-row style="height:40px;line-height:40px;display:flex;width:100%;" :span="24">
+          <el-row v-for="item,key in noticeData" :key="key" class="text item" :span="24">
+            <el-col
+              class="notice-category-title"
               underline="false"
-            >活动</span>
-            <span
-              style="padding-left: 5px; color: rgb(29 33 41)"
+              span="4"
+            >活动</el-col>
+            <el-col
+              class="notice-title"
+              span="20"
+              style="color: rgb(29 33 41)"
               :underline="false"
-            >{{ item.title }}</span>
-          </div>
-        </div>
+            >{{ item.title }}</el-col>
+          </el-row>
+        </el-row>
       </el-card>
     </el-col>
   </el-row>
@@ -67,6 +70,7 @@ export default {
 
 .item {
   margin-bottom: 18px;
+  width: 100%;
 }
 
 .clearfix:before,
@@ -78,7 +82,14 @@ export default {
   clear: both;
 }
 
-.waring-text {
+.notice-category-title {
   color: #249EFF;
+}
+
+.notice-title {
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
