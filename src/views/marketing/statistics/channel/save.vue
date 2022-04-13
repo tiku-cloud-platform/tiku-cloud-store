@@ -32,6 +32,10 @@
                   <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
+              <div>
+                <el-link href="https://www.chuangkit.com/templatecenter" target="_blank" :underline="false">海报生成工具</el-link>,
+                <el-link href="https://www.chuangkit.com/templatecenter" target="_blank" :underline="false">使用方法</el-link>
+              </div>
             </el-form-item>
           </el-col>
         </el-row>
