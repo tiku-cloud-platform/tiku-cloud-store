@@ -30,7 +30,7 @@
               <svg-icon icon-class="system_today_count" class-name="card-panel-icon" style="color: #FFF;" />
             </div>
             <div class="card-panel-description">
-              <div class="card-panel-text">系统用户</div>
+              <div class="card-panel-text">系统新增</div>
               <count-to :start-val="0" :end-val="tableData.collect.todaySystemTotal" :duration="3200" class="card-panel-num" />
             </div>
           </div>
@@ -41,7 +41,7 @@
               <svg-icon icon-class="channel_today_count" class-name="card-panel-icon" />
             </div>
             <div class="card-panel-description">
-              <div class="card-panel-text">渠道用户</div>
+              <div class="card-panel-text">渠道新增</div>
               <count-to :start-val="0" :end-val="tableData.collect.todayChannelSystemTotal" :duration="3600" class="card-panel-num" />
             </div>
           </div>

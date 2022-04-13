@@ -76,6 +76,16 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="注册渠道"
+          width="auto"
+          align="center"
+          :show-overflow-tooltip="true"
+        >
+          <template slot-scope="{ row }">
+            <span>{{ row.channel !== null ? row.channel.title : "" }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="姓名"
           width="auto"
           align="center"

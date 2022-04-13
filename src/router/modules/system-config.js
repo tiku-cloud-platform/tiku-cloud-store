@@ -45,9 +45,9 @@ const miniProgramRouter = {
     },
     {
       path: 'config/page',
-      name: '用户页面',
+      name: '系统页面',
       component: () => import('@/views/config/page/list'),
-      meta: { title: '用户页面', icon: 'table' }
+      meta: { title: '系统页面', icon: 'table' }
     }
   ]
 }
