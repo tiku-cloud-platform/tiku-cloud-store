@@ -145,7 +145,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/article/category/list` })
+      this.$router.push({ path: `/cms/article/category/list` })
     },
     modalPicTap(tit) {
       const _this = this
