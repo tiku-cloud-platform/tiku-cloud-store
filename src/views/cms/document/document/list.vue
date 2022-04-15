@@ -154,6 +154,7 @@
 import { list, del, publish } from '@/api/article/list'
 import { list as categoryList } from '@/api/article/category'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ArticleList',
   components: { Pagination },

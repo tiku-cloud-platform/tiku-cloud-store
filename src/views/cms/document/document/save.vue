@@ -99,7 +99,8 @@
           <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-model="content" />
+          <!-- <ueditor-from v-model="formValidate.content" :content="formValidate.content" /> -->
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -108,15 +109,16 @@
 </template>
 
 <script>
-import ueditorFrom from '@/components/ueditorFrom'
+// import ueditorFrom from '@/components/ueditorFrom'
 import { list as categoryList } from '@/api/article/category'
+import MarkdownEditor from '@/components/MarkdownEditor'
 // 内容
 import { add, edit, list } from '@/api/article/list'
 import { formatLongDate } from '@/utils'
 import { getName } from '@/utils/auth'
 export default {
   name: 'ArticleSave',
-  components: { ueditorFrom },
+  components: { MarkdownEditor },
   data() {
     const validateArticleCategory = (rule, value, callback) => {
       if (!this.formValidate.article_category_uuid) {
@@ -140,6 +142,7 @@ export default {
       }
     }
     return {
+      content: '',
       grid: {
         xl: 10,
         lg: 10,
