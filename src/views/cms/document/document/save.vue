@@ -202,7 +202,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/cms/article/list` })
+      this.$router.push({ path: `/cms/document/list` })
     },
     modalPicTap(tit) {
       const _this = this
