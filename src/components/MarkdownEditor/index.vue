@@ -48,6 +48,7 @@ export default {
         theme: 'dark',
         initialValue: this.value
       })
+      // 监听内容改变事件
       this.editor.on('change', () => {
         console.log(this.editor.getMarkdown())
         console.log(this.editor.getHTML())
