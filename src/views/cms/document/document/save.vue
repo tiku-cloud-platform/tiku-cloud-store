@@ -99,7 +99,7 @@
           <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <markdown-editor v-model="content" />
+          <markdown-editor v-model="formValidate.content" />
           <!-- <ueditor-from v-model="formValidate.content" :content="formValidate.content" /> -->
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
@@ -142,7 +142,6 @@ export default {
       }
     }
     return {
-      content: '',
       grid: {
         xl: 10,
         lg: 10,
@@ -158,7 +157,7 @@ export default {
         author: getName(),
         source: getName(),
         orders: 0,
-        content: '',
+        content: '##请添加内容',
         publish_date: formatLongDate(new Date()),
         is_show: 1,
         is_top: 1
@@ -224,6 +223,8 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
+      console.log(this.formValidate)
+      return
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
