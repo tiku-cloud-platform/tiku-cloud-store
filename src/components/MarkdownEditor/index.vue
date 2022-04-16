@@ -29,6 +29,11 @@ export default {
       editor: null
     }
   },
+  watch: {
+    value() {
+      return '123'
+    }
+  },
   mounted() {
     this.initEditor()
   },
@@ -41,7 +46,12 @@ export default {
         minHeight: '800px',
         language: 'zh-cn',
         theme: 'dark',
-        initialValue: '你好哦'
+        initialValue: this.value
+      })
+      this.editor.on('change', () => {
+        console.log(this.editor.getMarkdown())
+        console.log(this.editor.getHTML())
+        this.$emit('input', this.editor.getMarkdown())
       })
     }
   }
