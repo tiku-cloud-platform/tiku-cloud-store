@@ -4,7 +4,7 @@
       <el-row :gutter="40" class="panel-group">
         <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;">
           <div class="card-panel">
-            <div class="card-panel-icon-wrapper icon-people" style="background: #3689F5;">
+            <div class="card-panel-icon-wrapper icon-people" style="background: #f4516c;">
               <svg-icon icon-class="system_count" class-name="card-panel-icon" />
             </div>
             <div class="card-panel-description">
@@ -15,7 +15,7 @@
         </el-col>
         <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
           <div class="card-panel">
-            <div class="card-panel-icon-wrapper icon-message" style="background: #FF7F65;">
+            <div class="card-panel-icon-wrapper icon-message" style="background: #FF8B38;">
               <svg-icon icon-class="channel_system_count" class-name="card-panel-icon" />
             </div>
             <div class="card-panel-description">
