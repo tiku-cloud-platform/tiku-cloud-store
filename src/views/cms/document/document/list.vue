@@ -50,7 +50,7 @@
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
-                  <router-link :to="{path: '/cms/article/save'}">
+                  <router-link :to="{path: '/cms/document/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
@@ -136,7 +136,7 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/cms/article/save/'+row.uuid}">
+            <router-link :to="{path: '/cms/document/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
             <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
@@ -154,6 +154,7 @@
 import { list, del, publish } from '@/api/article/list'
 import { list as categoryList } from '@/api/article/category'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ArticleList',
   components: { Pagination },

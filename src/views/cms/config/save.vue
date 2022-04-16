@@ -65,7 +65,7 @@ import { list as constantList } from '@/api/system/const'
 // 内容
 import { add, edit, list } from '@/api/cms/content'
 export default {
-  name: 'EditArticle',
+  name: 'ConfigEdit',
   components: { ueditorFrom },
   data() {
     const validatePosition = (rule, value, callback) => {
@@ -127,7 +127,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/article/cms/about-me` })
+      this.$router.push({ path: `/cms/config/article/list` })
     },
     // 所有文章显示位置
     getConstantList() {
@@ -158,14 +158,14 @@ export default {
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/article/cms/about-me` })
+                this.$router.push({ path: `/cms/config/list` })
               }, 500)
             })
           } else {
             add(this.formValidate).then((message) => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/article/cms/about-me` })
+                this.$router.push({ path: `/cms/config/list` })
               }, 500)
             })
           }

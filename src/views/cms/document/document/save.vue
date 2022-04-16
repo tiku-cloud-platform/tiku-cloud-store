@@ -90,7 +90,7 @@
           <el-col v-bind="grid">
             <el-form-item label="是否置顶：">
               <el-radio-group v-model="formValidate.is_top">
-                <el-radio v-for="(item, index) in this.$store.getters.isTop" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item,index) in this.$store.getters.isTop" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -100,7 +100,8 @@
           <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor ref="editor" v-model="formValidate.content" />
+          <!-- <ueditor-from v-model="formValidate.content" :content="formValidate.content" /> -->
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -109,15 +110,16 @@
 </template>
 
 <script>
-import ueditorFrom from '@/components/ueditorFrom'
+// import ueditorFrom from '@/components/ueditorFrom'
 import { list as categoryList } from '@/api/article/category'
+import MarkdownEditor from '@/components/MarkdownEditor'
 // 内容
 import { add, edit, list } from '@/api/article/list'
 import { formatLongDate } from '@/utils'
 import { getName } from '@/utils/auth'
 export default {
   name: 'ArticleSave',
-  components: { ueditorFrom },
+  components: { MarkdownEditor },
   data() {
     const validateArticleCategory = (rule, value, callback) => {
       if (!this.formValidate.article_category_uuid) {
@@ -156,7 +158,7 @@ export default {
         author: getName(),
         source: getName(),
         orders: 0,
-        content: '',
+        content: '##请添加内容111',
         publish_date: formatLongDate(new Date()),
         is_show: 1,
         is_top: 1
@@ -203,7 +205,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/cms/article/list` })
+      this.$router.push({ path: `/cms/document/list` })
     },
     modalPicTap(tit) {
       const _this = this
@@ -222,6 +224,8 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
+      console.log(this.formValidate)
+      return
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
