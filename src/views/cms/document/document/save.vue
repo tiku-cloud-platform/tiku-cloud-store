@@ -31,6 +31,7 @@
                 <!--                </el-option>-->
                 <el-option
                   v-for="item in categoryData"
+                  :key="item.uuid"
                   :label="item.title"
                   :value="item.uuid"
                 />
@@ -82,14 +83,14 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="是否置顶：">
               <el-radio-group v-model="formValidate.is_top">
-                <el-radio v-for="item in this.$store.getters.isTop" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item,index) in this.$store.getters.isTop" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>

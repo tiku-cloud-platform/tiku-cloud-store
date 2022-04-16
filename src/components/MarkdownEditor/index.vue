@@ -38,9 +38,10 @@ export default {
         el: document.getElementById(this.id),
         initialEditType: 'markdown',
         previewStyle: 'vertical',
-        height: '300px',
+        minHeight: '800px',
         language: 'zh-cn',
-        theme: 'dark'
+        theme: 'dark',
+        initialValue: '你好哦'
       })
     }
   }

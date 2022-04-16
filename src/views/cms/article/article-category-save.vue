@@ -48,7 +48,7 @@
           <el-col :span="24">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="item in this.$store.getters.isShow" :key="item.uuid">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -72,13 +72,13 @@ export default {
     //     callback(new Error('请选择消息分类'))
     //   }
     // }
-    const validateFileUuid = (rule, value, callback) => {
-      if (this.formValidate.file_uuid) {
-        callback()
-      } else {
-        callback(new Error('请上传分类图片'))
-      }
-    }
+    // const validateFileUuid = (rule, value, callback) => {
+    //   if (this.formValidate.file_uuid) {
+    //     callback()
+    //   } else {
+    //     callback(new Error('请上传分类图片'))
+    //   }
+    // }
     return {
       grid: {
         xl: 10,
