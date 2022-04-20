@@ -3,7 +3,7 @@ const fileRouter = {
   path: '/file',
   component: Layout,
   name: '文件管理',
-  meta: { title: '文件管理', icon: 'el-icon-s-help' },
+  meta: { title: '文件管理', icon: 'el-icon-folder-opened' },
   children: [
     {
       path: 'config/file-upload-config',

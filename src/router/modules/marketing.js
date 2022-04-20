@@ -3,7 +3,7 @@ const marketingRouter = {
   path: '/marketing',
   component: Layout,
   name: '运营管理',
-  meta: { title: '运营管理', icon: 'el-icon-s-help' },
+  meta: { title: '运营管理', icon: 'el-icon-monitor' },
   children: [
     {
       path: 'marketing',

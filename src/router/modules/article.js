@@ -3,7 +3,7 @@ const articleRouter = {
   path: '/cms',
   component: Layout,
   name: '内容管理',
-  meta: { title: '内容管理', icon: 'el-icon-s-help' },
+  meta: { title: '内容管理', icon: 'el-icon-document' },
   children: [
     {
       path: 'article',

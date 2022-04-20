@@ -3,7 +3,7 @@ const miniProgramRouter = {
   path: '/wx_app',
   component: Layout,
   name: '系统配置',
-  meta: { title: '系统配置', icon: 'el-icon-s-help' },
+  meta: { title: '系统配置', icon: 'el-icon-s-tools' },
   children: [
     {
       path: 'mini/conf',

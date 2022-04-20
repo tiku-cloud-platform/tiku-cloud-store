@@ -3,7 +3,7 @@ const messageRouter = {
   path: '/message',
   component: Layout,
   name: '消息管理',
-  meta: { title: '消息管理', icon: 'el-icon-s-help' },
+  meta: { title: '消息管理', icon: 'el-icon-message' },
   children: [
     {
       path: 'sys',

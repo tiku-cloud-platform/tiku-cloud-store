@@ -3,7 +3,7 @@ const examRouter = {
   path: '/exam',
   component: Layout,
   name: '试题管理',
-  meta: { title: '试题管理', icon: 'el-icon-s-help' },
+  meta: { title: '试题管理', icon: 'el-icon-edit-outline' },
   alwaysShow: true,
   children: [
     {

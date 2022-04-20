@@ -3,7 +3,7 @@ const userRouter = {
   path: '/user',
   component: Layout,
   name: '用户管理',
-  meta: { title: '用户管理', icon: 'el-icon-s-help' },
+  meta: { title: '用户管理', icon: 'el-icon-user-solid' },
   children: [
     {
       path: 'wechat_user',
