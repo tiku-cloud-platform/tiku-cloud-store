@@ -9,20 +9,20 @@ const userRouter = {
       path: 'wechat_user',
       name: '用户列表',
       component: () => import('@/views/user/wechat'),
-      meta: { title: '用户列表', icon: 'table' }
+      meta: { title: '用户列表', icon: 'el-icon-liebiao' }
     },
     {
       path: 'group',
       name: '用户分组',
       component: () => import('@/views/user/group/list'),
-      meta: { title: '用户分组', icon: 'table' }
+      meta: { title: '用户分组', icon: 'el-icon-liebiao' }
     },
     {
       path: 'group/save/:uuid?',
       name: '添加用户分组',
       hidden: true,
       component: () => import('@/views/user/group/save'),
-      meta: { title: '添加用户分组', icon: 'table' }
+      meta: { title: '添加用户分组', icon: 'el-icon-liebiao' }
     }
   ]
 }
