@@ -72,14 +72,14 @@
         </el-table-column>
         <el-table-column label="是否推荐" width="auto" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_recommend === 2" size="mini" type="text" style="color:red;">否</el-button>
-            <el-button v-if="row.is_recommend === 1" size="mini" type="text">是</el-button>
+            <span v-if="row.is_recommend === 2" class="show-disable-text">否</span>
+            <span v-if="row.is_recommend === 1">是</span>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text" style="color:red;">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
+            <span v-if="row.is_show === 1">启用</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
