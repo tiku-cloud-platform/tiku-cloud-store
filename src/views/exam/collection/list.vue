@@ -157,10 +157,14 @@
                   row.reading_sum +
                   ` 已添加选择题:` +
                   row.option_sum +
+                  ` 已添加判断题:` +
+                  row.option_sum +
                   ` 设置问答题:` +
-                  row.reading_sum +
+                  row.max_reading_total +
                   ` 设置选择题:` +
-                  row.option_sum
+                  row.max_option_total +
+                  ` 设置判断题:` +
+                  row.max_judge_total
               "
             >
               <el-button slot="reference" type="text" size="mini">
@@ -176,18 +180,12 @@
               title="试题分数情况"
               trigger="hover"
               :content="
-                `已添加问答题:` +
+                `问答题:` +
                   row.reading_sum +
-                  ` 已添加选择题:` +
+                  ` 加选择题:` +
                   row.option_sum +
-                  ` 已添加判断题:` +
-                  row.option_sum +
-                  ` 设置问答题:` +
-                  row.max_reading_total +
-                  ` 设置选择题:` +
-                  row.max_option_total +
-                  ` 设置判断题:` +
-                  row.max_judge_total
+                  ` 判断题:` +
+                  row.option_sum
               "
             >
               <el-button slot="reference" type="text" size="mini">
