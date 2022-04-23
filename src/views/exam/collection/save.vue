@@ -294,7 +294,10 @@ export default {
           content: data.content,
           level: data.level,
           author: data.author,
-          audit_author: data.audit_author
+          audit_author: data.audit_author,
+          max_reading_total: data.max_reading_total,
+          max_option_total: data.max_option_total,
+          max_judge_total: data.max_judge_total
         }
       })
     }
