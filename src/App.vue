@@ -34,4 +34,7 @@ export default {
 .input-alter {
     color: red;
 }
+.show-disable-text {
+  color: #e6a23c;
+}
 </style>

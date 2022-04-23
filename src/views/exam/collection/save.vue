@@ -2,7 +2,7 @@
   <div class="divBox">
     <el-card class="box-card">
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-form ref="formValidate" class="form" label-position="left" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
           <el-divider />
@@ -83,20 +83,35 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="是否推荐：">
               <el-radio-group v-model="formValidate.is_recommend">
-                <el-radio v-for="item in this.$store.getters.isRecommend" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isRecommend" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="分类排序：">
+            <el-form-item label="显示排序：">
               <el-input-number v-model="formValidate.orders" :min="0" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="最大问答题数量：">
+              <el-input-number v-model="formValidate.max_reading_total" :min="0" :max="20" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="最大选择题数量：">
+              <el-input-number v-model="formValidate.max_option_total" :min="0" :max="50" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="最大判断题数量：">
+              <el-input-number v-model="formValidate.max_judge_total" :min="0" :max="10" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -171,7 +186,10 @@ export default {
         content: '',
         level: 1,
         author: getName(),
-        audit_author: getName()
+        audit_author: getName(),
+        max_reading_total: 20,
+        max_option_total: 50,
+        max_judge_total: 10
       },
       ruleValidate: {
         title: [{ required: true, message: '请填写试卷名称', trigger: 'blur' }],

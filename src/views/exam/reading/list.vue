@@ -124,8 +124,8 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <el-button v-if="row.is_show === 2" size="mini" type="text" style="color:red;">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
+            <span v-if="row.is_show === 1">启用</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -135,8 +135,8 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <el-button v-if="row.is_search === 2" size="mini" type="text" style="color:red;">禁用</el-button>
-            <el-button v-if="row.is_search === 1" size="mini" type="text">启用</el-button>
+            <span v-if="row.is_search === 2" class="show-disable-text">禁用</span>
+            <span v-if="row.is_search === 1">启用</span>
           </template>
         </el-table-column>
         <el-table-column
