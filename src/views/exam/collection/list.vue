@@ -158,7 +158,7 @@
                   ` 已添加选择题:` +
                   row.option_sum +
                   ` 已添加判断题:` +
-                  row.option_sum +
+                  row.jude_sum +
                   ` 设置问答题:` +
                   row.max_reading_total +
                   ` 设置选择题:` +

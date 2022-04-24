@@ -21,28 +21,28 @@ const examRouter = {
     },
     {
       path: 'knowledge/list',
-      name: '试题知识点',
+      name: '试题考点',
       component: () => import('@/views/exam/knowledge/list'),
-      meta: { title: '试题知识点', icon: 'el-icon-tags' }
+      meta: { title: '试题考点', icon: 'el-icon-tags' }
     },
     {
       path: 'knowledge/save/:uuid?',
-      name: '添加试题知识点',
+      name: '试题考点',
       hidden: true,
-      meta: { title: '添加试题知识点', icon: 'el-icon-tags' },
+      meta: { title: '试题考点', icon: 'el-icon-tags' },
       component: () => import('@/views/exam/knowledge/save')
     },
     {
       path: 'collection/list',
-      name: '试题集',
+      name: '试卷集合',
       component: () => import('@/views/exam/collection/list'),
-      meta: { title: '试题集', icon: 'el-icon-guanwangshijuan' }
+      meta: { title: '试卷集合', icon: 'el-icon-guanwangshijuan' }
     },
     {
       path: 'collection/save/:uuid?',
-      name: '添加试卷',
+      name: '试卷集合',
       hidden: true,
-      meta: { title: '添加试卷', icon: 'el-icon-guanwangshijuan' },
+      meta: { title: '试卷集合', icon: 'el-icon-guanwangshijuan' },
       component: () => import('@/views/exam/collection/save')
     },
     {
