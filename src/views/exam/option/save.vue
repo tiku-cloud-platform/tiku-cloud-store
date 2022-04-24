@@ -104,7 +104,7 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -122,12 +122,14 @@
           <el-col>
             <el-form-item
               v-for="(options, index) in formValidate.option_item"
+              :key="index"
               :prop="'option_item.' + index + '.title'"
               :rules="{ required: true, message: '答案不能为空', trigger: 'blur' }"
             >
               <el-checkbox
-                v-for="item in answerOptions"
+                v-for="(item, indexs) in answerOptions"
                 v-if="item.key === index"
+                :key="indexs"
                 v-model="options.is_check"
                 :label="'选项'+item.value"
                 :true-label="1"
@@ -210,7 +212,7 @@ export default {
         collection: [],
         tag: [],
         is_show: 1,
-        category: ''
+        category: []
       },
       ruleValidate: {
         title: [{ required: true, message: '请填写分类名称', trigger: 'blur' }],
