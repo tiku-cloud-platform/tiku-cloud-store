@@ -95,7 +95,7 @@
         size="small"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" width="auto" />
         <!-- <el-table-column label="试卷编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -116,7 +116,7 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="试卷图片" width="70" align="center">
+        <el-table-column label="试卷图片" width="auto" align="center">
           <template slot-scope="scope">
             <viewer><img
               :src="
@@ -128,7 +128,7 @@
             ></viewer>
           </template>
         </el-table-column>
-        <el-table-column label="难易程度" width="130" align="center">
+        <el-table-column label="难易程度" width="auto" align="center">
           <template slot-scope="{ row }" style="display: flex">
             <span
               style="justify-content: center; display: flex"
@@ -168,7 +168,7 @@
               "
             >
               <el-button slot="reference" type="text" size="mini">
-                查看
+                {{ row.total_number }}
               </el-button>
             </el-popover>
           </template>
@@ -181,15 +181,15 @@
               trigger="hover"
               :content="
                 `问答题:` +
-                  row.reading_sum +
+                  row.reading_score +
                   ` 加选择题:` +
-                  row.option_sum +
+                  row.option_score +
                   ` 判断题:` +
-                  row.option_sum
+                  row.jude_score
               "
             >
               <el-button slot="reference" type="text" size="mini">
-                20
+                {{ row.total_score }}
               </el-button>
             </el-popover>
           </template>
@@ -226,12 +226,8 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <spam v-if="row.is_recommend === 2" style="color: #e6a23c">否</spam>
-            <span
-              v-if="row.is_recommend === 1"
-              size="mini"
-              type="text"
-            >是</span>
+            <span v-if="row.is_recommend === 2" style="color: #e6a23c">否</span>
+            <span v-if="row.is_recommend === 1">是</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -248,7 +244,7 @@
         <el-table-column
           label="操作"
           align="center"
-          width="150"
+          width="auto"
           class-name="small-padding fixed-width"
         >
           <template slot-scope="{ row, $index }">
@@ -323,6 +319,10 @@ export default {
     getList() {
       this.listLoading = true
       list(this.listQuery).then((res) => {
+        for (let index = 0; index < res.data.items.length; index++) {
+          res.data.items[index].total_score = parseFloat(res.data.items[index].jude_score) + parseFloat(res.data.items[index].reading_score) + parseFloat(res.data.items[index].option_score)
+          res.data.items[index].total_number = parseInt(res.data.items[index].option_sum) + parseInt(res.data.items[index].reading_sum) + parseInt(res.data.items[index].jude_sum)
+        }
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
       })
