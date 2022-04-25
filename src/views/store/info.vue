@@ -140,7 +140,7 @@ export default {
         avatar: '',
         store_uuid: '',
         company_name: '',
-        company_tel: '',
+        company_tel: ''
       },
       pwdInfo: {
         old_password: '',
@@ -178,7 +178,7 @@ export default {
           expire_time: res.data.expire_time,
           store_uuid: res.data.store_uuid,
           company_tel: res.data.company_tel,
-          company_name: res.data.company_name,
+          company_name: res.data.company_name
         }
       })
     },

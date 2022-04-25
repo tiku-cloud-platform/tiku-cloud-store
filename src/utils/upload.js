@@ -13,7 +13,6 @@ const uploadFileCloud = {
       const extname = tmp.pop()
       const path = this.$md5(opt.file.name + randomName) + `.${extname}`
       let fileInfo = {}
-      let url
       try {
         if (upConf.driver === 'ali_cloud') {
           // const client = new OSS({

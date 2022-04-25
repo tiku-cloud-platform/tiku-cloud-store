@@ -17,8 +17,8 @@
             <el-form-item label="上级分类：" prop="parent_uuid">
               <el-select v-model="formValidate.parent_uuid" clearable placeholder="请选择" style="width: 90%">
                 <el-option
-                  v-for="item in parentUuidData"
-                  :key="item.uuid"
+                  v-for="(item, index) in parentUuidData"
+                  :key="index"
                   :label="item.title"
                   :value="item.uuid"
                   :disabled="formValidate.uuid === item.uuid"
@@ -60,14 +60,14 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="是否推荐：">
               <el-radio-group v-model="formValidate.is_recommend">
-                <el-radio v-for="item in this.$store.getters.isRecommend" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isRecommend" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
