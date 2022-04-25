@@ -17,7 +17,8 @@
             <el-form-item label="消息分类：" prop="platform_message_category_uuid">
               <el-select v-model="formValidate.platform_message_category_uuid" clearable placeholder="请选择" style="width: 90%">
                 <el-option
-                  v-for="item in categoryList"
+                  v-for="(item, index) in categoryList"
+                  :key="index"
                   :label="item.title"
                   :value="item.uuid"
                 />

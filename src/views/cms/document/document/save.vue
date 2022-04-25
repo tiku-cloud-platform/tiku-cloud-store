@@ -225,7 +225,6 @@ export default {
     // 提交数据
     onsubmit(name) {
       console.log(this.formValidate)
-      return
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {

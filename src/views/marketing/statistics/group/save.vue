@@ -22,7 +22,7 @@
           <el-col :span="24">
             <el-form-item label="启用状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>

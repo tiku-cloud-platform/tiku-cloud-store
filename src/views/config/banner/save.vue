@@ -17,8 +17,8 @@
             <el-form-item label="显示位置：" prop="position">
               <el-select v-model="formValidate.position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
-                  v-for="item in positionData"
-                  :key="item.value"
+                  v-for="(item, index) in positionData"
+                  :key="index"
                   :label="item.describe"
                   :value="item.value"
                 />
@@ -29,8 +29,8 @@
             <el-form-item label="跳转类型：" prop="type">
               <el-select v-model="formValidate.type" clearable placeholder="请选择" style="width: 90%">
                 <el-option
-                  v-for="item in typeData"
-                  :key="item.value"
+                  v-for="(item, index) in typeData"
+                  :key="index"
                   :label="item.describe"
                   :value="item.value"
                 />
@@ -67,7 +67,7 @@
           <el-col :span="24">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
