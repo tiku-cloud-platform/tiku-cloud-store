@@ -251,7 +251,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/exam/option/list` })
+      this.$router.push({ path: `/exam/library/option/list` })
     },
     modalPicTap(tit) {
       const _this = this
