@@ -8,68 +8,102 @@ const examRouter = {
   children: [
     {
       path: 'category/list',
-      name: '试题分类',
-      meta: { title: '试题分类', icon: 'el-icon-xianshicaidan' },
+      name: '分类',
+      meta: { title: '分类', icon: 'el-icon-xianshicaidan' },
       component: () => import('@/views/exam/category/list')
     },
     {
       path: 'category/save/:uuid?',
-      name: '添加试题分类',
+      name: '分类',
       hidden: true,
-      meta: { title: '添加试题分类', icon: 'el-icon-xianshicaidan' },
+      meta: { title: '分类', icon: 'el-icon-xianshicaidan' },
       component: () => import('@/views/exam/category/save')
     },
     {
       path: 'knowledge/list',
-      name: '试题考点',
+      name: '考点',
       component: () => import('@/views/exam/knowledge/list'),
-      meta: { title: '试题考点', icon: 'el-icon-tags' }
+      meta: { title: '考点', icon: 'el-icon-tags' }
     },
     {
       path: 'knowledge/save/:uuid?',
-      name: '试题考点',
+      name: '考点',
       hidden: true,
-      meta: { title: '试题考点', icon: 'el-icon-tags' },
+      meta: { title: '考点', icon: 'el-icon-tags' },
       component: () => import('@/views/exam/knowledge/save')
     },
     {
       path: 'collection/list',
-      name: '试卷集合',
+      name: '试卷',
       component: () => import('@/views/exam/collection/list'),
-      meta: { title: '试卷集合', icon: 'el-icon-guanwangshijuan' }
+      meta: { title: '试卷', icon: 'el-icon-guanwangshijuan' }
     },
     {
       path: 'collection/save/:uuid?',
-      name: '试卷集合',
+      name: '试卷',
       hidden: true,
-      meta: { title: '试卷集合', icon: 'el-icon-guanwangshijuan' },
+      meta: { title: '试卷', icon: 'el-icon-guanwangshijuan' },
       component: () => import('@/views/exam/collection/save')
     },
     {
-      path: 'option/list',
-      name: '选择试题',
-      component: () => import('@/views/exam/option/list'),
-      meta: { title: '选择试题', icon: 'el-icon-shijuanbianhao' }
-    },
-    {
-      path: 'option/save/:uuid?',
-      name: '添加选择题',
-      hidden: true,
-      meta: { title: '添加选择题', icon: 'el-icon-shijuanbianhao' },
-      component: () => import('@/views/exam/option/save')
-    },
-    {
-      path: 'reading/list',
-      name: '问答试题',
-      component: () => import('@/views/exam/reading/list'),
-      meta: { title: '问答试题', icon: 'el-icon-wenda' }
-    },
-    {
-      path: 'reading/save/:uuid?',
-      name: '添加阅读理解试题',
-      hidden: true,
-      meta: { title: '添加阅读理解试题', icon: 'el-icon-xuqiuwenda' },
-      component: () => import('@/views/exam/reading/save')
+      path: 'library',
+      name: '题库',
+      meta: { title: '题库', icon: 'el-icon-xianshicaidan' },
+      component: () => import('@/views/exam/library/index'),
+      children: [
+        {
+          path: 'option/list',
+          name: '选择题',
+          component: () => import('@/views/exam/library/option/list'),
+          meta: { title: '选择题', icon: 'el-icon-shijuanbianhao' }
+        },
+        {
+          path: 'option/save/:uuid?',
+          name: '选择题',
+          hidden: true,
+          meta: { title: '选择题', icon: 'el-icon-shijuanbianhao' },
+          component: () => import('@/views/exam/library/option/save')
+        },
+        {
+          path: 'reading/list',
+          name: '问答题',
+          component: () => import('@/views/exam/library/reading/list'),
+          meta: { title: '问答题', icon: 'el-icon-wenda' }
+        },
+        {
+          path: 'reading/save/:uuid?',
+          name: '问答题',
+          hidden: true,
+          meta: { title: '问答题', icon: 'el-icon-xuqiuwenda' },
+          component: () => import('@/views/exam/library/reading/save')
+        },
+        {
+          path: 'reading/list',
+          name: '判断题',
+          component: () => import('@/views/exam/library/reading/list'),
+          meta: { title: '判断题', icon: 'el-icon-wenda' }
+        },
+        {
+          path: 'reading/save/:uuid?',
+          name: '判断题',
+          hidden: true,
+          meta: { title: '判断题', icon: 'el-icon-xuqiuwenda' },
+          component: () => import('@/views/exam/library/reading/save')
+        },
+        {
+          path: 'reading/list',
+          name: '填空题',
+          component: () => import('@/views/exam/library/reading/list'),
+          meta: { title: '填空题', icon: 'el-icon-wenda' }
+        },
+        {
+          path: 'reading/save/:uuid?',
+          name: '填空题',
+          hidden: true,
+          meta: { title: '填空题', icon: 'el-icon-xuqiuwenda' },
+          component: () => import('@/views/exam/library/reading/save')
+        }
+      ]
     }
   ]
 }

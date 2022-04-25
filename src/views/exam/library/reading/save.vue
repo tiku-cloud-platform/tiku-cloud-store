@@ -374,7 +374,7 @@ export default {
     },
     // 返回
     back() {
-      this.$router.push({ path: `/exam/reading/list` })
+      this.$router.push({ path: `/exam/library/reading/list` })
     },
     // 提交数据
     onsubmit(name) {

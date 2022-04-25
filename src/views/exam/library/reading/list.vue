@@ -54,7 +54,7 @@
                     size="small"
                     @click="reset()"
                   >重置</el-button>
-                  <router-link :to="{ path: '/exam/reading/save' }">
+                  <router-link :to="{ path: '/exam/library/reading/save' }">
                     <el-button
                       size="small"
                       type="success"
@@ -146,7 +146,7 @@
           class-name="small-padding fixed-width"
         >
           <template slot-scope="{ row, $index }">
-            <router-link :to="{ path: '/exam/reading/save/' + row.uuid }">
+            <router-link :to="{ path: '/exam/library/reading/save/' + row.uuid }">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
             <el-button
