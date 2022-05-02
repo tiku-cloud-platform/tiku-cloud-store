@@ -96,7 +96,7 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试题链接：" prop="source_url" label-for="source_url">
-              <el-input v-model.trim="formValidate.source_url" placeholder="请输入" maxlength="32" style="width: 90%" />
+              <el-input v-model.trim="formValidate.source_url" placeholder="请输入" maxlength="255" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
