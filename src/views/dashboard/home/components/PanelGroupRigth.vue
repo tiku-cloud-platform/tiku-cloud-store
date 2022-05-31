@@ -1,9 +1,9 @@
 <template>
   <el-row class="panel-group-right">
     <el-col :span="24">
-      <el-card class="box-card" style="padding-top:10px;">
+      <el-card class="box-card">
         <el-row class="clearfix">
-          <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px">系统公告</div>
+          <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px;padding-top:10px;">系统公告</div>
           <span class="text" style="float: right">
             <el-link type="primary" :underline="false">查看更多</el-link>
           </span>
