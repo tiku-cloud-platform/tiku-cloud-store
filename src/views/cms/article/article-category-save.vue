@@ -48,7 +48,7 @@
           <el-col :span="24">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :key="item.uuid">{{ item.label }}</el-radio>
+                <el-radio v-for="item in this.$store.getters.isShow" :key="item.uuid" :label="item.value">{{ item.label }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-// 内容
+
 import { add, edit, list } from '@/api/article/category'
 export default {
   name: 'ArticleCategorySave',
@@ -182,7 +182,6 @@ export default {
     getDetails() {
       list({ uuid: this.$route.params.uuid }).then(async res => {
         const data = res.data.items[0]
-        console.log(data)
         this.formValidate = {
           file_uuid: data.file_uuid,
           file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
