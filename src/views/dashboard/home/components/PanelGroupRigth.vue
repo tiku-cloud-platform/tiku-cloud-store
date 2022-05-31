@@ -5,11 +5,11 @@
         <el-row class="clearfix">
           <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px;">系统公告</div>
           <span class="text" style="float: right">
-            <el-link type="primary" :underline="false">查看更多</el-link>
+            <!-- <el-link type="primary" :underline="false">查看更多</el-link> -->
           </span>
         </el-row>
-        <el-row style="height:40px;line-height:40px;display:flex;width:100%;" :span="24">
-          <el-row v-for="item,key in noticeData" :key="key" class="text item" :span="24">
+        <el-row style="height:auto;width:100%;padding-top:20px;" :span="24">
+          <el-row v-for="item,key in noticeData" :key="key" class="text item" :span="24" style="line-height:20px;height:20px;">
             <el-col
               class="notice-category-title"
               underline="false"
