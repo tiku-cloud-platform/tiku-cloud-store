@@ -1,7 +1,7 @@
 <template>
   <el-row class="panel-group-right">
     <el-col :span="24">
-      <el-card class="box-card">
+      <el-card class="box-card" style="padding-top:10px;">
         <el-row class="clearfix">
           <div style="font-weight: 500; color: rgb(29 33 41); font-size: 16px">系统公告</div>
           <span class="text" style="float: right">
