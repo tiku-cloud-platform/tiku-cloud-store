@@ -5,10 +5,10 @@
         <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;">
           <div class="card-panel">
             <div class="card-panel-icon-wrapper icon-people" style="background: #f4516c;">
-              <svg-icon icon-class="system_count" class-name="card-panel-icon" />
+              <svg-icon icon-class="system_today_count" class-name="card-panel-icon" style="color: #f4516c;" />
             </div>
             <div class="card-panel-description">
-              <div class="card-panel-text">系统用户</div>
+              <div class="card-panel-text">系统总用户</div>
               <count-to :start-val="0" :end-val="tableData.collect.systemCount" :duration="2600" class="card-panel-num" />
             </div>
           </div>
@@ -16,10 +16,10 @@
         <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
           <div class="card-panel">
             <div class="card-panel-icon-wrapper icon-message" style="background: #FF8B38;">
-              <svg-icon icon-class="channel_system_count" class-name="card-panel-icon" />
+              <svg-icon icon-class="channel_today_count" class-name="card-panel-icon" style="color: #FF8B38;" />
             </div>
             <div class="card-panel-description">
-              <div class="card-panel-text">渠道用户</div>
+              <div class="card-panel-text">渠道总用户</div>
               <count-to :start-val="0" :end-val="tableData.collect.channelSystemCount" :duration="3000" class="card-panel-num" />
             </div>
           </div>
