@@ -4,52 +4,37 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
       <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
         <div class="dividerTitle">
-          <span class="title mr10">文章信息</span>
+          <span class="title mr10">书籍信息</span>
           <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="文章标题：" prop="title" label-for="title">
+            <el-form-item label="书籍名称：" prop="title" label-for="title">
               <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%" />
             </el-form-item>
           </el-col>
-          <el-col v-bind="grid" class="mr50">
-            <el-form-item label="文章分类：" prop="article_category_uuid" label-for="article_category_uuid">
-              <el-select v-model="formValidate.article_category_uuid" clearable placeholder="请选择" style="width: 90%">
-                <!--                <el-option-->
-                <!--                  :label="sleOptions.title"-->
-                <!--                  :value="sleOptions.uuid"-->
-                <!--                  style="width: auto;height:200px;overflow: auto;background-color:#fff"-->
-                <!--                >-->
-                <!--                  <el-tree-->
-                <!--                    ref="tree2"-->
-                <!--                    :data="categoryData"-->
-                <!--                    :props="defaultProps"-->
-                <!--                    highlight-current-->
-                <!--                    @node-click="handleSelClick"-->
-                <!--                  />-->
-                <!--                </el-option>-->
-                <el-option
-                  v-for="item in categoryData"
-                  :key="item.uuid"
-                  :label="item.title"
-                  :value="item.uuid"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章作者：" prop="author" label-for="author">
+            <el-form-item label="书籍作者：" prop="author" label-for="author">
               <el-input v-model.trim="formValidate.author" placeholder="请输入" element-id="author" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章来源：" prop="source" label-for="source">
+            <el-form-item label="书籍来源：" prop="source" label-for="source">
               <el-input v-model.trim="formValidate.source" placeholder="请输入" element-id="source" style="width: 90%" />
             </el-form-item>
           </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="书籍标签：" prop="source" label-for="source">
+              <el-input v-model.trim="formValidate.tags" placeholder="请输入" element-id="source" style="width: 90%" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="书籍难度：" prop="level">
+              <el-rate v-model="formValidate.level" style="display: contents;" />
+            </el-form-item>
+          </el-col>
           <el-col v-bind="grid" class="mr50">
-            <el-form-item label="文章封面：" prop="file_uuid">
+            <el-form-item label="书籍封面：" prop="file_uuid">
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url"></div>
                 <div v-else class="upLoad">
@@ -65,22 +50,6 @@
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="发布日期：" prop="publish_date">
-              <el-date-picker
-                v-model="formValidate.publish_date"
-                :editable="false"
-                value-format="yyyy-MM-dd"
-                format="yyyy年MM月dd日"
-                type="date"
-                placeholder="选择日期"
-              />
-            </el-form-item>
-            <el-form-item label="文章排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
-              <div class="image-size-require">最大顺序为1,000,000,000</div>
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
@@ -88,20 +57,18 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="是否置顶：">
-              <el-radio-group v-model="formValidate.is_top">
-                <el-radio v-for="(item,index) in this.$store.getters.isTop" :key="index" :label="item.value">{{ item.label }}</el-radio>
-              </el-radio-group>
+            <el-form-item label="显示顺序：">
+              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
+              <div class="image-size-require">最大顺序为1,000,000,000</div>
             </el-form-item>
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">文章内容</span>
+          <span class="title">书籍简介</span>
           <el-divider />
         </div>
-        <el-form-item label="文章内容：" prop="content">
-          <markdown-editor ref="editor" v-model="formValidate.content" />
-          <!-- <ueditor-from v-model="formValidate.content" :content="formValidate.content" /> -->
+        <el-form-item label="书籍简介：" prop="intro">
+          <el-input v-model="formValidate.intro" type="textarea" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -110,36 +77,24 @@
 </template>
 
 <script>
-// import ueditorFrom from '@/components/ueditorFrom'
-import { list as categoryList } from '@/api/article/category'
-import MarkdownEditor from '@/components/MarkdownEditor'
 // 内容
-import { add, edit, list } from '@/api/article/list'
-import { formatLongDate } from '@/utils'
+import { add, edit, show } from '@/api/book/book'
 import { getName } from '@/utils/auth'
 export default {
   name: 'ArticleSave',
-  components: { MarkdownEditor },
   data() {
-    const validateArticleCategory = (rule, value, callback) => {
-      if (!this.formValidate.article_category_uuid) {
-        callback(new Error('请选择新闻分类'))
-      } else {
-        callback()
-      }
-    }
-    const validatePublishDate = (rule, value, callback) => {
-      if (!this.formValidate.publish_date) {
-        callback(new Error('请选择发布时间'))
-      } else {
-        callback()
-      }
-    }
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.file_uuid) {
         callback()
       } else {
-        callback(new Error('请上传新闻图片'))
+        callback(new Error('请上传书籍图片'))
+      }
+    }
+    const validateLevel = (rule, value, callback) => {
+      if (this.formValidate.level) {
+        callback()
+      } else {
+        callback(new Error('请选择试题难度'))
       }
     }
     return {
@@ -152,25 +107,24 @@ export default {
       },
       formValidate: {
         title: '',
-        article_category_uuid: '',
         file_uuid: '',
         file_url: '',
         author: getName(),
         source: getName(),
         orders: 0,
-        content: '##请添加内容111',
-        publish_date: formatLongDate(new Date()),
         is_show: 1,
-        is_top: 1
+        is_top: 1,
+        level: 1,
+        intro: '',
+        tags: ''
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入新闻标题', trigger: 'blur' }],
-        article_category_uuid: [{ required: true, validator: validateArticleCategory, trigger: 'change' }],
-        publish_date: [{ required: true, validator: validatePublishDate, trigger: 'change' }],
-        content: [{ required: true, message: '请输入新闻内容', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入书籍标题', trigger: 'blur' }],
+        intro: [{ required: true, message: '请输入书籍内容', trigger: 'blur' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
-        author: [{ required: true, message: '请输入新闻作者', trigger: 'blur' }],
-        source: [{ required: true, message: '请输入新闻来源', trigger: 'blur' }]
+        author: [{ required: true, message: '请输入书籍作者', trigger: 'blur' }],
+        source: [{ required: true, message: '请输入书籍来源', trigger: 'blur' }],
+        level: [{ required: true, validator: validateLevel, trigger: 'blur' }]
       },
       categoryData: [],
       sleOptions: {
@@ -194,10 +148,6 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
-    // 获取文章分类
-    categoryList().then(res => {
-      this.categoryData = res.data.items
-    })
     if (this.$route.params.uuid) {
       this.getDetails()
     }
@@ -205,7 +155,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/cms/document/list` })
+      this.$router.push({ path: `/cms/book/book/list` })
     },
     modalPicTap(tit) {
       const _this = this
@@ -224,10 +174,10 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
-      console.log(this.formValidate)
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
+            delete this.formValidate.file_url
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
@@ -247,10 +197,10 @@ export default {
         }
       })
     },
-    // 文章详情
+    // 书籍详情
     getDetails() {
-      list({ uuid: this.$route.params.uuid }).then(async res => {
-        const data = res.data.items[0]
+      show({ uuid: this.$route.params.uuid }).then(async res => {
+        const data = res.data
         this.formValidate = {
           file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
           file_uuid: data.file_uuid,
@@ -259,11 +209,11 @@ export default {
           author: data.author,
           source: data.source,
           orders: data.orders,
-          content: data.content,
-          publish_date: data.publish_date,
-          article_category_uuid: data.article_category_uuid,
+          intro: data.intro,
           is_show: data.is_show,
-          is_top: data.is_top
+          is_top: data.is_top,
+          level: data.level,
+          tags: data.tags.toString()
         }
       })
     }

@@ -76,33 +76,33 @@ const examRouter = {
           hidden: true,
           meta: { title: '问答题', icon: 'el-icon-xuqiuwenda' },
           component: () => import('@/views/exam/library/reading/save')
-        },
-        {
-          path: 'reading/list',
-          name: '判断题',
-          component: () => import('@/views/exam/library/reading/list'),
-          meta: { title: '判断题', icon: 'el-icon-wenda' }
-        },
-        {
-          path: 'reading/save/:uuid?',
-          name: '判断题',
-          hidden: true,
-          meta: { title: '判断题', icon: 'el-icon-xuqiuwenda' },
-          component: () => import('@/views/exam/library/reading/save')
-        },
-        {
-          path: 'reading/list',
-          name: '填空题',
-          component: () => import('@/views/exam/library/reading/list'),
-          meta: { title: '填空题', icon: 'el-icon-wenda' }
-        },
-        {
-          path: 'reading/save/:uuid?',
-          name: '填空题',
-          hidden: true,
-          meta: { title: '填空题', icon: 'el-icon-xuqiuwenda' },
-          component: () => import('@/views/exam/library/reading/save')
         }
+        // {
+        //   path: 'reading/list',
+        //   name: '判断题',
+        //   component: () => import('@/views/exam/library/reading/list'),
+        //   meta: { title: '判断题', icon: 'el-icon-wenda' }
+        // }
+        // {
+        //   path: 'reading/save/:uuid?',
+        //   name: '判断题',
+        //   hidden: true,
+        //   meta: { title: '判断题', icon: 'el-icon-xuqiuwenda' },
+        //   component: () => import('@/views/exam/library/reading/save')
+        // },
+        // {
+        //   path: 'reading/list',
+        //   name: '填空题',
+        //   component: () => import('@/views/exam/library/reading/list'),
+        //   meta: { title: '填空题', icon: 'el-icon-wenda' }
+        // },
+        // {
+        //   path: 'reading/save/:uuid?',
+        //   name: '填空题',
+        //   hidden: true,
+        //   meta: { title: '填空题', icon: 'el-icon-xuqiuwenda' },
+        //   component: () => import('@/views/exam/library/reading/save')
+        // }
       ]
     }
   ]

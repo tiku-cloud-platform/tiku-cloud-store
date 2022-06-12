@@ -7,42 +7,8 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
-                  <el-form-item label="分类名称：" prop="title">
+                  <el-form-item label="书籍名称：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
-                  </el-form-item>
-                </el-col>
-                <el-col v-bind="grid" style="width:auto">
-                  <el-form-item label="文章分类：" prop="category_uuid">
-                    <!--                    <el-cascader-->
-                    <!--                      v-model="value"-->
-                    <!--                      :options="categoryData"-->
-                    <!--                      :show-all-levels="false"-->
-                    <!--                      :props="{ expandTrigger: 'hover' }"-->
-                    <!--                      @change="handleChange"-->
-                    <!--                    />-->
-                    <!--                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择" style="width: 90%">-->
-                    <!--                      <el-option-->
-                    <!--                        :label="sleOptions.title"-->
-                    <!--                        :value="sleOptions.uuid"-->
-                    <!--                        style="width: auto;height:200px;overflow: auto;background-color:#fff"-->
-                    <!--                      >-->
-                    <!--                        <el-tree-->
-                    <!--                          ref="tree2"-->
-                    <!--                          :data="categoryData"-->
-                    <!--                          :props="defaultProps"-->
-                    <!--                          highlight-current-->
-                    <!--                          @node-click="handleSelClick"-->
-                    <!--                        />-->
-                    <!--                      </el-option>-->
-                    <!--                    </el-select>-->
-                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择" style="width: 90%">
-                      <el-option
-                        v-for="item in categoryData"
-                        :key="item.key"
-                        :label="item.title"
-                        :value="item.uuid"
-                      />
-                    </el-select>
                   </el-form-item>
                 </el-col>
               </el-col>
@@ -50,11 +16,10 @@
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
-                  <router-link :to="{path: '/cms/document/save'}">
+                  <router-link :to="{path: '/cms/book/book/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
-                  <el-button type="warning" size="small" @click="handleBatchPub">收录</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -71,39 +36,60 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
-        <!-- <el-table-column label="编号" width="auto" align="center">
+        <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
+            <svg-icon
+              icon-class="copy"
+              style="font-size: 20px; cursor: pointer"
+              @click="copyChannelId(row.uuid)"
+            />
             <span>{{ row.uuid }}</span>
           </template>
-        </el-table-column> -->
-        <el-table-column label="文章图片" width="70" align="center">
+        </el-table-column>
+        <el-table-column label="书籍图片" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
         </el-table-column>
-        <el-table-column label="文章标题" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="书籍标题" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="文章分类" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.category_info.title }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="文章作者" width="auto" align="center">
+        <el-table-column label="书籍作者" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.author }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="文章来源" width="auto" align="center">
+        <el-table-column label="书籍来源" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.source }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="阅读量" width="auto" align="center">
+        <el-table-column label="书籍标签" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.read_number }}</span>
+            <el-tag
+              v-for="(name, ix) in row.tags"
+              :key="ix"
+              size="mini"
+            >
+              {{ name }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="关注人数" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.collection_number }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="评分" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.score }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="书籍章数" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.numbers }}</span>
           </template>
         </el-table-column>
         <el-table-column label="显示顺序" width="auto" align="center">
@@ -111,35 +97,33 @@
             <span>{{ row.orders }}</span>
           </template>
         </el-table-column>
-        .<el-table-column label="发布时间" width="auto" align="center">
+        <el-table-column label="状态" width="100" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <span>{{ row.publish_date }}</span>
+            <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
+            <span v-if="row.is_show === 1">启用</span>
           </template>
         </el-table-column>
-        <el-table-column label="是否置顶" width="auto" align="center">
+        <el-table-column label="">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_top === 2" size="mini" type="text">否</el-button>
-            <el-button v-if="row.is_top === 1" size="mini" type="text">是</el-button>
+            <el-rate v-model="row.level" style="display: contents;" disabled />
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="创建时间" width="150" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="发布" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="更新时间" width="150" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_publish === 2" size="mini" type="text">否</el-button>
-            <el-button v-if="row.is_publish === 1" size="mini" type="text">是</el-button>
+            <span>{{ row.updated_at }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/cms/document/save/'+row.uuid}">
+            <router-link :to="{path: '/cms/book/book/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
+            <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -151,12 +135,10 @@
 </template>
 
 <script>
-import { list, del, publish } from '@/api/article/list'
-import { list as categoryList } from '@/api/article/category'
+import { list, del } from '@/api/book/book'
 import Pagination from '@/components/Pagination'
-
 export default {
-  name: 'ArticleList',
+  name: 'BookList',
   components: { Pagination },
   data() {
     return {
@@ -193,35 +175,20 @@ export default {
   },
   mounted() {
     this.getList()
-    // 获取文章分类
-    /* categoryList().then(res => {
-      const data = res.data.items
-      const categoryData = []
-      for (let i = 0; i < data.length; i++) {
-        const children = []
-        if (data[i].children) {
-          for (let j = 0; j < data[i].children.length; j++) {
-            const children_info = {
-              value: data[i].children[j].uuid,
-              label: data[i].children[j].title
-            }
-            children.push(children_info)
-          }
-        }
-        const info = {
-          value: data[i].uuid,
-          label: data[i].title,
-          children: children
-        }
-        categoryData.push(info)
-      }
-      this.categoryData = categoryData
-    })*/
-    categoryList().then(res => {
-      this.categoryData = res.data.items
-    })
   },
   methods: {
+    // copy渠道编号
+    copyChannelId(id) {
+      (function() {
+        document.oncopy = function(e) {
+          e.clipboardData.setData('text', id)
+          e.preventDefault()
+          document.oncopy = null
+        }
+      })(id)
+      document.execCommand('Copy')
+      this.$message.success('复制成功')
+    },
     handleChange(value) {
       console.log(value)
     },
@@ -273,21 +240,6 @@ export default {
       }
       this.$modalSure().then(() => {
         del(this.selectionDelList.join(',')).then(res => {
-          this.$message({ message: res.message, type: 'success' })
-        })
-        this.getList()
-      })
-    },
-    // 批量发布
-    handleBatchPub() {
-      if (this.selectionDelList.length <= 0) {
-        return this.$message({
-          message: '未选择数据',
-          type: 'warning'
-        })
-      }
-      this.$publishWeChat().then(() => {
-        publish(this.selectionDelList.join(',')).then(res => {
           this.$message({ message: res.message, type: 'success' })
         })
         this.getList()

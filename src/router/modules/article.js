@@ -40,36 +40,23 @@ const articleRouter = {
       ]
     },
     {
-      path: 'document',
-      name: '文档管理',
-      component: () => import('@/views/cms/document/index'),
+      path: 'book',
+      name: '书籍管理',
+      component: () => import('@/views/cms/book/index'),
       meta: { title: '文档管理', icon: 'el-icon-document' },
       children: [
         {
-          path: 'category/list',
-          name: '文档分类',
-          component: () => import('@/views/cms/document/category/list'),
-          meta: { title: '文档分类', icon: 'el-icon-xianshicaidan' }
+          path: 'book/list',
+          name: '书籍管理',
+          component: () => import('@/views/cms/book/book/list'),
+          meta: { title: '书籍管理', icon: 'el-icon-xianshicaidan' }
         },
         {
-          path: 'category/save/:uuid?',
-          name: '添加分类',
+          path: 'book/save/:uuid?',
+          name: '添加书籍',
           hidden: true,
-          component: () => import('@/views/cms/document/category/save'),
-          meta: { title: '添加分类', icon: 'el-icon-xianshicaidan' }
-        },
-        {
-          path: 'list',
-          name: '文档列表',
-          component: () => import('@/views/cms/document/document/list'),
-          meta: { title: '文档列表', icon: 'el-icon-liebiao' }
-        },
-        {
-          path: 'save/:uuid?',
-          name: '添加文档',
-          hidden: true,
-          component: () => import('@/views/cms/document/document/save'),
-          meta: { title: '添加文档', icon: 'el-icon-liebiao' }
+          component: () => import('@/views/cms/book/book/save'),
+          meta: { title: '添加书籍', icon: 'el-icon-xianshicaidan' }
         }
       ]
     },
@@ -81,15 +68,15 @@ const articleRouter = {
       children: [
         {
           path: 'article/list',
-          name: '系统配置',
+          name: '单文管理',
           component: () => import('@/views/cms/config/list'),
-          meta: { title: '系统配置', icon: 'el-icon-lanmupeizhi' }
+          meta: { title: '单文管理', icon: 'el-icon-lanmupeizhi' }
         },
         {
           path: 'article/save/:id?',
           component: () => import('@/views/cms/config/save'),
-          name: '编辑配置',
-          meta: { title: '编辑配置', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
+          name: '编辑单文',
+          meta: { title: '编辑单文', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
           hidden: true
         }
       ]
