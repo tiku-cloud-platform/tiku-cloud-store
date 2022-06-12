@@ -43,13 +43,13 @@ const articleRouter = {
       path: 'book',
       name: '书籍管理',
       component: () => import('@/views/cms/book/index'),
-      meta: { title: '文档管理', icon: 'el-icon-document' },
+      meta: { title: '书籍管理', icon: 'el-icon-notebook-2' },
       children: [
         {
           path: 'book/list',
           name: '书籍管理',
           component: () => import('@/views/cms/book/book/list'),
-          meta: { title: '书籍管理', icon: 'el-icon-xianshicaidan' }
+          meta: { title: '书籍管理', icon: 'el-icon-notebook-2' }
         },
         {
           path: 'book/save/:uuid?',
@@ -57,6 +57,13 @@ const articleRouter = {
           hidden: true,
           component: () => import('@/views/cms/book/book/save'),
           meta: { title: '添加书籍', icon: 'el-icon-xianshicaidan' }
+        },
+        {
+          path: 'category/list/:uuid',
+          name: '书籍内容',
+          component: () => import('@/views/cms/book/category/list'),
+          meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
+          hidden: true
         }
       ]
     },
