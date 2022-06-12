@@ -58,7 +58,6 @@ export const constantRoutes = [
   messageRouter,
   marketingRouter,
   systemConfigRouter,
-
   {
     path: '/setting/uploadPicture',
     component: () => import('@/components/uploadPicture/index.vue'),

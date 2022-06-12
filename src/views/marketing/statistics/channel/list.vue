@@ -24,7 +24,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;padding-left:5px;">
+        <el-col :xs="12" :sm="12" :lg="6" :span="5" class="card-panel-col" style="padding-right:5px;">
           <div class="card-panel">
             <div class="card-panel-icon-wrapper icon-money" style="background: #f4516c;">
               <svg-icon icon-class="system_today_count" class-name="card-panel-icon" style="color: #FFF;" />
@@ -130,7 +130,7 @@
             <router-link :to="{path: '/marketing/marketing/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
+            <el-button size="mini" type="text" style="color:red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
