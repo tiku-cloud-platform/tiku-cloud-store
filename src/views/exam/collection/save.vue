@@ -101,7 +101,7 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="最大问答题数量：">
-              <el-input-number v-model="formValidate.max_reading_total" :min="0" :max="20" />
+              <el-input-number v-model="formValidate.max_reading_total" :min="0" :max="50" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
