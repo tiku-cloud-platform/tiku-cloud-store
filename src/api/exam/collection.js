@@ -28,7 +28,7 @@ export function edit(params) {
   return request({
     url: '/store/exam/collection/update',
     method: 'put',
-    params
+    data: params
   })
 }
 
