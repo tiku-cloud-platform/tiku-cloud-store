@@ -123,9 +123,6 @@
             <router-link :to="{path: '/cms/book/book/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <router-link :to="{path: '/cms/book/category/list/'+row.uuid}">
-              <el-button type="text" size="mini" class="mr10">书籍</el-button>
-            </router-link>
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
           </template>
         </el-table-column>
@@ -141,7 +138,7 @@
 import { list, del } from '@/api/book/book'
 import Pagination from '@/components/Pagination'
 export default {
-  name: 'BookList',
+  name: 'BookCategoryList',
   components: { Pagination },
   data() {
     return {
