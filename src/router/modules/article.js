@@ -60,7 +60,7 @@ const articleRouter = {
         },
         {
           path: 'category/list/:uuid',
-          name: '书籍内容',
+          name: 'bookCategory',
           component: () => import('@/views/cms/book/category/list'),
           meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
           hidden: true
