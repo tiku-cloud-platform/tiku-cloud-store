@@ -64,6 +64,13 @@ const articleRouter = {
           component: () => import('@/views/cms/book/category/list'),
           meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
           hidden: true
+        },
+        {
+          path: 'category/save',
+          name: 'bookContentSave',
+          component: () => import('@/views/cms/book/category/save'),
+          meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
+          hidden: true
         }
       ]
     },

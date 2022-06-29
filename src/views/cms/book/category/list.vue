@@ -1,8 +1,8 @@
 <template>
-  <div class="divBox">
+  <div class="divBox" style="margin-top: 5px;">
     <el-row :gutter="20">
-      <el-col :span="4">
-        <el-card class="box-card" shadow="never">
+      <el-col :span="4" style="padding-left: 0;padding-right: 0;width: 14%;margin-left: 20px;">
+        <el-card id="box-card" shadow="never">
           <div class="Nav">
             <div class="input">
               <el-input
@@ -26,18 +26,18 @@
                     <div slot-scope="{ node, data}" class="custom-tree-node" @click.stop="handleNodeClick(data.uuid)">
                       <div>
                         <span>{{ node.label }}</span>
-                        <span style="font-size: 14px;color: #3889b1">（{{ data.title }}）</span>
+                        <!--  <span style="font-size: 14px;color: #3889b1">（{{ data.title }}）</span>-->
                       </div>
                       <span class="el-ic">
-                        <i v-if="data.parent_uuid == null" class="el-icon-circle-plus-outline" title="添加" @click.stop="onAdd(data.uuid)" />
+                        <i v-if="!data.parent_uuid" class="el-icon-circle-plus-outline" title="添加" @click.stop="onAdd(data.uuid)" />
                         <svg-icon icon-class="add" class="icon-space" />
-                        <i class="el-icon-edit" title="修改" @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)" />
+                        <i v-if="node.label !== '全部分类'" class="el-icon-edit" title="修改" @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)" />
                         <svg-icon icon-class="detail" class="icon-space" />
                         <i
-                          v-if="!data.children"
+                          v-if="!data.children && node.label !== '全部分类'"
                           class="el-icon-delete"
                           title="删除"
-                          @click.stop="() => handleDelete(data.uuid)"
+                          @click.stop="() => onDelete(data.uuid)"
                         />
                       </span>
                     </div>
@@ -52,22 +52,23 @@
         <el-card class="box-card" shadow="never">
           <div slot="header" class="clearfix">
             <div class="container">
-              <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right" label-width="100px">
+              <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right" label-width="100px">
                 <el-row>
                   <el-col :span="19">
                     <el-col v-bind="grid" style="width:auto">
                       <el-form-item label="书籍名称：" prop="title">
-                        <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
+                        <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable />
                       </el-form-item>
                     </el-col>
                   </el-col>
                   <el-col :span="5">
                     <el-form-item>
-                      <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                      <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getContentList">搜索</el-button>
                       <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
-                      <router-link :to="{path: '/cms/book/book/save'}">
-                        <el-button size="small" type="success" class="mr10">添加</el-button>
-                      </router-link>
+                      <!--  <router-link :to="{path: '/cms/book/book/save'}">
+                        <el-button size="small" type="success" class="mr10">添加</el-button>jumpAddContent
+                      </router-link>-->
+                      <el-button size="small" type="success" class="mr10" @click="jumpAddContent">添加</el-button>
                       <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
                     </el-form-item>
                   </el-col>
@@ -177,7 +178,7 @@
             </el-table-column>
           </el-table>
           <div class="block">
-            <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+            <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="contentQuery.page" :limit.sync="contentQuery.size" @pagination="getContentList" />
           </div>
         </el-card>
       </el-col>
@@ -186,7 +187,17 @@
 </template>
 
 <script>
-import { list as categoryList, del } from '@/api/book/category'
+import {
+  list as categoryList,
+  add as categoryAdd,
+  del as categoryDel,
+  edit
+} from '@/api/book/category'
+import {
+  list as contentList,
+  add as contentAdd,
+  del as contentDel
+} from '@/api/book/content'
 import Pagination from '@/components/Pagination'
 export default {
   name: 'BookCategoryList',
@@ -196,11 +207,12 @@ export default {
       treeData: [],
       treeData2: [],
       filterText: '',
-      listQuery: {
+      contentQuery: {
         page: 1,
         size: 10,
         title: '',
-        category_uuid: ''
+        store_book_category_uuid: '',
+        store_book_uuid: ''
       },
       categoryQuery: {
         store_book_uuid: '',
@@ -237,6 +249,13 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'title'
+      },
+      bookCategoryTemp: {
+        store_book_uuid: '',
+        parent_uuid: '',
+        title: '',
+        is_show: 1,
+        orders: 1
       }
     }
   },
@@ -246,13 +265,33 @@ export default {
     }
   },
   created() {
+    this.contentQuery.store_book_uuid = this.$route.params.uuid
     this.categoryQuery.store_book_uuid = this.$route.params.uuid
+    this.bookCategoryTemp.store_book_uuid = this.$route.params.uuid
   },
   mounted() {
-    this.getList()
+    this.getContentList()
     this.getCategoryList()
   },
   methods: {
+    // 跳转添加内容页面
+    jumpAddContent() {
+      this.$router.push({
+        name: 'bookContentSave',
+        query: {
+          store_book_category_uuid: this.contentQuery.store_book_category_uuid,
+          store_book_uuid: this.$route.params.uuid
+        }
+      })
+    },
+    getContentList() {
+      this.listLoading = true
+      contentList(this.contentQuery).then(res => {
+        this.tableData.data = res.data.items
+        this.tableData.total = res.data.total
+      })
+      this.listLoading = false
+    },
     // 搜索分类
     filterNode(value, data) {
       if (!value) return true
@@ -260,18 +299,40 @@ export default {
     },
     // 点击分类
     handleNodeClick(uuid) {
-      console.log(uuid)
+      this.contentQuery.store_book_category_uuid = uuid
     },
-    onAdd() {
-
+    async onAdd(uuid) {
+      if (Number(uuid) !== 0) this.bookCategoryTemp.parent_uuid = uuid
+      this.bookCategoryTemp.title = await this.$modePromptBox('添加分类名称')
+      categoryAdd(this.bookCategoryTemp).then(({ message }) => {
+        this.$message.success(message)
+        this.getCategoryList()
+      })
     },
-    onEdit(uuid, parent_uuid, title) {
-
+    async onEdit(uuid, parent_uuid, title) {
+      this.bookCategoryTemp.title = await this.$modePromptBox('修改分类名称', title)
+      this.bookCategoryTemp.uuid = uuid
+      this.bookCategoryTemp.parent_uuid = parent_uuid
+      edit(this.bookCategoryTemp).then(({ message }) => {
+        this.$message.success(message)
+        this.getCategoryList()
+      })
+    },
+    // 删除
+    onDelete(uuid) {
+      this.$modalSure().then(() => {
+        categoryDel(uuid).then(({ message }) => {
+          this.$message.success(message)
+          this.getCategoryList()
+        }).catch(({ message }) => {
+          this.$message.error(message)
+        })
+      })
     },
     // 分类
     getCategoryList() {
       const data = {
-        title: '全部图片',
+        title: '全部分类',
         uuid: ''
       }
       categoryList(this.categoryQuery).then(res => {
@@ -299,7 +360,7 @@ export default {
     },
     // 分类点击
     handleSelClick(node) {
-      this.listQuery.category_uuid = node.uuid
+      this.contentQuery.category_uuid = node.uuid
       this.sleOptions = {
         title: node.title,
         uuid: node.uuid
@@ -307,26 +368,7 @@ export default {
     },
     reset() {
       this.$refs['searchForm'].resetFields()
-      this.getList()
-    },
-    // 列表
-    getList() {
-      this.listLoading = true
-      // list(this.listQuery).then(res => {
-      //   this.tableData.data = res.data.items
-      //   this.tableData.total = res.data.total
-      // })
-      this.listLoading = false
-    },
-    // 删除
-    handleDelete(row, idx) {
-      this.$modalSure().then(() => {
-        del(row.uuid).then(res => {
-          this.$message({ message: res.message, type: 'success' })
-          this.tableData.data.splice(idx, 1)
-          this.tableData.total -= 1
-        })
-      })
+      this.getContentList()
     },
     // 批量选择时触发
     handleSelectionChange(selection) {
@@ -354,7 +396,13 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+#box-card {
+  .el-card__body {
+    padding: 10px;
+  }
+}
+
 .selWidth{
   width: 300px;
 }
@@ -481,6 +529,5 @@ export default {
     display: none;
   }
 }
-
 </style>
 

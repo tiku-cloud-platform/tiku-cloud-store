@@ -50,8 +50,8 @@ export default {
       })
       // 监听内容改变事件
       this.editor.on('change', () => {
-        console.log(this.editor.getMarkdown())
-        console.log(this.editor.getHTML())
+        // console.log(this.editor.getMarkdown()) // 获取markdown
+        // console.log(this.editor.getHTML()) // 获取html
         this.$emit('input', this.editor.getMarkdown())
       })
     }
