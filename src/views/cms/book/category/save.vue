@@ -66,7 +66,7 @@
           <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <markdown-editor v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -92,6 +92,7 @@ export default {
       }
     }
     return {
+      isShow: false, // 这里用来重新排序父子组件的生命周期，好让content回显数据在富文本里面
       grid: {
         xl: 10,
         lg: 10,
@@ -100,6 +101,7 @@ export default {
         xs: 24
       },
       formValidate: {
+        uuid: '',
         store_book_uuid: '',
         store_book_category_uuid: '',
         title: '',
@@ -120,34 +122,20 @@ export default {
         content: [{ required: true, message: '内容不能为空', trigger: 'blur' }],
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
-      bookCategoryData: [],
-      sleOptions: {
-        title: '',
-        uuid: ''
-      },
-      defaultProps: {
-        children: 'children',
-        label: 'title'
-      }
-    }
-  },
-  watch: {
-    $route(to, from) {
-      if (this.$route.query.uuid) {
-        this.getDetails()
-      }
+      bookCategoryData: []
     }
   },
   created() {
-    console.log(this.$route)
+    if (this.$route.query.content_uuid) {
+      this.getDetails()
+    } else {
+      this.isShow = true
+    }
     this.formValidate.store_book_uuid = this.$route.query.store_book_uuid
     this.formValidate.store_book_category_uuid = this.$route.query.store_book_category_uuid
     this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
-    if (this.$route.query.uuid) {
-      this.getDetails()
-    }
     this.getCategoryList()
   },
   methods: {
@@ -161,14 +149,13 @@ export default {
     },
     // 返回
     back() {
-      this.$router.push({ path: `/cms/book/book/list` })
+      this.$router.push({ path: `/cms/book/category/list/` + this.formValidate.store_book_uuid })
     },
     // 提交数据
     onsubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          if (this.$route.params.uuid) {
-            delete this.formValidate.file_url
+          if (this.$route.query.content_uuid) {
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
@@ -190,20 +177,25 @@ export default {
     },
     // 书籍详情
     getDetails() {
-      show({ uuid: this.$route.params.uuid }).then(async res => {
+      show({
+        uuid: this.$route.query.content_uuid,
+        store_book_uuid: this.$route.query.store_book_uuid
+      }).then(async res => {
         const data = res.data
         this.formValidate = {
           uuid: data.uuid,
+          store_book_uuid: data.store_book_uuid,
+          store_book_category_uuid: data.store_book_category_uuid,
           title: data.title,
+          intro: data.intro,
+          content: data.content,
           author: data.author,
+          tags: data.tags.toString(),
           source: data.source,
           orders: data.orders,
-          intro: data.intro,
-          is_show: data.is_show,
-          is_top: data.is_top,
-          level: data.level,
-          tags: data.tags.toString()
+          is_show: data.is_show
         }
+        this.isShow = true
       })
     },
     // 分类
@@ -213,6 +205,8 @@ export default {
       }).then(res => {
         const data = res.data.items
         const newArr = []
+
+        // 格式化级联选择器的数据格式
         data.map((item, index) => {
           newArr.push({
             value: item.uuid,

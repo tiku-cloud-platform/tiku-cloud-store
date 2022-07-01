@@ -54,21 +54,21 @@
             <div class="container">
               <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right" label-width="100px">
                 <el-row>
-                  <el-col :span="19">
+                  <el-col :span="14">
                     <el-col v-bind="grid" style="width:auto">
                       <el-form-item label="书籍名称：" prop="title">
                         <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable />
                       </el-form-item>
                     </el-col>
                   </el-col>
-                  <el-col :span="5">
+                  <el-col :span="10">
                     <el-form-item>
                       <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getContentList">搜索</el-button>
                       <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                       <!--  <router-link :to="{path: '/cms/book/book/save'}">
                         <el-button size="small" type="success" class="mr10">添加</el-button>jumpAddContent
                       </router-link>-->
-                      <el-button size="small" type="success" class="mr10" @click="jumpAddContent">添加</el-button>
+                      <el-button size="small" type="success" class="mr10" @click="jumpAddContent('')">添加</el-button>
                       <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
                     </el-form-item>
                   </el-col>
@@ -96,12 +96,7 @@
                 <span>{{ row.uuid }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="书籍封面" width="70" align="center">
-              <template slot-scope="scope">
-                <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
-              </template>
-            </el-table-column>
-            <el-table-column label="书籍标题" width="auto" align="center" :show-overflow-tooltip="true">
+            <el-table-column label="名称" width="auto" align="center" :show-overflow-tooltip="true">
               <template slot-scope="{row}">
                 <span>{{ row.title }}</span>
               </template>
@@ -127,19 +122,19 @@
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="关注人数" width="auto" align="center">
+            <el-table-column label="收藏数量" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.collection_number }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="评分" width="auto" align="center">
+            <el-table-column label="阅读数量" width="auto" align="center">
               <template slot-scope="{row}">
-                <span>{{ row.score }}</span>
+                <span>{{ row.read_number }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="书籍章数" width="auto" align="center">
+            <el-table-column label="点赞数量" width="auto" align="center">
               <template slot-scope="{row}">
-                <span>{{ row.numbers }}</span>
+                <span>{{ row.click_number }}</span>
               </template>
             </el-table-column>
             <el-table-column label="显示顺序" width="auto" align="center">
@@ -153,16 +148,11 @@
                 <span v-if="row.is_show === 1">启用</span>
               </template>
             </el-table-column>
-            <el-table-column label="">
-              <template slot-scope="{row}">
-                <el-rate v-model="row.level" style="display: contents;" disabled />
-              </template>
-            </el-table-column>
-            <el-table-column label="创建时间" width="150" align="center">
+            <!--  <el-table-column label="创建时间" width="150" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.created_at }}</span>
               </template>
-            </el-table-column>
+            </el-table-column>-->
             <el-table-column label="更新时间" width="150" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.updated_at }}</span>
@@ -170,9 +160,7 @@
             </el-table-column>
             <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
               <template slot-scope="{row,$index}">
-                <router-link :to="{path: '/cms/book/book/save/'+row.uuid}">
-                  <el-button type="text" size="mini" class="mr10">编辑</el-button>
-                </router-link>
+                <el-button type="text" size="mini" class="mr10" @click="jumpAddContent(row.uuid)">编辑</el-button>
                 <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
               </template>
             </el-table-column>
@@ -193,11 +181,7 @@ import {
   del as categoryDel,
   edit
 } from '@/api/book/category'
-import {
-  list as contentList,
-  add as contentAdd,
-  del as contentDel
-} from '@/api/book/content'
+import { list as contentList } from '@/api/book/content'
 import Pagination from '@/components/Pagination'
 export default {
   name: 'BookCategoryList',
@@ -265,9 +249,7 @@ export default {
     }
   },
   created() {
-    this.contentQuery.store_book_uuid = this.$route.params.uuid
-    this.categoryQuery.store_book_uuid = this.$route.params.uuid
-    this.bookCategoryTemp.store_book_uuid = this.$route.params.uuid
+    this.contentQuery.store_book_uuid = this.categoryQuery.store_book_uuid = this.bookCategoryTemp.store_book_uuid = this.$route.params.uuid
   },
   mounted() {
     this.getContentList()
@@ -275,12 +257,13 @@ export default {
   },
   methods: {
     // 跳转添加内容页面
-    jumpAddContent() {
+    jumpAddContent(uuid) {
       this.$router.push({
         name: 'bookContentSave',
         query: {
           store_book_category_uuid: this.contentQuery.store_book_category_uuid,
-          store_book_uuid: this.$route.params.uuid
+          store_book_uuid: this.$route.params.uuid,
+          content_uuid: uuid
         }
       })
     },
@@ -300,6 +283,7 @@ export default {
     // 点击分类
     handleNodeClick(uuid) {
       this.contentQuery.store_book_category_uuid = uuid
+      this.getContentList()
     },
     async onAdd(uuid) {
       if (Number(uuid) !== 0) this.bookCategoryTemp.parent_uuid = uuid
