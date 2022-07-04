@@ -55,7 +55,6 @@ export default {
           }]
         ]
       })
-
       // 监听内容改变事件
       this.editor.on('change', () => {
         // console.log(this.editor.getMarkdown()) // 获取markdown
@@ -71,7 +70,11 @@ export default {
       button.setAttribute('aria-label', 'Insert image')
       button.addEventListener('click', () => {
         this.$modalUpload(function(img) {
-          _this.editor.insertText('![](' + img.file_url + ')')
+          if (_this.editor.isMarkdownMode()) {
+            _this.editor.insertText('![](' + img.file_url + ')')
+          } else {
+            _this.editor.setHTML('<img src=' + img.file_url + ' alt=' + img.file_name + '>')
+          }
         }, 1)
       })
       return button
