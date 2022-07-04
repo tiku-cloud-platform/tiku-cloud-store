@@ -67,6 +67,11 @@
         style="width: 100%"
         size="small"
       >
+        <el-table-column label="获取用户" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.user.real_name }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="获取时间" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>

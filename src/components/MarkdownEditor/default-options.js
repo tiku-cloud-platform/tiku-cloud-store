@@ -1,7 +1,9 @@
 export default {
-  minHeight: '200px',
+  minHeight: '800px',
   previewStyle: 'vertical',
   initialEditType: 'markdown',
+  language: 'zh-cn',
+  theme: 'dark',
   useCommandShortcut: true,
   useDefaultHTMLSanitizer: true,
   usageStatistics: false,
