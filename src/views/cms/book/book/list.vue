@@ -126,7 +126,7 @@
             <router-link :to="{path: '/cms/book/category/list/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">书籍</el-button>
             </router-link>
-<!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
+            <!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
           </template>
         </el-table-column>
