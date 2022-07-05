@@ -193,7 +193,7 @@ export default {
       filterText: '',
       contentQuery: {
         page: 1,
-        size: 10000,
+        size: 20,
         title: '',
         store_book_category_uuid: '',
         store_book_uuid: ''
