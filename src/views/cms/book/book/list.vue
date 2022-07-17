@@ -51,22 +51,22 @@
             <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
         </el-table-column>
-        <el-table-column label="书籍标题" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="书名" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="书籍作者" width="auto" align="center">
+        <el-table-column label="作者" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.author }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="书籍来源" width="auto" align="center">
+        <el-table-column label="来源" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.source }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="书籍标签" width="auto" align="center">
+        <el-table-column label="标签" width="auto" align="center">
           <template slot-scope="{row}">
             <el-tag
               v-for="(name, ix) in row.tags"
@@ -77,7 +77,7 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="关注人数" width="auto" align="center">
+        <el-table-column label="关注" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.collection_number }}</span>
           </template>
@@ -87,12 +87,12 @@
             <span>{{ row.score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="书籍章数" width="auto" align="center">
+        <el-table-column label="章节" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.numbers }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="显示顺序" width="auto" align="center">
+        <el-table-column label="顺序" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.orders }}</span>
           </template>
