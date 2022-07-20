@@ -17,6 +17,6 @@ This will automatically open http://localhost:9528
 # build for test environment
 npm run build:stage
 
-# build for production environment
+# 生产环境构建
 npm run build:prod
 ```
