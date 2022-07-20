@@ -4,6 +4,7 @@
 
 <script>
 // import 'codemirror/lib/codemirror.css'
+
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 import Editor from '@toast-ui/editor'
@@ -52,6 +53,10 @@ export default {
           [{
             el: this.createUploadImgButton(),
             tooltip: '上传图片'
+          }],
+          [{
+            el: this.createScreenFull(),
+            tooltip: '全屏'
           }]
         ]
       })
@@ -76,6 +81,20 @@ export default {
             _this.editor.setHTML('<img src=' + img.file_url + ' alt=' + img.file_name + '>')
           }
         }, 1)
+      })
+      return button
+    },
+    createScreenFull() {
+      const _this = this
+      const button = document.createElement('button')
+      button.style.margin = '0'
+      button.innerHTML = '全屏'
+      button.addEventListener('click', () => {
+        console.log(_this.$refs.tuiEditor.requestFullscreen)
+        _this.$refs.tuiEditor.style.background = '#FFF'
+        if (_this.$refs.tuiEditor.requestFullscreen) {
+          _this.$refs.tuiEditor.requestFullscreen()
+        }
       })
       return button
     }
