@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      editor: null
+      editor: null,
+      is_screen: true
     }
   },
   mounted() {
@@ -90,10 +91,23 @@ export default {
       button.style.margin = '0'
       button.innerHTML = '全屏'
       button.addEventListener('click', () => {
-        console.log(_this.$refs.tuiEditor.requestFullscreen)
-        _this.$refs.tuiEditor.style.background = '#FFF'
-        if (_this.$refs.tuiEditor.requestFullscreen) {
-          _this.$refs.tuiEditor.requestFullscreen()
+        const element = _this.$refs.tuiEditor
+        element.style.background = '#FFF'
+        if (_this.is_screen) {
+          element.requestFullscreen()
+          setTimeout(() => {
+            // 获取图片库的dom
+            if (document.querySelector('.el-dialog__wrapper')) {
+              // 追加到<div :id="id" ref="tuiEditor" />内部去
+              this.$refs.tuiEditor.appendChild(document.querySelector('.el-dialog__wrapper'))
+            }
+          }, 100)
+          button.innerHTML = '退出'
+          _this.is_screen = false
+        } else {
+          document.exitFullscreen()
+          button.innerHTML = '全屏'
+          _this.is_screen = true
         }
       })
       return button
