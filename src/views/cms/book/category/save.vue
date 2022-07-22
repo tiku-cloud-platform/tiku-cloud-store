@@ -1,37 +1,51 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        :ref="formValidate"
+        :class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">书籍信息</span>
           <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="名称：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%" />
+            <el-form-item label="文章标题：" prop="title" label-for="title">
+              <el-input v-model.trim="formValidate.title" placeholder="请输入标题" element-id="title" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入" element-id="author" style="width: 90%" />
+            <el-form-item label="文章作者：" prop="author" label-for="author">
+              <el-input v-model.trim="formValidate.author" placeholder="请输入作者" element-id="author" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入" element-id="source" style="width: 90%" />
+            <el-form-item label="文章来源：" prop="source" label-for="source">
+              <el-input v-model.trim="formValidate.source" placeholder="请输入来源" element-id="source" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍标签：" prop="tags" label-for="tags">
-              <el-input v-model.trim="formValidate.tags" placeholder="请输入" element-id="tags" style="width: 90%" />
+            <el-form-item label="文章标签：" prop="tags" label-for="tags">
+              <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%" />
               <div class="image-size-require">多个标签使用","分割</div>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍目录：" prop="store_book_category_uuid" label-for="store_book_category_uuid">
-              <el-cascader v-model="formValidate.store_book_category_uuid" :options="bookCategoryData" :props="{ expandTrigger: 'hover' }" @change="handleChange" />
+            <el-form-item label="文章目录：" prop="store_book_category_uuid" label-for="store_book_category_uuid">
+              <el-cascader
+                v-model="formValidate.store_book_category_uuid"
+                :options="bookCategoryData"
+                :props="{ expandTrigger: 'hover' }"
+                @change="handleChange"
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -43,7 +57,9 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -55,10 +71,10 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">书籍简介</span>
+          <span class="title">文章简介</span>
           <el-divider />
         </div>
-        <el-form-item label="书籍简介：" prop="intro">
+        <el-form-item label="文章简介：" prop="intro">
           <el-input v-model="formValidate.intro" type="textarea" />
         </el-form-item>
         <div class="dividerTitle">
@@ -80,6 +96,7 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import { add, edit, show } from '@/api/book/content'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
+
 export default {
   name: 'BookContentSave',
   components: { MarkdownEditor },
@@ -114,12 +131,12 @@ export default {
         is_show: 1
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入名称', trigger: 'blur' }],
-        intro: [{ required: true, message: '简介不能为空', trigger: 'blur' }],
-        author: [{ required: true, message: '请输入书籍作者', trigger: 'blur' }],
-        source: [{ required: true, message: '请输入书籍来源', trigger: 'blur' }],
-        tags: [{ required: true, message: '请输入标签', trigger: 'blur' }],
-        content: [{ required: true, message: '内容不能为空', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }],
+        // intro: [{ required: true, message: '简介不能为空', trigger: 'blur' }],
+        author: [{ required: true, message: '请输入文章作者', trigger: 'blur' }],
+        source: [{ required: true, message: '请输入文章来源', trigger: 'blur' }],
+        // tags: [{ required: true, message: '请输入标签', trigger: 'blur' }],
+        content: [{ required: true, message: '文章内容不能为空', trigger: 'blur' }],
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
       bookCategoryData: []
