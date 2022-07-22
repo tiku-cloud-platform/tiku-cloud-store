@@ -29,10 +29,14 @@
                         <!--  <span style="font-size: 14px;color: #3889b1">（{{ data.title }}）</span>-->
                       </div>
                       <span class="el-ic">
-                        <i v-if="!data.parent_uuid" class="el-icon-circle-plus-outline" title="添加" @click.stop="onAdd(data.uuid)" />
-                        <svg-icon icon-class="add" class="icon-space" />
-                        <i v-if="node.label !== '全部分类'" class="el-icon-edit" title="修改" @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)" />
-                        <svg-icon icon-class="detail" class="icon-space" />
+                        <i v-if="!data.parent_uuid" class="el-icon-circle-plus-outline" title="添加"
+                           @click.stop="onAdd(data.uuid)"
+                        />
+                        <svg-icon icon-class="add" class="icon-space"/>
+                        <i v-if="node.label !== '全部分类'" class="el-icon-edit" title="修改"
+                           @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)"
+                        />
+                        <svg-icon icon-class="detail" class="icon-space"/>
                         <i
                           v-if="!data.children && node.label !== '全部分类'"
                           class="el-icon-delete"
@@ -52,18 +56,23 @@
         <el-card class="box-card" shadow="never">
           <div slot="header" class="clearfix">
             <div class="container">
-              <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right" label-width="100px">
+              <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right"
+                       label-width="100px"
+              >
                 <el-row>
                   <el-col :span="14">
                     <el-col v-bind="grid" style="width:auto">
                       <el-form-item label="书籍名称：" prop="title">
-                        <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable />
+                        <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable/>
                       </el-form-item>
                     </el-col>
                   </el-col>
                   <el-col :span="10">
                     <el-form-item>
-                      <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getContentList">搜索</el-button>
+                      <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
+                                 @click="getContentList"
+                      >搜索
+                      </el-button>
                       <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                       <!--  <router-link :to="{path: '/cms/book/book/save'}">
                         <el-button size="small" type="success" class="mr10">添加</el-button>jumpAddContent
@@ -85,7 +94,7 @@
             :tree-props="{children: 'children'}"
             @selection-change="handleSelectionChange"
           >
-            <el-table-column type="selection" width="55" />
+            <el-table-column type="selection" width="55"/>
             <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
               <template slot-scope="{row}">
                 <svg-icon
@@ -166,7 +175,9 @@
             </el-table-column>
           </el-table>
           <div class="block">
-            <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="contentQuery.page" :limit.sync="contentQuery.size" @pagination="getContentList" />
+            <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="contentQuery.page"
+                        :limit.sync="contentQuery.size" @pagination="getContentList"
+            />
           </div>
         </el-card>
       </el-col>
@@ -183,6 +194,7 @@ import {
 } from '@/api/book/category'
 import { list as contentList } from '@/api/book/content'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'BookCategoryList',
   components: { Pagination },
@@ -387,7 +399,7 @@ export default {
   }
 }
 
-.selWidth{
+.selWidth {
   width: 300px;
 }
 
@@ -397,7 +409,7 @@ export default {
 
 /* 点击树结构项的选中颜色 */
 .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
-  background-color:  #F56C6C;
+  background-color: #F56C6C;
 }
 
 .treeBox {
@@ -429,11 +441,13 @@ export default {
 
 .el-ic {
   display: none;
+
   i, span {
     /*padding: 0 14px;*/
     font-size: 18px;
     font-weight: 600;
   }
+
   .svg-icon {
     color: #4386c6;
   }
@@ -462,10 +476,12 @@ export default {
     color: transparent;
     cursor: default;
   }
+
   /*background-color: #3998d9;*/
   .custom-tree-node {
     font-weight: bold;
   }
+
   .el-tree-node__expand-icon {
     font-weight: bold;
   }
@@ -475,19 +491,23 @@ export default {
   .upload-container .image-preview .image-preview-wrapper img {
     height: 100px;
   }
+
   .el-dialog .el-collapse-item__wrap {
     padding-top: 0px;
 
   }
+
   .spatial_img {
     .el-collapse-item__wrap {
       margin-bottom: 0;
       padding-top: 0px;
     }
   }
+
   .upload-container .image-preview .image-preview-wrapper {
     width: 120px;
   }
+
   .upload-container .image-preview .image-preview-action {
     line-height: 100px;
     height: 100px;
@@ -499,16 +519,19 @@ export default {
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+
   .scollhide {
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 10px 0 10px 0;
     box-sizing: border-box;
+
     .trees {
       width: 100%;
       max-height: 374px;
     }
   }
+
   .scollhide::-webkit-scrollbar {
     display: none;
   }
