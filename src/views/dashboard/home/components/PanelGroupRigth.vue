@@ -13,11 +13,11 @@
             <el-col
               class="notice-category-title"
               underline="false"
-              span="4"
+              :span="4"
             >活动</el-col>
             <el-col
               class="notice-title"
-              span="20"
+              :span="20"
               style="color: rgb(29 33 41)"
               :underline="false"
             >{{ item.title }}</el-col>
@@ -47,7 +47,6 @@ export default {
   methods: {
     getNotice() {
       list(this.listQuery).then((res) => {
-        console.log(res.data.items)
         this.noticeData = res.data.items
         this.listQuery.page = res.data.page
         this.listQuery.size = res.data.size

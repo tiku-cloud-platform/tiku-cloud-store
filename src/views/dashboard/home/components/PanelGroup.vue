@@ -72,11 +72,6 @@ export default {
       default: 0
     }
   }
-  // methods: {
-  //   handleSetLineChartData(type) {
-  //     this.$emit('handleSetLineChartData', type)
-  //   }
-  // }
 }
 </script>
 
