@@ -6,7 +6,6 @@
       </el-button>
       <el-form
         :ref="formValidate"
-        :class="form"
         :model="formValidate"
         label-width="120px"
         :rules="ruleValidate"
@@ -169,28 +168,22 @@ export default {
       this.$router.push({ path: `/cms/book/category/list/` + this.formValidate.store_book_uuid })
     },
     // 提交数据
-    onsubmit(name) {
-      this.$refs[name].validate((valid) => {
-        if (valid) {
-          if (this.$route.query.content_uuid) {
-            edit(this.formValidate).then(async message => {
-              this.$message.success(message)
-              setTimeout(() => {
-                this.back()
-              }, 500)
-            })
-          } else {
-            add(this.formValidate).then((message) => {
-              this.$message.success(message)
-              setTimeout(() => {
-                this.back()
-              }, 500)
-            })
-          }
-        } else {
-          return false
-        }
-      })
+    onsubmit() {
+      if (this.$route.query.content_uuid) {
+        edit(this.formValidate).then(async message => {
+          this.$message.success(message)
+          setTimeout(() => {
+            this.back()
+          }, 500)
+        })
+      } else {
+        add(this.formValidate).then((message) => {
+          this.$message.success(message)
+          setTimeout(() => {
+            this.back()
+          }, 500)
+        })
+      }
     },
     // 书籍详情
     getDetails() {
