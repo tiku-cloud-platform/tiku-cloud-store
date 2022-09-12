@@ -1,4 +1,9 @@
+## 仓库说明
+
+本仓库负责商户端功能。
+
 # document
+
 ## Build Setup
 
 ```bash
