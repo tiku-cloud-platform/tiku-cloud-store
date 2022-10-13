@@ -39,9 +39,11 @@
         :key="tableKey"
         v-loading="listLoading"
         :data="list"
-        empty-text="暂无数据"
-        highlight-current-row
         style="width: 100%;"
+        border
+        empty-text="暂无数据"
+        show-header
+        stripe
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />

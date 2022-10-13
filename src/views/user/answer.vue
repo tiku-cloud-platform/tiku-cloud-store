@@ -54,6 +54,9 @@
         :data="tableData.data"
         style="width: 100%"
         size="small"
+        border
+        empty-text="暂无数据"
+        show-header
       >
         <el-table-column label="答题时间" width="auto" align="center">
           <template slot-scope="{row}">

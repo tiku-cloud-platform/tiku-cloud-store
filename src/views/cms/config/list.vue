@@ -30,6 +30,10 @@
         v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
+        border
+        stripe
+        empty-text="暂无数据"
+        show-header
       >
         <el-table-column type="selection" width="55" />
         <!-- <el-table-column label="内容编号" width="auto" align="center" :show-overflow-tooltip="true">

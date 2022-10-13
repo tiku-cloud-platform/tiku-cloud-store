@@ -38,7 +38,11 @@
         :data="tableData.data"
         style="width: 100%"
         size="small"
+        border
+        empty-text="暂无数据"
+        show-header
         row-key="uuid"
+        stripe
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >

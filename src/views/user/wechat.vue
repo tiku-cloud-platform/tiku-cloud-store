@@ -61,8 +61,10 @@
         v-loading="listLoading"
         :data="list"
         empty-text="暂无数据"
-        highlight-current-row
         style="width: 100%"
+        border
+        show-header
+        stripe
       >
         <el-table-column type="selection" width="55" />
         <el-table-column
@@ -283,7 +285,9 @@
               v-loading="listLoading"
               :data="userPlatform.data"
               empty-text="暂无数据"
-              highlight-current-row
+              show-header
+              border
+              stripe
               style="width: 100%;margin:10px;"
             >
               <el-table-column
@@ -477,6 +481,10 @@
               :data="examDetail.tableData.data"
               style="width: 100%"
               size="small"
+              border
+              empty-text="暂无数据"
+             show-header
+             stripe
             >
               <el-table-column label="答题时间" width="auto" align="center">
                 <template slot-scope="{row}">
@@ -592,6 +600,10 @@
               :data="userScoreDetail.tableData.data"
               style="width: 100%"
               size="small"
+              border
+              empty-text="暂无数据"
+              show-header
+              stripe
             >
               <el-table-column label="获取时间" width="auto" align="center">
                 <template slot-scope="{row}">
@@ -682,7 +694,9 @@
               v-loading="listLoading"
               :data="userSubscribe.tableData.data"
               style="width: 100%"
-              size="small"
+              border
+              show-header
+              stripe
             >
               <el-table-column label="订阅时间" width="auto" align="center">
                 <template slot-scope="{row}">

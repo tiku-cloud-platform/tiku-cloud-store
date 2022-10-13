@@ -77,8 +77,10 @@
         v-loading="listLoading"
         :data="list"
         empty-text="暂无数据"
-        highlight-current-row
+        show-header
         style="width: 100%"
+        border
+        stripe
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />

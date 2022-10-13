@@ -66,6 +66,10 @@
         :data="tableData.data"
         style="width: 100%"
         size="small"
+        border
+        empty-text="暂无数据"
+        show-header
+        stripe
       >
         <el-table-column label="获取用户" width="auto" align="center">
           <template slot-scope="{row}">

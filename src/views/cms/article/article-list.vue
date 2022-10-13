@@ -67,6 +67,10 @@
         style="width: 100%"
         size="small"
         row-key="uuid"
+        border
+        stripe
+        empty-text="暂无数据"
+        show-header
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
