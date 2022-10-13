@@ -37,7 +37,9 @@
         v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
-        size="small"
+        border
+        show-header
+        stripe
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />

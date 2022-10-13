@@ -26,13 +26,14 @@
       <el-table
         :key="tableKey"
         ref="store"
+        empty-text="暂无数据"
+        show-header
+        border
         v-loading="listLoading"
         :data="list"
         row-key="uuid"
         :tree-props="{children: 'children'}"
-        fit
-        empty-text="暂无数据"
-        highlight-current-row
+        stripe
         style="width: 100%;"
         @selection-change="handleSelectionChange"
       >

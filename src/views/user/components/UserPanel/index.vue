@@ -4,7 +4,9 @@
       :key="tableKey"
       :data="tableData.items"
       empty-text="暂无数据"
+      show-header
       highlight-current-row
+      border
       style="width: 100%;"
     >
 

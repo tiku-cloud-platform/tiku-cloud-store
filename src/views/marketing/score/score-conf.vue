@@ -42,7 +42,11 @@
         v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
-        size="small"
+        highlight-current-row
+        show-header
+        border
+        stripe
+        empty-text="暂无数据"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />

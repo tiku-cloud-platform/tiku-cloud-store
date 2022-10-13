@@ -38,6 +38,9 @@
         :data="tableData.data"
         style="width: 100%"
         size="small"
+        stripe
+        header
+        show-header
         @selection-change="handleSelectionChange"
       >
         <!--        row-key="uuid"-->

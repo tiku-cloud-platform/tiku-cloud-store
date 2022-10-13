@@ -38,6 +38,10 @@
         :data="tableData.data"
         style="width: 100%"
         size="small"
+        border
+        empty-text="暂无数据"
+        show-header
+        stripe
         @selection-change="handleSelectionChange"
       >
         <!--        row-key="uuid"-->

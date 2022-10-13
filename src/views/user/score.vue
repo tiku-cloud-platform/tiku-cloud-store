@@ -18,6 +18,7 @@
       border
       fit
       empty-text="暂无数据"
+      show-header
       highlight-current-row
       style="width: 100%;"
     >

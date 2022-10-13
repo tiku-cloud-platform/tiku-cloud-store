@@ -33,8 +33,9 @@
         v-loading="listLoading"
         max-height="650px"
         :data="list"
+        border
         empty-text="暂无数据"
-        highlight-current-row
+        show-header
         style="width: 100%;"
       >
         <el-table-column label="头像" width="70" align="center">
