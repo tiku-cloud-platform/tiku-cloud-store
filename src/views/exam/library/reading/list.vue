@@ -82,7 +82,7 @@
         stripe
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" align="center"/>
         <el-table-column label="编号" width="auto" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -91,14 +91,14 @@
         <el-table-column
           label="试题题目"
           width="auto"
-          align="center"
+          align="left"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="难易程度" width="130" align="center">
+        <el-table-column label="难易程度" width="130" align="left">
           <template slot-scope="{ row }" style="display: flex">
             <span
               style="justify-content: center; display: flex"
@@ -111,12 +111,12 @@
             /></span>
           </template>
         </el-table-column>
-        <el-table-column label="解析消耗积分" width="auto" align="center">
+        <el-table-column label="解析消耗积分" width="auto" align="left">
           <template slot-scope="{ row }">
             <span>{{ row.tips_expend_score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="答案奖励积分" width="auto" align="center">
+        <el-table-column label="答案奖励积分" width="auto" align="left">
           <template slot-scope="{ row }">
             <span>{{ row.answer_income_score }}</span>
           </template>
@@ -124,7 +124,7 @@
         <el-table-column
           label="试题状态"
           width="auto"
-          align="center"
+          align="left"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
@@ -135,7 +135,7 @@
         <el-table-column
           label="搜索状态"
           width="auto"
-          align="center"
+          align="left"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
