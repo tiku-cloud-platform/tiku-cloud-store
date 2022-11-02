@@ -44,38 +44,38 @@
         stripe
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
-        <el-table-column label="试题题目" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column type="selection"  align="center" />
+        <el-table-column label="试题题目" width="auto" align="left" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="试题图片" width="70" align="center">
+        <!-- <el-table-column label="试题图片" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
-        </el-table-column>
-        <el-table-column label="试题答案" width="auto" align="center">
+        </el-table-column> -->
+        <el-table-column label="试题答案" width="auto" align="left">
           <template slot-scope="{row}">
             <span>{{ row.answer }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="难易程度" width="130" align="center">
+        <el-table-column label="难易程度" width="130" align="left">
           <template slot-scope="{row}" style="display: flex">
             <span style="justify-content: center;display: flex;"><svg-icon v-for="n in + row.level" :key="n" style="float: left" icon-class="xingxing" class="meta-item__icon" /></span>
           </template>
         </el-table-column>
-        <el-table-column label="解析消耗积分" width="auto" align="center">
+        <el-table-column label="解析消耗积分" width="auto" align="left">
           <template slot-scope="{row}">
             <span>{{ row.tips_expend_score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="答案奖励积分" width="auto" align="center">
+        <el-table-column label="答案奖励积分" width="auto" align="left">
           <template slot-scope="{row}">
             <span>{{ row.answer_income_score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="试题状态" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="试题状态" width="auto" align="left" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
             <span v-if="row.is_show === 1">启用</span>
