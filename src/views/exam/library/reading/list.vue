@@ -79,6 +79,7 @@
         border
         empty-text="暂无数据"
         show-header
+        header-row-class-name="table-header-bg"
         stripe
         @selection-change="handleSelectionChange"
       >
@@ -263,7 +264,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .svg-icon {
   width: 2em !important;
   height: 2em !important;
