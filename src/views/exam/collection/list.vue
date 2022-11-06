@@ -250,6 +250,7 @@
           align="center"
           width="auto"
           class-name="small-padding fixed-width"
+          fixed="right"
         >
           <template slot-scope="{ row, $index }">
             <router-link :to="{ path: '/exam/collection/save/' + row.uuid }">
