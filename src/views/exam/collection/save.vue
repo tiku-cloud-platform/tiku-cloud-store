@@ -81,17 +81,8 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="显示状态：">
-              <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
-            <el-form-item label="是否推荐：">
-              <el-radio-group v-model="formValidate.is_recommend">
-                <el-radio v-for="(item, index) in this.$store.getters.isRecommend" :key="index" :label="item.value">{{ item.label }}</el-radio>
-              </el-radio-group>
+            <el-form-item label="试卷链接：" prop="resource_url" label-for="resource_url">
+              <el-input v-model.trim="formValidate.resource_url" placeholder="请输入试卷链接地址" maxlength="255" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -112,6 +103,20 @@
           <el-col v-bind="grid">
             <el-form-item label="最大判断题数量：">
               <el-input-number v-model="formValidate.max_judge_total" :min="0" :max="10" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="显示状态：">
+              <el-radio-group v-model="formValidate.is_show">
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="是否推荐：">
+              <el-radio-group v-model="formValidate.is_recommend">
+                <el-radio v-for="(item, index) in this.$store.getters.isRecommend" :key="index" :label="item.value">{{ item.label }}</el-radio>
+              </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
@@ -189,7 +194,8 @@ export default {
         audit_author: getName(),
         max_reading_total: 20,
         max_option_total: 50,
-        max_judge_total: 10
+        max_judge_total: 10,
+        resource_url: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请填写试卷名称', trigger: 'blur' }],
@@ -297,7 +303,8 @@ export default {
           audit_author: data.audit_author,
           max_reading_total: data.max_reading_total,
           max_option_total: data.max_option_total,
-          max_judge_total: data.max_judge_total
+          max_judge_total: data.max_judge_total,
+          resource_url: data.resource_url,
         }
       })
     }
