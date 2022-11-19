@@ -26,6 +26,18 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
+            <el-form-item label="显示端口：" prop="client_position">
+              <el-select v-model="formValidate.client_position" clearable placeholder="请选择" style="width: 90%">
+                <el-option
+                  v-for="(item, index) in bannerPosition"
+                  :key="index"
+                  :label="item"
+                  :value="index"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid" class="mr50">
             <el-form-item label="跳转类型：" prop="type">
               <el-select v-model="formValidate.type" clearable placeholder="请选择" style="width: 90%">
                 <el-option
@@ -82,13 +94,20 @@
 // 常量配置
 import { list as constantList } from '@/api/system/const'
 // 内容
-import { add, edit, list } from '@/api/banner/index'
+import { add, edit, position, show } from '@/api/banner'
 export default {
   name: 'SaveBanner',
   data() {
     const validatePosition = (rule, value, callback) => {
       if (!this.formValidate.position) {
         callback(new Error('请选择显示位置'))
+      } else {
+        callback()
+      }
+    }
+    const validateClientPosition = (rule, value, callback) => {
+      if (!this.formValidate.client_position) {
+        callback(new Error('请选择显示端口'))
       } else {
         callback()
       }
@@ -115,6 +134,7 @@ export default {
         sm: 24,
         xs: 24
       },
+      bannerPosition: [],
       bannerImgUrl: '',
       formValidate: {
         title: '',
@@ -123,11 +143,13 @@ export default {
         url: '',
         orders: '',
         position: '',
-        is_show: 1
+        is_show: 1,
+        client_position: ''
       },
       ruleValidate: {
         title: [{ max: 32, message: '标题最多只能填写32个字符以内', trigger: 'blur' }],
         position: [{ required: true, validator: validatePosition, trigger: 'change' }],
+        client_position: [{ required: true, validator: validateClientPosition, trigger: 'change' }],
         type: [{ required: true, validator: validateType, trigger: 'change' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
         url: [{ required: true, message: '请输入跳转地址', trigger: 'blur' }]
@@ -149,7 +171,8 @@ export default {
           url: '',
           orders: '',
           position: '',
-          is_show: 0
+          is_show: 0,
+          client_position: ''
         }
       }
     }
@@ -163,11 +186,18 @@ export default {
       this.setTagsViewTitle()
       this.getDetails()
     }
+    this.getPosition()
   },
   methods: {
     // 返回
     back() {
       this.$router.push({ path: `/wx_app/banner/list` })
+    },
+    // 获取banner显示端口
+    getPosition() {
+      position().then(res => {
+        this.bannerPosition = res.data
+      })
     },
     // 显示位置
     getConstantList() {
@@ -187,7 +217,6 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
-      console.log(this.formValidate)
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
@@ -212,8 +241,8 @@ export default {
     },
     // 详情
     getDetails() {
-      list({ uuid: this.$route.params.uuid }).then(async res => {
-        const data = res.data.items[0]
+      show(this.$route.params.uuid).then(async res => {
+        const data = res.data
         this.bannerImgUrl = data.cover_file_info.file_url + data.cover_file_info.file_name
         this.formValidate = {
           file_uuid: data.file_uuid,
@@ -223,7 +252,8 @@ export default {
           title: data.title,
           orders: data.orders,
           position: data.position,
-          is_show: data.is_show
+          is_show: data.is_show,
+          client_position: data.client_position
         }
       })
     },
