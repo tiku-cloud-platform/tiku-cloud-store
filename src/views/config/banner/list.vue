@@ -89,6 +89,11 @@
             <span>{{ row.position_show ? row.position_show.describe : '' }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="跳转端口" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.client_position_remark}}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="跳转类型" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.menu_type ? row.menu_type.describe : '' }}</span>

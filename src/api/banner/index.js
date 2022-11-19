@@ -33,3 +33,22 @@ export function del(params) {
     }
   })
 }
+
+// 轮播图详情
+export function show(uid) {
+  return request({
+    url: '/store/config/banner/show',
+    method: 'get',
+    params: {
+      uuid: uid
+    }
+  })
+}
+
+// 获取端口位置
+export function position() {
+  return request({
+    url: '/store/config/banner/position_config',
+    method: 'get'
+  })
+}
