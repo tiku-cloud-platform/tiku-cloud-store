@@ -66,7 +66,6 @@
         show-header
         stripe
       >
-        <el-table-column type="selection" width="55" />
         <el-table-column
           label="用户组"
           width="auto"
