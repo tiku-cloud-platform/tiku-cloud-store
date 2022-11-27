@@ -5,7 +5,7 @@
         <div class="container">
           <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right">
             <el-row>
-              <el-col :span="19">
+              <el-col :span="24">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="文章标题：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入文章标题" size="small" clearable />
@@ -42,11 +42,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
-                  <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/wx_app/banner/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -65,7 +67,7 @@
         border
         empty-text="暂无数据"
         show-header
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
@@ -230,7 +232,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

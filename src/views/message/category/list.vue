@@ -17,12 +17,14 @@
                       <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
                     </el-select>
                   </el-form-item>
-                </el-col>
-              </el-col>
-              <el-col :span="5">
-                <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr10" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
+                </el-col>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="5">
+                <el-form-item>
                   <router-link :to="{path: '/message/sys/category/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -39,7 +41,7 @@
         style="width: 100%"
         size="small"
         border
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         empty-text="暂无数据"
         show-header
         @selection-change="handleSelectionChange"
@@ -179,7 +181,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

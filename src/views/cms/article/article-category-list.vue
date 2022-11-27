@@ -18,11 +18,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
-                  <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/cms/article/category/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -34,29 +36,28 @@
         </div>
       </div>
       <el-table
-        v-loading="listLoading"
+        :loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
-        border
         empty-text="暂无数据"
-        show-header
-        stripe
+        border="true"
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <!--        row-key="uuid"-->
         <!--        :tree-props="{children: 'children'}"-->
-        <el-table-column type="selection" width="55" />
+<!--        <el-table-column type="selection" width="55" />-->
         <!-- <el-table-column label="编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column> -->
-        <el-table-column label="分类图片" width="70" align="center">
-          <template slot-scope="scope">
-            <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
-          </template>
-        </el-table-column>
+<!--        <el-table-column label="分类图片" width="70" align="center">-->
+<!--          <template slot-scope="scope">-->
+<!--            <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
         <el-table-column label="分类名称" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
@@ -177,7 +178,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

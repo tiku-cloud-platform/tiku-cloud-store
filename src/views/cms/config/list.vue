@@ -10,12 +10,14 @@
                   <el-form-item label="标题名称：">
                     <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth" size="small" />
                   </el-form-item>
-                </el-col>
-              </el-col>
-              <el-col :span="5">
-                <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
+                </el-col>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="5">
+                <el-form-item>
                   <router-link :to="{path: '/cms/config/article/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -33,7 +35,7 @@
         border
         stripe
         empty-text="暂无数据"
-        show-header
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
         <el-table-column type="selection" width="55" />
         <!-- <el-table-column label="内容编号" width="auto" align="center" :show-overflow-tooltip="true">
@@ -126,5 +128,8 @@ export default {
 
 .mr10 {
   margin-right: 10px;
+}
+::v-deep .el-card__body {
+  padding: 0 !important;
 }
 </style>

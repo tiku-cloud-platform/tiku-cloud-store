@@ -8,47 +8,47 @@ const examRouter = {
   children: [
     {
       path: 'category/list',
-      name: '分类',
-      meta: { title: '分类', icon: 'el-icon-xianshicaidan' },
+      name: '问题类型',
+      meta: { title: '问题类型', icon: 'el-icon-xianshicaidan' },
       component: () => import('@/views/exam/category/list')
     },
     {
       path: 'category/save/:uuid?',
-      name: '分类',
+      name: '问题类型',
       hidden: true,
-      meta: { title: '分类', icon: 'el-icon-xianshicaidan' },
+      meta: { title: '问题类型', icon: 'el-icon-xianshicaidan' },
       component: () => import('@/views/exam/category/save')
     },
     {
       path: 'knowledge/list',
-      name: '考点',
+      name: '问题标签',
       component: () => import('@/views/exam/knowledge/list'),
-      meta: { title: '考点', icon: 'el-icon-tags' }
+      meta: { title: '问题标签', icon: 'el-icon-tags' }
     },
     {
       path: 'knowledge/save/:uuid?',
-      name: '考点',
+      name: '问题标签',
       hidden: true,
-      meta: { title: '考点', icon: 'el-icon-tags' },
+      meta: { title: '问题标签', icon: 'el-icon-tags' },
       component: () => import('@/views/exam/knowledge/save')
     },
     {
       path: 'collection/list',
-      name: '试卷',
+      name: '问题合集',
       component: () => import('@/views/exam/collection/list'),
-      meta: { title: '试卷', icon: 'el-icon-guanwangshijuan' }
+      meta: { title: '问题合集', icon: 'el-icon-guanwangshijuan' }
     },
     {
       path: 'collection/save/:uuid?',
-      name: '试卷',
+      name: '问题合集',
       hidden: true,
-      meta: { title: '试卷', icon: 'el-icon-guanwangshijuan' },
+      meta: { title: '问题合集', icon: 'el-icon-guanwangshijuan' },
       component: () => import('@/views/exam/collection/save')
     },
     {
       path: 'library',
-      name: '题库',
-      meta: { title: '题库', icon: 'el-icon-xianshicaidan' },
+      name: '问题题库',
+      meta: { title: '问题题库', icon: 'el-icon-xianshicaidan' },
       component: () => import('@/views/exam/library/index'),
       children: [
         {

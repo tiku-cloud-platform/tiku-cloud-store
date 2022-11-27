@@ -9,13 +9,17 @@
                 <el-form-item label="名称：">
                   <el-input v-model="listQuery.title" placeholder="请输入名称" clearable />
                 </el-form-item>
+                <el-form-item>
+                  <el-button v-prevent-re-click type="primary" label="default" class="mr15" size="small" @click="search">搜索</el-button>
+                  <el-button class="ResetSearch mr10" size="small" @click="resetForm('searchFrom')">重置</el-button>
+                </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col v-bind="grid" :span="5">
                 <el-form-item>
-                  <el-button v-prevent-re-click type="primary" icon="el-icon-search" label="default" class="mr15" size="small" @click="search">搜索</el-button>
-                  <el-button class="ResetSearch mr10" size="small" @click="resetForm('searchFrom')">重置</el-button>
-                  <el-button type="success" icon="el-icon-plus" @click="handleCreate">添加</el-button>
-                  <el-button type="danger" icon="el-icon-delete" @click="handleBatchDel">删除</el-button>
+                  <el-button type="success"  @click="handleCreate">添加</el-button>
+                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -33,7 +37,7 @@
         :data="list"
         row-key="uuid"
         :tree-props="{children: 'children'}"
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         style="width: 100%;"
         @selection-change="handleSelectionChange"
       >
@@ -270,7 +274,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
+
 .el-dialog {
   width: 550px;
 }

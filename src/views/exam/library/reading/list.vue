@@ -38,22 +38,24 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
+                <el-button
+                  type="primary"
+                  icon="ios-search"
+                  label="default"
+                  class="mr15"
+                  size="small"
+                  @click="getList"
+                >搜索</el-button>
+                <el-button
+                  class="ResetSearch mr10"
+                  size="small"
+                  @click="reset()"
+                >重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button
-                    type="primary"
-                    icon="ios-search"
-                    label="default"
-                    class="mr15"
-                    size="small"
-                    @click="getList"
-                  >搜索</el-button>
-                  <el-button
-                    class="ResetSearch mr10"
-                    size="small"
-                    @click="reset()"
-                  >重置</el-button>
                   <router-link :to="{ path: '/exam/library/reading/save' }">
                     <el-button
                       size="small"
@@ -72,7 +74,7 @@
         </div>
       </div>
       <el-table
-        v-loading="listLoading"
+        :loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -81,25 +83,26 @@
         show-header
         header-row-class-name="table-header-bg"
         stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" align="center"/>
-        <el-table-column label="编号" width="auto" :show-overflow-tooltip="true">
-          <template slot-scope="{row}">
-            <span>{{ row.uuid }}</span>
-          </template>
-        </el-table-column>
+<!--        <el-table-column label="编号" width="auto" :show-overflow-tooltip="true" align="center">-->
+<!--          <template slot-scope="{row}">-->
+<!--            <span>{{ row.uuid }}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
         <el-table-column
           label="试题题目"
           width="auto"
-          align="left"
+          align="center"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="难易程度" width="130" align="left">
+        <el-table-column label="难易程度" width="130" align="center">
           <template slot-scope="{ row }" style="display: flex">
             <span
               style="justify-content: center; display: flex"
@@ -112,12 +115,12 @@
             /></span>
           </template>
         </el-table-column>
-        <el-table-column label="解析消耗积分" width="auto" align="left">
+        <el-table-column label="解析消耗积分" width="auto" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.tips_expend_score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="答案奖励积分" width="auto" align="left">
+        <el-table-column label="答案奖励积分" width="auto" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.answer_income_score }}</span>
           </template>
@@ -125,7 +128,7 @@
         <el-table-column
           label="试题状态"
           width="auto"
-          align="left"
+          align="center"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
@@ -136,7 +139,7 @@
         <el-table-column
           label="搜索状态"
           width="auto"
-          align="left"
+          align="center"
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
@@ -264,7 +267,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .svg-icon {
   width: 2em !important;
   height: 2em !important;
@@ -273,7 +276,9 @@ export default {
   overflow: hidden;
   margin-left: -2px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

@@ -18,11 +18,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
+                <el-button type="primary" icon="ios-search" label="default" class="mr10" size="small" @click="getList">搜索</el-button>
+                <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr10" size="small" @click="getList">搜索</el-button>
-                  <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/marketing/marketing/group/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -38,7 +40,7 @@
         :data="tableData.data"
         style="width: 100%"
         border
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         empty-text="暂无数据"
         show-header
         @selection-change="handleSelectionChange"
@@ -173,7 +175,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

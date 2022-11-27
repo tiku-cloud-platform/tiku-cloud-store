@@ -3,7 +3,7 @@
     <el-card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <div class="container">
-          <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right" label-width="100px">
+          <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right">
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
@@ -11,11 +11,13 @@
                     <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
-                  <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/cms/book/book/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -27,7 +29,7 @@
         </div>
       </div>
       <el-table
-        v-loading="listLoading"
+        :loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -36,21 +38,22 @@
         empty-text="暂无数据"
         show-header
         stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
-          <template slot-scope="{row}">
-            <svg-icon
-              icon-class="copy"
-              style="font-size: 20px; cursor: pointer"
-              @click="copyChannelId(row.uuid)"
-            />
-            <span>{{ row.uuid }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="书籍封面" width="70" align="center">
+<!--        <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">-->
+<!--          <template slot-scope="{row}">-->
+<!--            <svg-icon-->
+<!--              icon-class="copy"-->
+<!--              style="font-size: 20px; cursor: pointer"-->
+<!--              @click="copyChannelId(row.uuid)"-->
+<!--            />-->
+<!--            <span>{{ row.uuid }}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+        <el-table-column label="封面" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
@@ -60,12 +63,12 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="作者" width="auto" align="center">
+        <el-table-column label="作者" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span>{{ row.author }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="来源" width="auto" align="center">
+        <el-table-column label="来源" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span>{{ row.source }}</span>
           </template>
@@ -107,7 +110,7 @@
             <span v-if="row.is_show === 1">启用</span>
           </template>
         </el-table-column>
-        <el-table-column label="">
+        <el-table-column label="难度">
           <template slot-scope="{row}">
             <el-rate v-model="row.level" style="display: contents;" disabled />
           </template>
@@ -128,7 +131,7 @@
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
             <router-link :to="{path: '/cms/book/category/list/'+row.uuid}">
-              <el-button type="text" size="mini" class="mr10">书籍</el-button>
+              <el-button type="text" size="mini" class="mr10">章节</el-button>
             </router-link>
             <!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
@@ -270,7 +273,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }
