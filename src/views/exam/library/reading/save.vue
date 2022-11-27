@@ -163,6 +163,7 @@
         style="width: 100%;margin:10px;"
         :data="tableData.data"
         height="70%"
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />

@@ -8,7 +8,7 @@
                @submit.native.prevent
       >
         <div class="dividerTitle">
-          <span class="title mr10">书籍信息</span>
+          <span class="title mr10">基础信息</span>
           <el-divider/>
         </div>
         <el-row :gutter="10">

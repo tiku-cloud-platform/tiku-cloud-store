@@ -9,7 +9,6 @@
             inline
             size="small"
             label-position="right"
-            label-width="100px"
           >
             <el-row>
               <el-col :span="19">
@@ -55,8 +54,6 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-              </el-col>
-              <el-col :span="5">
                 <el-form-item>
                   <el-button
                     type="primary"
@@ -71,6 +68,12 @@
                     size="small"
                     @click="reset()"
                   >重置</el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="5">
+                <el-form-item>
                   <router-link :to="{ path: '/exam/collection/save' }">
                     <el-button
                       size="small"
@@ -97,6 +100,7 @@
         stripe
         empty-text="暂无数据"
         show-header
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="auto" />
@@ -208,12 +212,12 @@
             <span>{{ row.exam_time }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="出题人" width="auto" align="center">
+        <el-table-column label="出题人" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{ row }">
             <span>{{ row.author }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="审核人" width="auto" align="center">
+        <el-table-column label="审核人" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{ row }">
             <span>{{ row.audit_author }}</span>
           </template>
@@ -378,7 +382,9 @@ export default {
   overflow: hidden;
   margin-left: -2px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

@@ -33,6 +33,8 @@
                   </el-form-item>
                 </el-col>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
                   <el-button
@@ -55,16 +57,15 @@
           </el-form>
         </div>
       </div>
-
+      <!--      用户基础信息开始-->
       <el-table
         :key="tableKey"
-        v-loading="listLoading"
+        :loading="listLoading"
         :data="list"
         empty-text="暂无数据"
         style="width: 100%"
         border
-        show-header
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
         <el-table-column type="selection" width="55" />
         <el-table-column
@@ -78,7 +79,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="注册渠道"
+          label="渠道"
           width="auto"
           align="center"
           :show-overflow-tooltip="true"
@@ -98,7 +99,17 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="手机号"
+          label="手机"
+          width="auto"
+          align="center"
+          :show-overflow-tooltip="true"
+        >
+          <template slot-scope="{ row }">
+            <span>{{ row.mobile }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="邮箱"
           width="auto"
           align="center"
           :show-overflow-tooltip="true"
@@ -134,28 +145,29 @@
               size="mini"
               style="margin-left: 16px"
               @click="openDetail(row.uuid, (drawer = true))"
-            >详情</el-button>
-            <el-button
-              type="text"
-              size="mini"
-              style="margin-left: 16px"
-              @click="openExam(row.uuid, (drawer = true))"
-            >试题</el-button>
-            <el-button
-              type="text"
-              size="mini"
-              style="margin-left: 16px"
-              @click="openScore(row.uuid, (drawer = true))"
-            >积分</el-button>
-            <el-button
-              type="text"
-              size="mini"
-              style="margin-left: 16px"
-              @click="openSubscribe(row.uuid, (drawer = true))"
-            >订阅</el-button>
+            >详细信息</el-button>
+<!--            <el-button-->
+<!--              type="text"-->
+<!--              size="mini"-->
+<!--              style="margin-left: 16px"-->
+<!--              @click="openExam(row.uuid, (drawer = true))"-->
+<!--            >试题</el-button>-->
+<!--            <el-button-->
+<!--              type="text"-->
+<!--              size="mini"-->
+<!--              style="margin-left: 16px"-->
+<!--              @click="openScore(row.uuid, (drawer = true))"-->
+<!--            >积分</el-button>-->
+<!--            <el-button-->
+<!--              type="text"-->
+<!--              size="mini"-->
+<!--              style="margin-left: 16px"-->
+<!--              @click="openSubscribe(row.uuid, (drawer = true))"-->
+<!--            >订阅</el-button>-->
           </template>
         </el-table-column>
       </el-table>
+      <!--      用户基础信息结束-->
       <pagination
         v-show="total > 0"
         :total="total"
@@ -430,7 +442,7 @@
           <div v-if="active === 'exam'">
             <div slot="header" class="clearfix">
               <div class="container">
-                <el-form ref="examSearchForm" :model="examDetail.listQuery" inline size="mini" label-position="right">
+                <el-form ref="examSearchForm" :model="examDetail.listQuery" inline size="mini" label-position="right" label-width="100px">
                   <el-row>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                       <el-col v-bind="grid" style="width: auto;">
@@ -466,7 +478,9 @@
                         </el-form-item>
                       </el-col>
                     </el-col>
-                    <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
+                  </el-row>
+                  <el-row>
+                    <el-col>
                       <el-form-item>
                         <el-button type="primary" icon="ios-search" label="default" class="mr15" size="mini" @click="getExamDetail">搜索</el-button>
                         <el-button class="ResetSearch mr10" size="mini" @click="reset('examSearchForm')">重置</el-button>
@@ -965,13 +979,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-table__header-wrapper {
     height: 40px;
 }
-.el-card__body {
-    padding-top: 0px;
-}
+
 .el-drawer {
   overflow: auto;
 }
@@ -992,7 +1004,9 @@ export default {
   width: 94px;
   height: 94px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .detail-table {
   width: 95%;
   margin: 20px auto;

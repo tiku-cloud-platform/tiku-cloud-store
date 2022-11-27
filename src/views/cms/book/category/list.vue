@@ -57,23 +57,24 @@
           <div slot="header" class="clearfix">
             <div class="container">
               <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right"
-                       label-width="100px"
               >
                 <el-row>
                   <el-col :span="14">
                     <el-col v-bind="grid" style="width:auto">
-                      <el-form-item label="书籍名称：" prop="title">
+                      <el-form-item label="章节名称：" prop="title">
                         <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable/>
                       </el-form-item>
                     </el-col>
+                    <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
+                               @click="getContentList"
+                    >搜索
+                    </el-button>
+                    <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   </el-col>
+                </el-row>
+                <el-row>
                   <el-col :span="10">
                     <el-form-item>
-                      <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
-                                 @click="getContentList"
-                      >搜索
-                      </el-button>
-                      <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                       <!--  <router-link :to="{path: '/cms/book/book/save'}">
                         <el-button size="small" type="success" class="mr10">添加</el-button>jumpAddContent
                       </router-link>-->
@@ -86,7 +87,7 @@
             </div>
           </div>
           <el-table
-            v-loading="listLoading"
+            :loading="listLoading"
             :data="tableData.data"
             style="width: 100%"
             size="small"
@@ -95,36 +96,37 @@
             empty-text="暂无数据"
             show-header
             stripe
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
             :tree-props="{children: 'children'}"
             @selection-change="handleSelectionChange"
           >
             <el-table-column type="selection" width="55"/>
-            <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
-              <template slot-scope="{row}">
-                <svg-icon
-                  icon-class="copy"
-                  style="font-size: 20px; cursor: pointer"
-                  @click="copyChannelId(row.uuid)"
-                />
-                <span>{{ row.uuid }}</span>
-              </template>
-            </el-table-column>
+<!--            <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">-->
+<!--              <template slot-scope="{row}">-->
+<!--                <svg-icon-->
+<!--                  icon-class="copy"-->
+<!--                  style="font-size: 20px; cursor: pointer"-->
+<!--                  @click="copyChannelId(row.uuid)"-->
+<!--                />-->
+<!--                <span>{{ row.uuid }}</span>-->
+<!--              </template>-->
+<!--            </el-table-column>-->
             <el-table-column label="名称" width="auto" align="center" :show-overflow-tooltip="true">
               <template slot-scope="{row}">
                 <span>{{ row.title }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="书籍作者" width="auto" align="center">
+            <el-table-column label="作者" width="auto" align="center" show-overflow-tooltip>
               <template slot-scope="{row}">
                 <span>{{ row.author }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="书籍来源" width="auto" align="center">
+            <el-table-column label="来源" width="auto" align="center" show-overflow-tooltip>
               <template slot-scope="{row}">
                 <span>{{ row.source }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="书籍标签" width="auto" align="center">
+            <el-table-column label="标签" width="auto" align="center" min-width="100">
               <template slot-scope="{row}">
                 <el-tag
                   v-for="(name, ix) in row.tags"
@@ -135,22 +137,22 @@
                 </el-tag>
               </template>
             </el-table-column>
-            <el-table-column label="收藏数量" width="auto" align="center">
+            <el-table-column label="收藏" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.collection_number }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="阅读数量" width="auto" align="center">
+            <el-table-column label="阅读" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.read_number }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="点赞数量" width="auto" align="center">
+            <el-table-column label="点赞" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.click_number }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="显示顺序" width="auto" align="center">
+            <el-table-column label="顺序" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.orders }}</span>
               </template>
@@ -161,11 +163,11 @@
                 <span v-if="row.is_show === 1">启用</span>
               </template>
             </el-table-column>
-            <!--  <el-table-column label="创建时间" width="150" align="center">
+            <el-table-column label="创建时间" width="150" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.created_at }}</span>
               </template>
-            </el-table-column>-->
+            </el-table-column>
             <el-table-column label="更新时间" width="150" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.updated_at }}</span>
@@ -396,11 +398,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#box-card {
-  .el-card__body {
-    padding: 10px;
-  }
+<style lang="scss" scoped>
+::v-deep .el-card__body {
+  padding: 0 !important;
 }
 
 .selWidth {

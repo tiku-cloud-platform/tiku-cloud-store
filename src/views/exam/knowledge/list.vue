@@ -18,11 +18,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
+                <el-button type="primary" size="small" @click="getList">搜索</el-button>
+                <el-button class="mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button type="primary" size="small" @click="getList">搜索</el-button>
-                  <el-button class="mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/exam/knowledge/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -34,7 +36,7 @@
         </div>
       </div>
       <el-table
-        v-loading="listLoading"
+        :loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -42,7 +44,7 @@
         empty-text="暂无数据"
         show-header
         row-key="uuid"
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
@@ -174,6 +176,9 @@ export default {
 <style scoped lang="scss">
 .mr10 {
   margin-right: 10px;
+}
+::v-deep .el-card__body {
+  padding: 0 !important;
 }
 .el-col-lg-12 {
   width: 30%;

@@ -47,6 +47,8 @@
                   </el-form-item>
                 </el-col>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
                   <el-button
@@ -80,10 +82,10 @@
         show-header
         style="width: 100%"
         border
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+<!--        <el-table-column type="selection" width="55" />-->
         <el-table-column label="所属平台" width="auto" align="center">
           <template slot-scope="{ row }">
             <span>{{ row.type }}</span>
@@ -205,11 +207,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-col-xl-18 {
   width: 57%;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .el-dialog {
   width: 550px;
 }

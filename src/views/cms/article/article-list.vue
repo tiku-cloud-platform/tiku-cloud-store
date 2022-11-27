@@ -3,12 +3,12 @@
     <el-card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <div class="container">
-          <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right" label-width="100px">
+          <el-form ref="searchForm" :model="listQuery" inline size="small" label-position="right">
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="分类名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
+                    <el-input v-model="listQuery.title" placeholder="请输入查询分类名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto">
@@ -35,7 +35,7 @@
                     <!--                        />-->
                     <!--                      </el-option>-->
                     <!--                    </el-select>-->
-                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择" style="width: 90%">
+                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择分类状态" style="width: 90%">
                       <el-option
                         v-for="item in categoryData"
                         :key="item.key"
@@ -44,17 +44,19 @@
                       />
                     </el-select>
                   </el-form-item>
-                </el-col>
-              </el-col>
-              <el-col :span="5">
-                <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
+                </el-col>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                <el-form-item>
                   <router-link :to="{path: '/cms/article/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
-                  <el-button type="warning" size="small" @click="handleBatchPub">收录</el-button>
+                  <el-button type="warning" size="small" @click="handleBatchPub">微信收录</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -68,10 +70,9 @@
         size="small"
         row-key="uuid"
         border
-        stripe
         empty-text="暂无数据"
-        show-header
         :tree-props="{children: 'children'}"
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
@@ -80,37 +81,37 @@
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column> -->
-        <el-table-column label="文章图片" width="70" align="center">
+        <el-table-column label="封面" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
           </template>
         </el-table-column>
-        <el-table-column label="文章标题" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="标题" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="文章分类" width="auto" align="center">
+        <el-table-column label="分类" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.category_info.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="文章作者" width="auto" align="center">
+        <el-table-column label="作者" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.author }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="文章来源" width="auto" align="center">
+        <el-table-column label="来源" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.source }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="阅读量" width="auto" align="center">
+        <el-table-column label="阅读" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.read_number }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="显示顺序" width="auto" align="center">
+        <el-table-column label="顺序" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.orders }}</span>
           </template>
@@ -304,7 +305,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }

@@ -62,14 +62,14 @@ const articleRouter = {
           path: 'category/list/:uuid',
           name: 'bookCategory',
           component: () => import('@/views/cms/book/category/list'),
-          meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
+          meta: { title: '书籍章节', icon: 'el-icon-notebook-2' },
           hidden: true
         },
         {
           path: 'category/save',
           name: 'bookContentSave',
           component: () => import('@/views/cms/book/category/save'),
-          meta: { title: '书籍内容', icon: 'el-icon-notebook-2' },
+          meta: { title: '书籍章节', icon: 'el-icon-notebook-2' },
           hidden: true
         }
       ]
@@ -94,6 +94,44 @@ const articleRouter = {
           hidden: true
         }
       ]
+    },
+    {
+      path: 'banner/list',
+      name: '轮播图管理',
+      component: () => import('@/views/config/banner/list'),
+      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
+    },
+    {
+      path: 'banner/save/:uuid?',
+      name: '轮播图管理',
+      hidden: true,
+      component: () => import('@/views/config/banner/save'),
+      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
+    },
+    {
+      path: 'menu/list',
+      name: '菜单管理',
+      component: () => import('@/views/config/menu/list'),
+      meta: { title: '菜单管理', icon: 'el-icon-s-grid' }
+    },
+    {
+      path: 'menu/save/:uuid?',
+      name: '菜单管理',
+      hidden: true,
+      component: () => import('@/views/config/menu/save'),
+      meta: { title: '菜单管理', icon: 'el-icon-s-grid' }
+    },
+    {
+      path: 'config/constant/list',
+      name: '常量配置',
+      component: () => import('@/views/config/constant/list'),
+      meta: { title: '常量配置', icon: 'el-icon-xitongpeizhi' }
+    },
+    {
+      path: 'config/page',
+      name: '系统页面',
+      component: () => import('@/views/config/page/list'),
+      meta: { title: '系统页面', icon: 'el-icon-page' }
     }
   ]
 }

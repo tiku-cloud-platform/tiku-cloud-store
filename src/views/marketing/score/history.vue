@@ -51,6 +51,8 @@
                   </el-form-item>
                 </el-col>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="5">
                 <el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="mini" @click="getList">搜索</el-button>
@@ -69,7 +71,7 @@
         border
         empty-text="暂无数据"
         show-header
-        stripe
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
         <el-table-column label="获取用户" width="auto" align="center">
           <template slot-scope="{row}">
@@ -190,7 +192,9 @@ export default {
 .selWidth{
   width: 300px;
 }
-
+::v-deep .el-card__body {
+  padding: 0 !important;
+}
 .mr10 {
   margin-right: 10px;
 }
