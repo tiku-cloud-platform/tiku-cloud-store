@@ -45,7 +45,6 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
         <el-table-column label="分组名称" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
