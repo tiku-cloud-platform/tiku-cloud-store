@@ -67,7 +67,6 @@
         border
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
-        <el-table-column type="selection" width="55" />
         <el-table-column
           label="用户组"
           width="auto"
