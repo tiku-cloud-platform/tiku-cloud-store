@@ -45,11 +45,6 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column label="分组名称" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.title }}</span>
-          </template>
-        </el-table-column>
         <el-table-column label="分组状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>

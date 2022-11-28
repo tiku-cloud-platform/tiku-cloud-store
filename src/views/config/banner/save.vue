@@ -191,7 +191,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/wx_app/banner/list` })
+      this.$router.back()
     },
     // 获取banner显示端口
     getPosition() {
@@ -223,14 +223,14 @@ export default {
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/wx_app/banner/list` })
+                this.$router.back()
               }, 500)
             })
           } else {
             add(this.formValidate).then((message) => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/wx_app/banner/list` })
+                this.$router.back()
               }, 500)
             })
           }

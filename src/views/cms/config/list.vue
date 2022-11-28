@@ -37,7 +37,6 @@
         empty-text="暂无数据"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
-        <el-table-column type="selection" width="55" />
         <!-- <el-table-column label="内容编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>

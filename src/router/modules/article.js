@@ -82,24 +82,18 @@ const articleRouter = {
       children: [
         {
           path: 'article/list',
-          name: '单文管理',
+          name: '文章配置',
           component: () => import('@/views/cms/config/list'),
-          meta: { title: '单文管理', icon: 'el-icon-lanmupeizhi' }
+          meta: { title: '文章配置', icon: 'el-icon-lanmupeizhi' }
         },
         {
           path: 'article/save/:id?',
           component: () => import('@/views/cms/config/save'),
-          name: '编辑单文',
-          meta: { title: '编辑单文', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
+          name: '编辑配置',
+          meta: { title: '编辑配置', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
           hidden: true
         }
       ]
-    },
-    {
-      path: 'banner/list',
-      name: '轮播图管理',
-      component: () => import('@/views/config/banner/list'),
-      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
     },
     {
       path: 'banner/save/:uuid?',
@@ -132,6 +126,12 @@ const articleRouter = {
       name: '系统页面',
       component: () => import('@/views/config/page/list'),
       meta: { title: '系统页面', icon: 'el-icon-page' }
+    },
+    {
+      path: 'banner/list',
+      name: '轮播图管理',
+      component: () => import('@/views/config/banner/list'),
+      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
     }
   ]
 }
