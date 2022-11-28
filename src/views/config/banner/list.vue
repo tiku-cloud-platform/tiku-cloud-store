@@ -49,7 +49,7 @@
             <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <router-link :to="{path: '/wx_app/banner/save'}">
+                  <router-link :to="{path: '/cms/banner/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
@@ -70,20 +70,15 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+      <!--        <el-table-column type="selection" width="55" />-->
         <!-- <el-table-column label="编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column> -->
-        <el-table-column label="图片" width="70" align="center">
-          <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
-          </template>
-        </el-table-column>
-        <el-table-column label="标题" width="auto" align="center">
+        <el-table-column label="跳转端口" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.title }}</span>
+            <span>{{ row.client_position_remark}}</span>
           </template>
         </el-table-column>
         <el-table-column label="显示位置" width="auto" align="center">
@@ -91,17 +86,22 @@
             <span>{{ row.position_show ? row.position_show.describe : '' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="跳转端口" width="auto" align="center">
+        <el-table-column label="标题" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span>{{ row.client_position_remark}}</span>
+            <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="跳转类型" width="auto" align="center">
+        <el-table-column label="图片" width="70" align="center">
+          <template slot-scope="scope">
+            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+          </template>
+        </el-table-column>
+        <el-table-column label="跳转类型" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span>{{ row.menu_type ? row.menu_type.describe : '' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="跳转地址" width="auto" align="center">
+        <el-table-column label="跳转地址" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span>{{ row.url ? row.url : '' }}</span>
           </template>
@@ -119,7 +119,7 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/wx_app/banner/save/'+row.uuid}">
+            <router-link :to="{path: '/cms/banner/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
             <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>

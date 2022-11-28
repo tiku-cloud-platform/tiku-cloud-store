@@ -166,7 +166,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/wx_app/menu/list` })
+      this.$router.back()
     },
     // 显示位置
     getConstantList() {
