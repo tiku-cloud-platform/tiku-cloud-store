@@ -6,8 +6,8 @@ export default {
   theme: 'dark',
   useCommandShortcut: true,
   useDefaultHTMLSanitizer: true,
-  usageStatistics: false,
-  hideModeSwitch: false,
+  usageStatistics: true,
+  hideModeSwitch: true,
   toolbarItems: [
     'heading',
     'bold',
