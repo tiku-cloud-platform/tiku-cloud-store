@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-.el-dialog {
+::v-deep .el-dialog {
   margin-top: 9vh;
 }
 </style>

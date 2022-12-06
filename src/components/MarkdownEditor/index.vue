@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" ref="tuiEditor" />
+  <div :id="id" ref="tuiEditor" style="min-height: 1000px;" />
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
         el: document.getElementById(this.id),
         initialEditType: 'markdown',
         previewStyle: 'vertical',
-        minHeight: '800px',
+        minHeight: '1000px',
         language: 'zh-cn',
         theme: 'dark',
         initialValue: this.initialValue,
@@ -58,13 +58,12 @@ export default {
           [{
             el: this.createScreenFull(),
             tooltip: '全屏'
-          }]
+          }],
+          ['scrollSync']
         ]
       })
       // 监听内容改变事件
       this.editor.on('change', () => {
-        // console.log(this.editor.getMarkdown()) // 获取markdown
-        // console.log(this.editor.getHTML()) // 获取html
         this.$emit('input', this.editor.getMarkdown())
       })
     },
