@@ -400,11 +400,11 @@
               >
                 <template slot-scope="{ row }">
                   <el-button
-                    v-if="row.is_forbidden == 1"
+                    v-if="row.is_forbidden == 2"
                     type="text"
                   >启用</el-button>
                   <el-button
-                    v-if="row.is_forbidden == 2"
+                    v-if="row.is_forbidden == 1"
                     style="color: red"
                     type="text"
                   >禁用</el-button>
