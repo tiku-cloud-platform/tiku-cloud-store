@@ -7,8 +7,11 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
-                  <el-form-item label="标题名称：">
+                  <el-form-item label="文章标题：">
                     <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth" size="small" />
+                  </el-form-item>
+                  <el-form-item label="配置描述：">
+                    <el-input v-model="listQuery.position" placeholder="请输入配置描述" clearable class="selWidth" size="small" />
                   </el-form-item>
                   <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
@@ -49,7 +52,7 @@
         </el-table-column>
         <el-table-column label="显示位置" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.position_show ? row.position_show.describe : '' }}</span>
+            <span>{{ row.position }}</span>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -86,6 +89,7 @@ export default {
         page: 1,
         size: 20,
         title: ''
+        position: '',
       },
       tableData: {
         data: [],
