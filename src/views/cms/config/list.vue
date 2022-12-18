@@ -88,8 +88,8 @@ export default {
       listQuery: {
         page: 1,
         size: 20,
-        title: ''
-        position: '',
+        title: '',
+        position: ''
       },
       tableData: {
         data: [],
