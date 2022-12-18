@@ -14,15 +14,10 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
-            <el-form-item label="文章位置：" prop="position">
-              <el-select v-model="formValidate.position" clearable placeholder="注意：同一个位置只能添加一篇文章" style="width: 90%">
-                <el-option
-                  v-for="item in positionData"
-                  :key="item.value"
-                  :label="item.describe"
-                  :value="item.value"
-                />
-              </el-select>
+            <el-form-item label="配置描述：" prop="position">
+              <el-form-item label="配置描述：" prop="position" label-for="title">
+                <el-input v-model.trim="formValidate.position" placeholder="注意：描述当前位置配置区域" element-id="title" style="width: 90%" />
+              </el-form-item>
             </el-form-item>
           </el-col>
         </el-row>
@@ -68,13 +63,13 @@ export default {
   name: 'ConfigEdit',
   components: { ueditorFrom },
   data() {
-    const validatePosition = (rule, value, callback) => {
-      if (!this.formValidate.position) {
-        callback(new Error('请选择文章位置'))
-      } else {
-        callback()
-      }
-    }
+    // const validatePosition = (rule, value, callback) => {
+    //   if (!this.formValidate.position) {
+    //     callback(new Error('请选择文章位置'))
+    //   } else {
+    //     callback()
+    //   }
+    // }
     return {
       grid: {
         xl: 10,
@@ -92,7 +87,8 @@ export default {
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
-        position: [{ required: true, validator: validatePosition, trigger: 'change' }],
+        position: [{ required: true, message: '请输入配置描述', trigger: 'blur' }],
+        // position: [{ required: true, validator: validatePosition, trigger: 'change' }],
         content: [{ required: true, message: '请输入文章内容', trigger: 'change' }]
       },
       tempRoute: {},
@@ -118,7 +114,7 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
-    this.getConstantList()
+    // this.getConstantList()
     if (this.$route.params.id) {
       this.setTagsViewTitle()
       this.getDetails()
@@ -158,14 +154,14 @@ export default {
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/cms/config/list` })
+                this.$router.go(-1)
               }, 500)
             })
           } else {
             add(this.formValidate).then((message) => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/cms/config/list` })
+                this.$router.go(-1)
               }, 500)
             })
           }
@@ -182,7 +178,7 @@ export default {
           uuid: data.uuid,
           title: data.title,
           orders: data.orders,
-          position: data.position_show.value,
+          position: data.position,
           content: data.content,
           is_show: data.is_show
         }
