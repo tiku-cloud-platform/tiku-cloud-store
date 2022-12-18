@@ -40,11 +40,11 @@
         empty-text="暂无数据"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
-        <!-- <el-table-column label="内容编号" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="内容编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
           </template>
-        </el-table-column> -->
+        </el-table-column>
         <el-table-column label="文章标题" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
