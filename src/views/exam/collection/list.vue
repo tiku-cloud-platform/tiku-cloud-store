@@ -370,7 +370,7 @@ export default {
   data() {
     return {
       // 顺序调整弹窗
-      drawer: true,
+      drawer: false,
       direction: 'rtl',
       drawerOption: 'exam',
       // 调整试题数据
