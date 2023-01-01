@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" ref="tuiEditor" style="min-height: 1000px;" />
+  <div :id="id" ref="tuiEditor" style="min-height: 1000px;"/>
 </template>
 
 <script>
@@ -7,8 +7,16 @@
 
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/toastui-editor-viewer.css'
-import Editor from '@toast-ui/editor'
 // import defaultOptions from './default-options'
+import 'prismjs/themes/prism.css'
+import 'tui-color-picker/dist/tui-color-picker.css'
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
+
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
+import Prism from 'prismjs'
+import Editor from '@toast-ui/editor'
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight'
 
 export default {
   name: 'MarkdownEditor',
@@ -43,6 +51,8 @@ export default {
         minHeight: '1000px',
         language: 'zh-cn',
         theme: 'dark',
+        plugins: [[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax],
+        viewer: true,
         initialValue: this.initialValue,
         toolbarItems: [
           ['heading', 'bold', 'italic', 'strike'],
@@ -78,7 +88,7 @@ export default {
           if (_this.editor.isMarkdownMode()) {
             _this.editor.insertText('![](' + img.file_url + ')')
           } else {
-            _this.editor.setHTML('<img src=' + img.file_url + ' alt=' + img.file_name + '>')
+            _this.editor.setHTML('<img src=' + img.file_url + ' "alt="' + img.file_name + '>')
           }
         }, 1)
       })
