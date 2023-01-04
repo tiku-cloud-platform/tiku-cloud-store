@@ -81,7 +81,22 @@
           <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />
+<!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
+          <div style="border: 1px solid #C0C4CC;">
+            <Toolbar
+              style="border-bottom: 1px solid #ccc"
+              :editor="editor"
+              :defaultConfig="toolbarConfig"
+              :mode="mode"
+            />
+            <Editor
+              style="height: 500px; overflow-y: hidden;"
+              v-model="formValidate.content"
+              :defaultConfig="editorConfig"
+              :mode="mode"
+              @onCreated="onCreated"
+            />
+          </div>
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -95,10 +110,11 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 import { add, edit, show } from '@/api/book/content'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
-
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 export default {
   name: 'BookContentSave',
-  components: { MarkdownEditor },
+  // components: { MarkdownEditor },
+  components: { MarkdownEditor, Editor, Toolbar },
   data() {
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.store_book_category_uuid) {
@@ -138,7 +154,12 @@ export default {
         content: [{ required: true, message: '文章内容不能为空', trigger: 'blur' }],
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
-      bookCategoryData: []
+      bookCategoryData: [],
+      editor: null,
+      html: '<p>hello</p>',
+      toolbarConfig: { },
+      editorConfig: { placeholder: '请输入内容...' },
+      mode: 'default', // or 'simple'
     }
   },
   created() {
@@ -153,8 +174,20 @@ export default {
   },
   mounted() {
     this.getCategoryList()
+    // 模拟 ajax 请求，异步渲染编辑器
+    setTimeout(() => {
+      this.html = '<p>模拟 Ajax 异步设置内容 HTML</p>'
+    }, 1500)
+  },
+  beforeDestroy() {
+    const editor = this.editor
+    if (editor == null) return
+    editor.destroy() // 组件销毁时，及时销毁编辑器
   },
   methods: {
+    onCreated(editor) {
+      this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
+    },
     // 选择书籍分类
     handleChange(value) {
       if (value.length !== 1) {
@@ -241,7 +274,7 @@ export default {
 }
 
 </script>
-
+<style src="@wangeditor/editor/dist/css/style.css"></style>
 <style scoped lang="scss">
 .el-divider--horizontal {
   margin: 20px 0;
