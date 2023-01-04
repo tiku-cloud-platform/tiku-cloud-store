@@ -155,8 +155,8 @@ export default {
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
       bookCategoryData: [],
+      // 富文本编辑器
       editor: null,
-      html: '<p>hello</p>',
       toolbarConfig: { },
       editorConfig: { placeholder: '请输入内容...' },
       mode: 'default', // or 'simple'
@@ -174,10 +174,6 @@ export default {
   },
   mounted() {
     this.getCategoryList()
-    // 模拟 ajax 请求，异步渲染编辑器
-    setTimeout(() => {
-      this.html = '<p>模拟 Ajax 异步设置内容 HTML</p>'
-    }, 1500)
   },
   beforeDestroy() {
     const editor = this.editor
