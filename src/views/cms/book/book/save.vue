@@ -74,7 +74,7 @@
           <el-divider />
         </div>
         <el-form-item label="书籍简介：" prop="intro">
-          <el-input v-model="formValidate.intro" type="textarea" />
+          <ueditor-from v-model="formValidate.intro" :content="formValidate.intro" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -86,9 +86,11 @@
 // 内容
 import { add, edit, show } from '@/api/book/book'
 import { getName } from '@/utils/auth'
+import ueditorFrom from '@/components/ueditorFrom'
 
 export default {
   name: 'ArticleSave',
+  components: { ueditorFrom },
   data() {
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.file_uuid) {
