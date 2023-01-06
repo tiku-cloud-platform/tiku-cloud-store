@@ -17,28 +17,28 @@
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="文章标题：" prop="title" label-for="title">
+            <el-form-item label="章节标题：" prop="title" label-for="title">
               <el-input v-model.trim="formValidate.title" placeholder="请输入标题" element-id="title" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章作者：" prop="author" label-for="author">
+            <el-form-item label="章节作者：" prop="author" label-for="author">
               <el-input v-model.trim="formValidate.author" placeholder="请输入作者" element-id="author" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章来源：" prop="source" label-for="source">
+            <el-form-item label="章节来源：" prop="source" label-for="source">
               <el-input v-model.trim="formValidate.source" placeholder="请输入来源" element-id="source" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章标签：" prop="tags" label-for="tags">
+            <el-form-item label="章节标签：" prop="tags" label-for="tags">
               <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%" />
               <div class="image-size-require">多个标签使用","分割</div>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="文章目录：" prop="store_book_category_uuid" label-for="store_book_category_uuid">
+            <el-form-item label="章节目录：" prop="store_book_category_uuid" label-for="store_book_category_uuid">
               <el-cascader
                 v-model="formValidate.store_book_category_uuid"
                 :options="bookCategoryData"
@@ -70,33 +70,19 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">文章简介</span>
+          <span class="title">章节简介</span>
           <el-divider />
         </div>
-        <el-form-item label="文章简介：" prop="intro">
+        <el-form-item label="章节简介：" prop="intro">
           <el-input v-model="formValidate.intro" type="textarea" />
         </el-form-item>
         <div class="dividerTitle">
-          <span class="title">文章内容</span>
+          <span class="title">章节内容</span>
           <el-divider />
         </div>
-        <el-form-item label="文章内容：" prop="content">
+        <el-form-item label="章节内容：" prop="content">
 <!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
-          <div style="border: 1px solid #C0C4CC;">
-            <Toolbar
-              style="border-bottom: 1px solid #ccc"
-              :editor="editor"
-              :defaultConfig="toolbarConfig"
-              :mode="mode"
-            />
-            <Editor
-              style="height: 500px; overflow-y: hidden;"
-              v-model="formValidate.content"
-              :defaultConfig="editorConfig"
-              :mode="mode"
-              @onCreated="onCreated"
-            />
-          </div>
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -107,14 +93,13 @@
 <script>
 // 内容
 import MarkdownEditor from '@/components/MarkdownEditor'
+import ueditorFrom from '@/components/ueditorFrom'
 import { add, edit, show } from '@/api/book/content'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 export default {
   name: 'BookContentSave',
-  // components: { MarkdownEditor },
-  components: { MarkdownEditor, Editor, Toolbar },
+  components: { MarkdownEditor, ueditorFrom },
   data() {
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.store_book_category_uuid) {
@@ -146,20 +131,15 @@ export default {
         is_show: 1
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入章节标题', trigger: 'blur' }],
         // intro: [{ required: true, message: '简介不能为空', trigger: 'blur' }],
-        author: [{ required: true, message: '请输入文章作者', trigger: 'blur' }],
-        source: [{ required: true, message: '请输入文章来源', trigger: 'blur' }],
+        author: [{ required: true, message: '请输入章节作者', trigger: 'blur' }],
+        source: [{ required: true, message: '请输入章节来源', trigger: 'blur' }],
         // tags: [{ required: true, message: '请输入标签', trigger: 'blur' }],
-        content: [{ required: true, message: '文章内容不能为空', trigger: 'blur' }],
+        content: [{ required: true, message: '章节内容不能为空', trigger: 'blur' }],
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
       bookCategoryData: [],
-      // 富文本编辑器
-      editor: null,
-      toolbarConfig: { },
-      editorConfig: { placeholder: '请输入内容...' },
-      mode: 'default', // or 'simple'
     }
   },
   created() {
@@ -175,15 +155,7 @@ export default {
   mounted() {
     this.getCategoryList()
   },
-  beforeDestroy() {
-    const editor = this.editor
-    if (editor == null) return
-    editor.destroy() // 组件销毁时，及时销毁编辑器
-  },
   methods: {
-    onCreated(editor) {
-      this.editor = Object.seal(editor) // 一定要用 Object.seal() ，否则会报错
-    },
     // 选择书籍分类
     handleChange(value) {
       if (value.length !== 1) {
@@ -270,7 +242,6 @@ export default {
 }
 
 </script>
-<style src="@wangeditor/editor/dist/css/style.css"></style>
 <style scoped lang="scss">
 .el-divider--horizontal {
   margin: 20px 0;
