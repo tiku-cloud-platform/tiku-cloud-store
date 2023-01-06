@@ -111,7 +111,7 @@
 <!--                <span>{{ row.uuid }}</span>-->
 <!--              </template>-->
 <!--            </el-table-column>-->
-            <el-table-column label="名称" width="auto" align="center" :show-overflow-tooltip="true">
+            <el-table-column label="名称" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.title }}</span>
               </template>
