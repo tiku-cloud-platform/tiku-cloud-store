@@ -14,22 +14,30 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="书籍名称：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入名称" element-id="title" style="width: 90%" />
+              <el-input v-model.trim="formValidate.title" placeholder="请输入名称" element-id="title"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入书籍作者" element-id="author" style="width: 90%" />
+              <el-input v-model.trim="formValidate.author" placeholder="请输入书籍作者" element-id="author"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入是来源" element-id="source" style="width: 90%" />
+              <el-input v-model.trim="formValidate.source" placeholder="请输入是来源" element-id="source"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍标签：" prop="tags" label-for="tags">
-              <el-input v-model.trim="formValidate.tags" placeholder="请输入书籍标签" element-id="tags" style="width: 90%" />
+              <el-input v-model.trim="formValidate.tags" placeholder="请输入书籍标签" element-id="tags"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -40,9 +48,9 @@
           <el-col v-bind="grid" class="mr50">
             <el-form-item label="书籍封面：" prop="file_uuid">
               <div class="upLoadPicBox" @click="modalPicTap('1')">
-                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url"></div>
+                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url" alt=""></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont" />
+                  <i class="el-icon-camera cameraIconfont"/>
                 </div>
               </div>
             </el-form-item>
@@ -50,7 +58,7 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -71,10 +79,10 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">书籍简介</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-form-item label="书籍简介：" prop="intro">
-          <ueditor-from v-model="formValidate.intro" :content="formValidate.intro" />
+          <ueditor-from v-model="formValidate.intro" :content="formValidate.intro"/>
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -164,7 +172,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/cms/book/book/list` })
+      this.$router.back()
     },
     modalPicTap(tit) {
       const _this = this

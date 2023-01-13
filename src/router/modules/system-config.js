@@ -1,25 +1,47 @@
 import Layout from '@/layout'
-const miniProgramRouter = {
-  path: '/wx_app',
+
+const settingRouter = {
+  path: '/setting',
   component: Layout,
   name: '系统配置',
   meta: { title: '系统配置', icon: 'el-icon-s-tools' },
   children: [
     {
-      path: 'mini',
+      path: 'wechat',
       name: '平台配置',
       component: () => import('@/views/config/mini/conf'),
       meta: { title: '平台配置', icon: 'el-icon-xitongpeizhi' },
       children: [
         {
-          path: 'mini/config',
+          path: 'config',
           name: '微信配置',
           component: () => import('@/views/config/mini/conf'),
           meta: { title: '微信配置', icon: 'el-icon-xitongpeizhi' }
         }
       ]
-    }
+    },
+    {
+      path: 'dict',
+      name: '字典配置',
+      component: () => import('@/views/config/dictionary/group/index'),
+      meta: { title: '字典分组', icon: 'el-icon-guanwangshijuan' },
+      children: [
+        {
+          path: 'group/list',
+          name: '字典分组',
+          component: () => import('@/views/config/dictionary/group/list'),
+          meta: { title: '字典分组', icon: 'el-icon-guanwangshijuan' }
+        },
+        {
+          path: 'group/save/:uuid?',
+          name: '字典分组',
+          hidden: true,
+          component: () => import('@/views/config/dictionary/group/save'),
+          meta: { title: '字典分组', icon: 'el-icon-guanwangshijuan' }
+        }
+      ]
+    },
   ]
 }
 
-export default miniProgramRouter
+export default settingRouter

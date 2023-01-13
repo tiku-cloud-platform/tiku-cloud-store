@@ -31,12 +31,12 @@ export default {
         toolbars: [
           [
             'source', // 源代码
-            'anchor', // 锚点
-            'undo', // 撤销
-            'redo', // 重做
-            'subscript', // 下标
-            'fontborder', // 字符边框
-            'superscript', // 上标
+            // 'anchor', // 锚点
+            // 'undo', // 撤销
+            // 'redo', // 重做
+            // 'subscript', // 下标
+            // 'fontborder', // 字符边框
+            // 'superscript', // 上标
             'formatmatch', // 格式刷
             'removeformat', // 清除格式
             'cleardoc', // 清空文档
@@ -45,10 +45,10 @@ export default {
             'emotion', // 表情
             'spechars', // 特殊字符
             'searchreplace', // 查询替换
-            'blockquote', // 引用
+            // 'blockquote', // 引用
             'horizontal', // 分隔线
-            'pasteplain', // 纯文本粘贴模式
-            'selectall', // 全选
+            // 'pasteplain', // 纯文本粘贴模式
+            // 'selectall', // 全选
             'bold', // 加粗
             'italic', // 斜体
             'forecolor', // 字体颜色
@@ -68,8 +68,8 @@ export default {
             'insertunorderedlist', // 无序列表
             'rowspacingtop', // 段前距
             'rowspacingbottom', // 段后距
-            'insertvideo', // 视频
-            'map', // Baidu地图
+            // 'insertvideo', // 视频
+            // 'map', // Baidu地图
             'fontfamily', // 字体
             'fontsize', // 字号
             'paragraph', // 段落格式
@@ -77,7 +77,7 @@ export default {
             'insertcode', // 代码语言
             // 'snapscreen', // 截图
             // 'print', // 打印
-            'preview', // 预览
+            // 'preview', // 预览
             // 'time', // 时间
             // 'date', // 日期
             'inserttable', // 插入表格
@@ -102,7 +102,7 @@ export default {
             // 'directionalityltr', // 从左向右输入
             // 'directionalityrtl', // 从右向左输入
             // 'pagebreak' // 分页
-            'insertframe' // 插入Iframe
+            // 'insertframe' // 插入Iframe
             // 'imagenone' // 默认
             // 'imageleft', // 左浮动
             // 'imageright', // 右浮动

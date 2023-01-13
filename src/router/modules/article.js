@@ -40,57 +40,22 @@ const articleRouter = {
       ]
     },
     {
-      path: 'book',
-      name: '书籍管理',
-      component: () => import('@/views/cms/book/index'),
-      meta: { title: '书籍管理', icon: 'el-icon-notebook-2' },
-      children: [
-        {
-          path: 'book/list',
-          name: '书籍管理',
-          component: () => import('@/views/cms/book/book/list'),
-          meta: { title: '书籍管理', icon: 'el-icon-notebook-2' }
-        },
-        {
-          path: 'book/save/:uuid?',
-          name: '添加书籍',
-          hidden: true,
-          component: () => import('@/views/cms/book/book/save'),
-          meta: { title: '添加书籍', icon: 'el-icon-xianshicaidan' }
-        },
-        {
-          path: 'category/list/:uuid',
-          name: 'bookCategory',
-          component: () => import('@/views/cms/book/category/list'),
-          meta: { title: '书籍章节', icon: 'el-icon-notebook-2' },
-          hidden: true
-        },
-        {
-          path: 'category/save',
-          name: 'bookContentSave',
-          component: () => import('@/views/cms/book/category/save'),
-          meta: { title: '书籍章节', icon: 'el-icon-notebook-2' },
-          hidden: true
-        }
-      ]
-    },
-    {
       path: 'config',
-      name: '系统配置',
+      name: '单文配置',
       component: () => import('@/views/cms/config/index'),
-      meta: { title: '系统配置', icon: 'el-icon-s-help' },
+      meta: { title: '单文配置', icon: 'el-icon-s-help' },
       children: [
         {
           path: 'article/list',
-          name: '文章配置',
+          name: '单文配置',
           component: () => import('@/views/cms/config/list'),
-          meta: { title: '文章配置', icon: 'el-icon-lanmupeizhi' }
+          meta: { title: '单文配置', icon: 'el-icon-lanmupeizhi' }
         },
         {
           path: 'article/save/:id?',
           component: () => import('@/views/cms/config/save'),
-          name: '编辑配置',
-          meta: { title: '编辑配置', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
+          name: '单文配置',
+          meta: { title: '单文配置', noCache: true, activeMenu: `/cms/config/save`, icon: 'el-icon-lanmupeizhi' },
           hidden: true
         }
       ]

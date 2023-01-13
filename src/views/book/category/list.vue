@@ -101,16 +101,16 @@
             @selection-change="handleSelectionChange"
           >
             <el-table-column type="selection" width="55"/>
-<!--            <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">-->
-<!--              <template slot-scope="{row}">-->
-<!--                <svg-icon-->
-<!--                  icon-class="copy"-->
-<!--                  style="font-size: 20px; cursor: pointer"-->
-<!--                  @click="copyChannelId(row.uuid)"-->
-<!--                />-->
-<!--                <span>{{ row.uuid }}</span>-->
-<!--              </template>-->
-<!--            </el-table-column>-->
+            <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
+              <template slot-scope="{row}">
+                <svg-icon
+                  icon-class="copy"
+                  style="font-size: 20px; cursor: pointer"
+                  @click="copyChannelId(row.uuid)"
+                />
+                <span>{{ row.uuid }}</span>
+              </template>
+            </el-table-column>
             <el-table-column label="名称" width="auto" align="center">
               <template slot-scope="{row}">
                 <span>{{ row.title }}</span>

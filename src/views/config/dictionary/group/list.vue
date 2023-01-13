@@ -46,14 +46,15 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
-        <el-table-column label="等级名称" prop="title" align="center"></el-table-column>
-        <el-table-column label="等级状态" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="分组code" prop="code" align="center"></el-table-column>
+        <el-table-column label="分组名称" prop="title" align="center"></el-table-column>
+        <el-table-column label="分组类型" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text">系统创建</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text">自定义</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="创建时间" width="auto" align="center">
+        <el-table-column label="添加时间" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>
           </template>

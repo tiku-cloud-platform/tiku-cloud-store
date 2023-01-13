@@ -13,27 +13,33 @@
       >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
-          <el-divider />
+          <el-divider></el-divider>
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="章节标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入标题" element-id="title" style="width: 90%" />
+              <el-input v-model.trim="formValidate.title" placeholder="请输入标题" element-id="title"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入作者" element-id="author" style="width: 90%" />
+              <el-input v-model.trim="formValidate.author" placeholder="请输入作者" element-id="author"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入来源" element-id="source" style="width: 90%" />
+              <el-input v-model.trim="formValidate.source" placeholder="请输入来源" element-id="source"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节标签：" prop="tags" label-for="tags">
-              <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%" />
+              <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%"/>
               <div class="image-size-require">多个标签使用","分割</div>
             </el-form-item>
           </el-col>
@@ -50,7 +56,7 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -71,18 +77,18 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">章节简介</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-form-item label="章节简介：" prop="intro">
-          <el-input v-model="formValidate.intro" type="textarea" />
+          <el-input v-model="formValidate.intro" type="textarea"/>
         </el-form-item>
         <div class="dividerTitle">
           <span class="title">章节内容</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-form-item label="章节内容：" prop="content">
-<!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+          <!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content"/>
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -97,6 +103,7 @@ import ueditorFrom from '@/components/ueditorFrom'
 import { add, edit, show } from '@/api/book/content'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
+
 export default {
   name: 'BookContentSave',
   components: { MarkdownEditor, ueditorFrom },
@@ -139,7 +146,7 @@ export default {
         content: [{ required: true, message: '章节内容不能为空', trigger: 'blur' }],
         store_book_category_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }]
       },
-      bookCategoryData: [],
+      bookCategoryData: []
     }
   },
   created() {
@@ -166,7 +173,7 @@ export default {
     },
     // 返回
     back() {
-      this.$router.push({ path: `/cms/book/category/list/` + this.formValidate.store_book_uuid })
+      this.$router.back()
     },
     // 提交数据
     onsubmit() {

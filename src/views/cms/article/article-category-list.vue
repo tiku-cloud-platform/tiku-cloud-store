@@ -41,7 +41,7 @@
         style="width: 100%"
         size="small"
         empty-text="暂无数据"
-        border="true"
+        :border="true"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >

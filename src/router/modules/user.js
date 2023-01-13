@@ -13,16 +13,16 @@ const userRouter = {
     },
     {
       path: 'group',
-      name: '用户分组',
+      name: '会员等级',
       component: () => import('@/views/user/group/list'),
-      meta: { title: '用户分组', icon: 'el-icon-liebiao' }
+      meta: { title: '会员等级', icon: 'el-icon-liebiao' }
     },
     {
       path: 'group/save/:uuid?',
-      name: '添加用户分组',
+      name: '添加会员等级',
       hidden: true,
       component: () => import('@/views/user/group/save'),
-      meta: { title: '添加用户分组', icon: 'el-icon-liebiao' }
+      meta: { title: '添加会员等级', icon: 'el-icon-liebiao' }
     }
   ]
 }

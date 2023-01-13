@@ -7,18 +7,20 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
-                  <el-form-item label="书籍名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
+                  <el-form-item label="教程名称：" prop="title">
+                    <el-input v-model="listQuery.title" placeholder="请输入教程名称" size="small" clearable/>
                   </el-form-item>
                 </el-col>
-                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">
+                  搜索
+                </el-button>
                 <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <router-link :to="{path: '/cms/book/book/save'}">
+                  <router-link :to="{path: '/book/book/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
@@ -42,20 +44,22 @@
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
-<!--        <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">-->
-<!--          <template slot-scope="{row}">-->
-<!--            <svg-icon-->
-<!--              icon-class="copy"-->
-<!--              style="font-size: 20px; cursor: pointer"-->
-<!--              @click="copyChannelId(row.uuid)"-->
-<!--            />-->
-<!--            <span>{{ row.uuid }}</span>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <el-table-column type="selection" width="55"/>
+        <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
+          <template slot-scope="{row}">
+            <svg-icon
+              icon-class="copy"
+              style="font-size: 20px; cursor: pointer"
+              @click="copyChannelId(row.uuid)"
+            />
+            <span>{{ row.uuid }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="封面" width="70" align="center">
           <template slot-scope="scope">
-            <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+            <viewer v-if="scope.row.cover_file_info != null"><img
+              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"
+            ></viewer>
           </template>
         </el-table-column>
         <el-table-column label="书名" width="auto" align="center" :show-overflow-tooltip="true">
@@ -112,7 +116,7 @@
         </el-table-column>
         <el-table-column label="难度">
           <template slot-scope="{row}">
-            <el-rate v-model="row.level" style="display: contents;" disabled />
+            <el-rate v-model="row.level" style="display: contents;" disabled/>
           </template>
         </el-table-column>
         <el-table-column label="创建时间" width="150" align="center">
@@ -127,10 +131,10 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/cms/book/book/save/'+row.uuid}">
+            <router-link :to="{path: '/book/book/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <router-link :to="{path: '/cms/book/category/list/'+row.uuid}">
+            <router-link :to="{path: '/book/book/category/list/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">章节</el-button>
             </router-link>
             <!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
@@ -139,7 +143,9 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
+                    :limit.sync="listQuery.size" @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -148,6 +154,7 @@
 <script>
 import { list, del } from '@/api/book/book'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'BookList',
   components: { Pagination },
@@ -270,12 +277,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.selWidth{
+.selWidth {
   width: 300px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .mr10 {
   margin-right: 10px;
 }
