@@ -33,11 +33,10 @@ const settingRouter = {
           meta: { title: '字典分组', icon: 'el-icon-guanwangshijuan' }
         },
         {
-          path: 'group/save/:uuid?',
-          name: '字典分组',
-          hidden: true,
-          component: () => import('@/views/config/dictionary/group/save'),
-          meta: { title: '字典分组', icon: 'el-icon-guanwangshijuan' }
+          path: 'dict/list/:uuid',
+          name: '字典明细',
+          component: () => import('@/views/config/dictionary/dict/list'),
+          meta: { title: '字典明细', icon: 'el-icon-guanwangshijuan' }
         }
       ]
     },
