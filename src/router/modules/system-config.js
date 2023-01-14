@@ -35,6 +35,7 @@ const settingRouter = {
         {
           path: 'dict/list/:uuid',
           name: '字典明细',
+          hidden: true,
           component: () => import('@/views/config/dictionary/dict/list'),
           meta: { title: '字典明细', icon: 'el-icon-guanwangshijuan' }
         }

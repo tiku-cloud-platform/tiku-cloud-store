@@ -7,12 +7,12 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分组名称：" prop="title">
+                  <el-form-item label="字典名称：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分组状态：" prop="is_show">
+                  <el-form-item label="字典状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
                       <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
                                  :label="item.label"
@@ -50,12 +50,12 @@
         <el-table-column type="selection" width="55"/>
         <el-table-column label="分组名称" align="center">
           <template slot-scope="{row}">
-            {{ row.title }}
+            {{ row.group.title }}
           </template>
         </el-table-column>
-        <el-table-column label="分组code" prop="code" align="center">
+        <el-table-column label="字典名称" align="center">
           <template slot-scope="{row}">
-            {{ row.code }}
+            {{ row.title }}
           </template>
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -64,13 +64,13 @@
             <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="分组类型" width="auto" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="字典类型" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <el-button v-if="row.is_system === 2" size="mini" type="text">自定义</el-button>
             <el-button v-if="row.is_system === 1" size="mini" type="text" style="color: #A5A8AD;">系统定义</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="分组描述" prop="remark" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="字典描述" prop="remark" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             {{ row.remark }}
           </template>
@@ -82,11 +82,14 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/setting/dict/dict/list/'+row.uuid}">
-              <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10" @click="editForm(row)">字典
-              </el-button>
-            </router-link>
-            <el-button type="text" size="mini" class="mr10" @click="editForm(row)">编辑</el-button>
+            <el-button size="mini" type="text" style="color:red"
+                       @click="editForm(row)" v-if="row.is_system === 2"
+            >编辑
+            </el-button>
+            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
+                       @click="editForm(row)" v-if="row.is_system === 1"
+            >编辑
+            </el-button>
             <el-button size="mini" type="text" style="color:red"
                        @click="handleDelete(row, $index)" v-if="row.is_system === 2"
             >删除
@@ -108,19 +111,21 @@
     <!--    分组弹窗开始-->
     <div>
       <el-dialog
-        title="字典分组操作"
+        title="字典操作"
         :visible.sync="dialogVisible"
         width="30%"
         :before-close="handleClose"
       >
-        <el-form ref="form" :model="form" label-width="80px" :rules="rulesForm">
-          <el-form-item prop="title" label="分组名称">
-            <el-input v-model="form.title" placeholder="请输入分组名称" maxlength="32" show-word-limit
-                      :clearable="true"
-            ></el-input>
+        <el-form ref="form" :model="form" label-width="80px" :rules="rulesForm" label-position="right">
+          <el-form-item label="字典分组" prop="group_uuid">
+            <el-select v-model="form.group_uuid" placeholder="请选择字典分组" style="width: 100%;">
+              <el-option :label="item.title" :value="item.uuid" v-for="(item, index) in allGroupList" :key="item.uuid"
+              ></el-option>
+            </el-select>
           </el-form-item>
-          <el-form-item label="分组标识" prop="code">
-            <el-input v-model="form.code" placeholder="请输入分组标识" maxlength="20" :clearable="true" show-word-limit
+          <el-form-item prop="title" label="字典名称">
+            <el-input v-model="form.title" placeholder="请输入字典名称" maxlength="32" show-word-limit
+                      :clearable="true"
             ></el-input>
           </el-form-item>
           <el-form-item label="启用状态" prop="is_show">
@@ -129,8 +134,8 @@
               <el-radio :label="2">禁用</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="分组描述" prop="remark">
-            <el-input type="textarea" v-model="form.remark" placeholder="请输入分组描述信息" maxlength="50"
+          <el-form-item label="字典描述" prop="remark">
+            <el-input type="textarea" v-model="form.remark" placeholder="请输入字典描述信息" maxlength="50"
                       show-word-limit :clearable="true"
             ></el-input>
           </el-form-item>
@@ -146,17 +151,10 @@
 </template>
 
 <script>
-import { list, del, add, edit } from '@/api/dict/group'
+import { list, del, add, edit } from '@/api/dict/dict'
+import { all as groupAll } from '@/api/dict/group'
 import Pagination from '@/components/Pagination'
-
-let validGroupCode = (rule, value, callback) => {
-  let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/
-  if (!reg.test(value)) {
-    callback(new Error('分组标识必须是由4-20位字母+数字组合'))
-  } else {
-    callback()
-  }
-}
+import { right } from 'core-js/internals/array-reduce'
 
 export default {
   name: 'UserGroupList',
@@ -170,7 +168,8 @@ export default {
         page: 1,
         size: 20,
         title: '',
-        is_show: ''
+        is_show: '',
+        group_uuid: ''
       },
       tableData: {
         data: [],
@@ -192,31 +191,43 @@ export default {
       form: {
         uuid: '',
         title: '',
-        code: '',
         is_show: 2,
         resource: '',
-        remark: ''
+        remark: '',
+        group_uuid: ''
       },
       // 表单验证规则
       rulesForm: {
-        code: [
-          { required: true, message: '分组标识不能为空', trigger: 'blur' },
-          { validator: validGroupCode, trigger: 'blur' }
-        ],
         title: [
           { required: true, message: '分组名称不能为空', trigger: 'blur', max: 20 }
+        ],
+        group_uuid: [
+          { required: true, message: '字典分组不能为空', trigger: 'blur' }
         ]
-      }
+      },
+      // 分组列表
+      allGroupList: []
     }
   },
   mounted() {
-     if (this.$route.params.uuid) {
-      this.setTagsViewTitle()
-      this.getDetails()
+    const group_uuid = this.$route.params.uuid || ''
+    if (group_uuid) {
+      this.listQuery.group_uuid = group_uuid
+      this.form.group_uuid = group_uuid
+      this.getList()
+      this.getAllGroupList()
+    } else {
+      this.$message.error('分组编号不存在')
     }
-    this.getList()
   },
   methods: {
+    right,
+    // 查询所有的分组
+    getAllGroupList() {
+      groupAll({ page: 1, size: 100 }).then(res => {
+        this.allGroupList = res.data.items
+      })
+    },
     reset() {
       this.$refs['searchForm'].resetFields()
       this.getList()
@@ -273,6 +284,7 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
+      Reflect.deleteProperty(this.form, 'group')
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.form.uuid) {
@@ -281,7 +293,6 @@ export default {
               this.handleClose()
             })
           } else {
-            console.log(this.form)
             add(this.form).then((message) => {
               this.$message.success(message)
               this.handleClose()

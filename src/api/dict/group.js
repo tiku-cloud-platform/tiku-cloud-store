@@ -8,6 +8,14 @@ export function list(params) {
   })
 }
 
+export function all(params) {
+  return request({
+    url: '/store/dict/group/all',
+    method: 'get',
+    params
+  })
+}
+
 export function add(params) {
   return request({
     url: '/store/dict/group/create',

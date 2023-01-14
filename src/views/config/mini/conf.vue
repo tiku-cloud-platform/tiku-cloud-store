@@ -119,7 +119,6 @@ export default {
   methods: {
     getDetail() {
       list(this.formValidate.type).then(res => {
-        console.log(res)
         if (res.data.items[0] !== undefined) {
           this.formValidate = res.data.items[0]
         }

@@ -83,7 +83,7 @@
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/setting/dict/dict/list/'+row.uuid}">
-              <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10" @click="editForm(row)">字典
+              <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10">字典
               </el-button>
             </router-link>
             <el-button type="text" size="mini" class="mr10" @click="editForm(row)">编辑</el-button>
@@ -230,7 +230,6 @@ export default {
     editForm(row) {
       this.form = row
       this.dialogVisible = true
-      console.log(row)
     },
     // 删除
     handleDelete(row, idx) {
@@ -277,7 +276,6 @@ export default {
               this.handleClose()
             })
           } else {
-            console.log(this.form)
             add(this.form).then((message) => {
               this.$message.success(message)
               this.handleClose()
