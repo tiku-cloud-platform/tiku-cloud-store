@@ -86,7 +86,14 @@
               <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10">字典
               </el-button>
             </router-link>
-            <el-button type="text" size="mini" class="mr10" @click="editForm(row)">编辑</el-button>
+            <el-button size="mini" type="text" style="color:red"
+                       @click="editForm(row)" v-if="row.is_system === 2"
+            >编辑
+            </el-button>
+            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
+                       @click="editForm(row)" v-if="row.is_system === 1"
+            >编辑
+            </el-button>
             <el-button size="mini" type="text" style="color:red"
                        @click="handleDelete(row, $index)" v-if="row.is_system === 2"
             >删除
