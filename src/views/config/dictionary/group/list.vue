@@ -86,7 +86,7 @@
               <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10">字典
               </el-button>
             </router-link>
-            <el-button size="mini" type="text" style="color:red"
+            <el-button size="mini" type="text"
                        @click="editForm(row)" v-if="row.is_system === 2"
             >编辑
             </el-button>

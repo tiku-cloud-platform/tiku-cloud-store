@@ -48,6 +48,11 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"/>
+        <el-table-column label="数据编号" align="center">
+          <template slot-scope="{row}">
+            {{ row.uuid }}
+          </template>
+        </el-table-column>
         <el-table-column label="分组名称" align="center">
           <template slot-scope="{row}">
             {{ row.group.title }}
@@ -56,6 +61,11 @@
         <el-table-column label="字典名称" align="center">
           <template slot-scope="{row}">
             {{ row.title }}
+          </template>
+        </el-table-column>
+        <el-table-column label="字典值" align="center">
+          <template slot-scope="{row}">
+            {{ row.value }}
           </template>
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -82,7 +92,7 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <el-button size="mini" type="text" style="color:red"
+            <el-button size="mini" type="text"
                        @click="editForm(row)" v-if="row.is_system === 2"
             >编辑
             </el-button>
@@ -125,6 +135,11 @@
           </el-form-item>
           <el-form-item prop="title" label="字典名称">
             <el-input v-model="form.title" placeholder="请输入字典名称" maxlength="32" show-word-limit
+                      :clearable="true"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="value" label="字典值">
+            <el-input v-model="form.value" placeholder="请输入字典配置值" maxlength="50" show-word-limit
                       :clearable="true"
             ></el-input>
           </el-form-item>
@@ -194,12 +209,16 @@ export default {
         is_show: 2,
         resource: '',
         remark: '',
-        group_uuid: ''
+        group_uuid: '',
+        value: ''
       },
       // 表单验证规则
       rulesForm: {
         title: [
-          { required: true, message: '分组名称不能为空', trigger: 'blur', max: 20 }
+          { required: true, message: '字典配置名称不能为空', trigger: 'blur', max: 20 }
+        ],
+        value: [
+          { required: true, message: '字典配置值不能为空', trigger: 'blur', max: 50 }
         ],
         group_uuid: [
           { required: true, message: '字典分组不能为空', trigger: 'blur' }

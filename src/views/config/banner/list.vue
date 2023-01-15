@@ -76,14 +76,14 @@
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column> -->
-        <el-table-column label="跳转端口" width="auto" align="center">
+        <el-table-column label="显示端口" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.client_position_remark}}</span>
+            <span>{{ row.client === null ? '' : row.client.title }}</span>
           </template>
         </el-table-column>
         <el-table-column label="显示位置" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.position_show ? row.position_show.describe : '' }}</span>
+            <span>{{ row.position === null ? '' : row.position.title }}</span>
           </template>
         </el-table-column>
         <el-table-column label="标题" width="auto" align="center" show-overflow-tooltip>
@@ -93,12 +93,12 @@
         </el-table-column>
         <el-table-column label="图片" width="70" align="center">
           <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50" alt=""></viewer>
           </template>
         </el-table-column>
         <el-table-column label="跳转类型" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span>{{ row.menu_type ? row.menu_type.describe : '' }}</span>
+            <span>{{ row.type }}</span>
           </template>
         </el-table-column>
         <el-table-column label="跳转地址" width="auto" align="center" show-overflow-tooltip>
@@ -134,7 +134,7 @@
 </template>
 
 <script>
-import { list, del } from '@/api/banner/index'
+import { list, del } from '@/api/banner'
 // 常量配置
 import { list as constantList } from '@/api/system/const'
 import Pagination from '@/components/Pagination'
@@ -166,7 +166,7 @@ export default {
       // 批量删除选中id
       selectionDelList: [],
       positionData: [], // 显示位置
-      typeData: [] // 跳转类型
+      routerList: [] // 跳转类型
     }
   },
   mounted() {

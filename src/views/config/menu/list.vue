@@ -8,13 +8,15 @@
               <el-col :span="24">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="菜单名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
+                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
+                                 :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
@@ -42,7 +44,10 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList()">搜索</el-button>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
+                           @click="getList()"
+                >搜索
+                </el-button>
                 <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
             </el-row>
@@ -70,7 +75,7 @@
         show-header
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" width="55"/>
         <!-- <el-table-column label="菜单编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -78,7 +83,19 @@
         </el-table-column> -->
         <el-table-column label="菜单图片" width="70" align="center">
           <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50"
+                         height="50"
+            ></viewer>
+          </template>
+        </el-table-column>
+        <el-table-column label="显示端口" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.client === null ? '' : row.client.title }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="显示位置" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.position === null ? '' : row.position.title }}</span>
           </template>
         </el-table-column>
         <el-table-column label="菜单名称" width="auto" align="center">
@@ -86,14 +103,9 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="显示位置" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.position_show.describe }}</span>
-          </template>
-        </el-table-column>
         <el-table-column label="跳转类型" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.menu_type.describe }}</span>
+            <span>{{ row.type }}</span>
           </template>
         </el-table-column>
         <el-table-column label="跳转地址" width="auto" align="center">
@@ -122,7 +134,9 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
+                    :limit.sync="listQuery.size" @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -133,6 +147,7 @@ import { list, del } from '@/api/menu'
 // 常量配置
 import { list as constantList } from '@/api/system/const'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'Menu',
   components: { Pagination },
@@ -226,12 +241,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.selWidth{
+.selWidth {
   width: 300px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .mr10 {
   margin-right: 10px;
 }

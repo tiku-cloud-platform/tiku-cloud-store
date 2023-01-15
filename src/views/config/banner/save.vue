@@ -1,16 +1,27 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
+               @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="轮播标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" maxlength="32" style="width: 90%" />
+            <el-form-item label="显示端口：" prop="client_position">
+              <el-select v-model="formValidate.client_position" clearable placeholder="请选择" style="width: 90%">
+                <el-option
+                  v-for="(item, index) in clientType"
+                  :key="item.uuid"
+                  :label="item.title"
+                  :value="item.uuid"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
@@ -18,32 +29,27 @@
               <el-select v-model="formValidate.position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
                   v-for="(item, index) in positionData"
-                  :key="index"
-                  :label="item.describe"
-                  :value="item.value"
+                  :key="item.uuid"
+                  :label="item.title"
+                  :value="item.uuid"
                 />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="显示端口：" prop="client_position">
-              <el-select v-model="formValidate.client_position" clearable placeholder="请选择" style="width: 90%">
-                <el-option
-                  v-for="(item, index) in bannerPosition"
-                  :key="index"
-                  :label="item"
-                  :value="index"
-                />
-              </el-select>
+            <el-form-item label="轮播标题：" prop="title" label-for="title">
+              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" maxlength="32"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
             <el-form-item label="跳转类型：" prop="type">
               <el-select v-model="formValidate.type" clearable placeholder="请选择" style="width: 90%">
                 <el-option
-                  v-for="(item, index) in typeData"
+                  v-for="(item, index) in routerList"
                   :key="index"
-                  :label="item.describe"
+                  :label="item.title"
                   :value="item.value"
                 />
               </el-select>
@@ -51,7 +57,9 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="跳转地址：" prop="url" label-for="url">
-              <el-input v-model.trim="formValidate.url" placeholder="请输入 例：/pages/index/index" element-id="title" style="width: 90%" />
+              <el-input v-model.trim="formValidate.url" placeholder="请输入 例：/pages/index/index" element-id="title"
+                        style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
@@ -59,7 +67,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="bannerImgUrl"></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont" />
+                  <i class="el-icon-camera cameraIconfont"/>
                 </div>
               </div>
               <div class="image-size-require">推荐图片尺寸为900*380(px)</div>
@@ -68,18 +76,20 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider />
+          <el-divider/>
         </div>
         <el-row>
           <el-col :span="24">
             <el-form-item label="排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000"/>
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -95,6 +105,9 @@
 import { list as constantList } from '@/api/system/const'
 // 内容
 import { add, edit, position, show } from '@/api/banner'
+// 字典
+import { listGroupCode } from '@/api/dict/dict'
+
 export default {
   name: 'SaveBanner',
   data() {
@@ -134,7 +147,6 @@ export default {
         sm: 24,
         xs: 24
       },
-      bannerPosition: [],
       bannerImgUrl: '',
       formValidate: {
         title: '',
@@ -156,7 +168,8 @@ export default {
       },
       tempRoute: {},
       positionData: [], // 显示位置
-      typeData: [] // 跳转类型
+      routerList: [], // 跳转类型
+      clientType: []// 显示客户端
     }
   },
   watch: {
@@ -181,32 +194,29 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
-    this.getConstantList()
     if (this.$route.params.uuid) {
-      this.setTagsViewTitle()
       this.getDetails()
     }
-    this.getPosition()
+    this.listGroupCod('menu')
+    this.listGroupCod('client_type')
+    this.listGroupCod('router1')
   },
   methods: {
+    // 获取字典信息
+    listGroupCod(code) {
+      listGroupCode({ page: 1, size: 20, code: code }).then(res => {
+        if (code === 'menu') {
+          this.positionData = res.data.items
+        } else if (code === 'client_type') {
+          this.clientType = res.data.items
+        } else if (code === 'router1') {
+          this.routerList = res.data.items
+        }
+      })
+    },
     // 返回
     back() {
       this.$router.back()
-    },
-    // 获取banner显示端口
-    getPosition() {
-      position().then(res => {
-        this.bannerPosition = res.data
-      })
-    },
-    // 显示位置
-    getConstantList() {
-      constantList({ title: 'wechat_banner' }).then(res => {
-        this.positionData = res.data.items
-      })
-      constantList({ title: 'wechat_banner_navi' }).then(res => {
-        this.typeData = res.data.items
-      })
     },
     modalPicTap(tit) {
       const _this = this
@@ -257,11 +267,6 @@ export default {
         }
       })
     },
-    setTagsViewTitle() {
-      const title = '编辑文章'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.$route.params.id}` })
-      this.$store.dispatch('tagsView/updateVisitedView', route)
-    }
   }
 }
 </script>
