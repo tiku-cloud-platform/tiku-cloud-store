@@ -197,7 +197,7 @@ export default {
     if (this.$route.params.uuid) {
       this.getDetails()
     }
-    this.listGroupCod('menu')
+    this.listGroupCod('banner')
     this.listGroupCod('client_type')
     this.listGroupCod('router1')
   },
@@ -205,7 +205,7 @@ export default {
     // 获取字典信息
     listGroupCod(code) {
       listGroupCode({ page: 1, size: 20, code: code }).then(res => {
-        if (code === 'menu') {
+        if (code === 'banner') {
           this.positionData = res.data.items
         } else if (code === 'client_type') {
           this.clientType = res.data.items
