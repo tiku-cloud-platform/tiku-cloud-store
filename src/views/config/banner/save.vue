@@ -25,8 +25,8 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
-            <el-form-item label="显示位置：" prop="position">
-              <el-select v-model="formValidate.position" clearable placeholder="请选择" style="width: 90%">
+            <el-form-item label="显示位置：" prop="position_position">
+              <el-select v-model="formValidate.position_position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
                   v-for="(item, index) in positionData"
                   :key="item.uuid"
@@ -112,7 +112,7 @@ export default {
   name: 'SaveBanner',
   data() {
     const validatePosition = (rule, value, callback) => {
-      if (!this.formValidate.position) {
+      if (!this.formValidate.position_position) {
         callback(new Error('请选择显示位置'))
       } else {
         callback()
@@ -154,13 +154,13 @@ export default {
         type: '',
         url: '',
         orders: '',
-        position: '',
+        position_position: '',
         is_show: 1,
         client_position: ''
       },
       ruleValidate: {
         title: [{ max: 32, message: '标题最多只能填写32个字符以内', trigger: 'blur' }],
-        position: [{ required: true, validator: validatePosition, trigger: 'change' }],
+        position_position: [{ required: true, validator: validatePosition, trigger: 'change' }],
         client_position: [{ required: true, validator: validateClientPosition, trigger: 'change' }],
         type: [{ required: true, validator: validateType, trigger: 'change' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
@@ -183,7 +183,7 @@ export default {
           type: '',
           url: '',
           orders: '',
-          position: '',
+          position_position: '',
           is_show: 0,
           client_position: ''
         }
@@ -261,7 +261,7 @@ export default {
           uuid: data.uuid,
           title: data.title,
           orders: data.orders,
-          position: data.position,
+          position_position: data.position_position,
           is_show: data.is_show,
           client_position: data.client_position
         }
