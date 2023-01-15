@@ -109,7 +109,7 @@ export default {
   name: 'SaveMenu',
   data() {
     const validatePosition = (rule, value, callback) => {
-      if (!this.formValidate.position) {
+      if (!this.formValidate.position_position) {
         callback(new Error('请选择显示位置'))
       } else {
         callback()
