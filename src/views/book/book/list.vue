@@ -88,9 +88,19 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="关注" width="auto" align="center">
+        <el-table-column label="收藏" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.collection_number }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="点赞" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.click_number }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="阅读" width="auto" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.read_number }}</span>
           </template>
         </el-table-column>
         <el-table-column label="评分" width="auto" align="center">
