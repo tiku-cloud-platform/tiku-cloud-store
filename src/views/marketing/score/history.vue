@@ -105,8 +105,8 @@
           </template>
         </el-table-column>
       </el-table>
-      <div style="display: flex;">
-        <div style="margin-top: 38px;">
+      <div style="display: flex; justify-content: right; margin-bottom: 20px;margin-right: 20px;">
+        <div style="margin-top: 38px; justify-content: left;">
           <span style="color:red;">消耗积分：{{ expend }}</span>
           <span style="margin-left:20px;color:#1890ff;">获取积分：{{ income }}</span>
         </div>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import { history } from '@/api/score/index'
+import { history } from '@/api/score'
 // 常量配置
 import { list as constantList } from '@/api/system/const'
 import Pagination from '@/components/Pagination'
