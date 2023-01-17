@@ -103,7 +103,7 @@
             <el-input v-model="formValidate.title" maxlength="20" show-word-limit></el-input>
           </el-form-item>
           <el-form-item label="初始积分" prop="score">
-            <el-input-number v-model="formValidate.score" :min="1" :max="10" label="初始积分" :step="0.01"
+            <el-input-number v-model="formValidate.score" :min="1" :max="100000" label="初始积分" :step="0.01"
                              style="width: 100%;"
             ></el-input-number>
             <span>当用户积分达到该值时，用户自动升级为该等级。</span>
