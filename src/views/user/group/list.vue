@@ -7,12 +7,12 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分组名称：" prop="title">
+                  <el-form-item label="等级名称：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分组状态：" prop="is_show">
+                  <el-form-item label="启用状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
                       <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
                                  :label="item.label"
@@ -29,8 +29,8 @@
             <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button size="small" type="success" class="mr10" @click="showDialogTableVisible">添加</el-button>
-                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
+                  <el-button size="small" type="success" class="mr10" @click="showDialogTableVisible">添加会员等级</el-button>
+                  <el-button type="danger" @click="handleBatchDel">删除会员等级</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
