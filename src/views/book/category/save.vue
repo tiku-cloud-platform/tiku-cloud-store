@@ -101,6 +101,7 @@
 import MarkdownEditor from '@/components/MarkdownEditor'
 import ueditorFrom from '@/components/ueditorFrom'
 import { add, edit, show } from '@/api/book/content'
+import {  show as BookShow } from '@/api/book/book'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
 
@@ -131,9 +132,9 @@ export default {
         title: '',
         intro: '',
         content: '',
-        author: getName(),
+        author: '',
         tags: '',
-        source: getName(),
+        source: '',
         orders: 0,
         is_show: 1
       },
@@ -150,14 +151,15 @@ export default {
     }
   },
   created() {
+    this.formValidate.store_book_uuid = this.$route.query.store_book_uuid
+    this.formValidate.store_book_category_uuid = this.$route.query.store_book_category_uuid
+    this.tempRoute = Object.assign({}, this.$route)
     if (this.$route.query.content_uuid) {
       this.getDetails()
     } else {
       this.isShow = true
+      this.getBookDetail()
     }
-    this.formValidate.store_book_uuid = this.$route.query.store_book_uuid
-    this.formValidate.store_book_category_uuid = this.$route.query.store_book_category_uuid
-    this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
     this.getCategoryList()
@@ -170,6 +172,13 @@ export default {
       } else {
         this.formValidate.store_book_category_uuid = value[0] // 没子集就是第一个值
       }
+    },
+    // 查询数据详情
+    getBookDetail() {
+      BookShow({uuid: this.formValidate.store_book_uuid}).then(res => {
+        this.formValidate.author = res.data.author
+        this.formValidate.source = res.data.source
+      })
     },
     // 返回
     back() {
