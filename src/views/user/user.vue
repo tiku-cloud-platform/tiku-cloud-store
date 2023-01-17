@@ -67,8 +67,9 @@
         border
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
+        <el-table-column type="selection" width="55" />
         <el-table-column
-          label="用户组"
+          label="用户等级"
           width="auto"
           align="center"
           :show-overflow-tooltip="true"
@@ -78,7 +79,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="渠道"
+          label="注册渠道"
           width="auto"
           align="center"
           :show-overflow-tooltip="true"
@@ -137,7 +138,7 @@
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="详情" width="auto" align="center">
+        <el-table-column label="详情" width="auto" align="center" fixed="right">
           <template slot-scope="{ row }">
             <el-button
               type="text"

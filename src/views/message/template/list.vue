@@ -28,6 +28,7 @@
           </el-form>
         </div>
       </div>
+      <!--      表格开始-->
       <el-table
         v-loading="listLoading"
         :data="tableData.data"
@@ -75,6 +76,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <!--      表格结束-->
       <div class="block">
         <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
       </div>
