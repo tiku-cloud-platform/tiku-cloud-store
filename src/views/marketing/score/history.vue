@@ -101,7 +101,7 @@
         <el-table-column label="积分类型" width="auto" align="center">
           <template slot-scope="{row}">
             <span v-if="row.type === 1" style="color:#1890ff;">增加</span>
-            <span v-else style="color:red;">减少</span>
+            <span v-else class="show-disable-text">减少</span>
           </template>
         </el-table-column>
       </el-table>

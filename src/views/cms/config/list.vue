@@ -6,7 +6,7 @@
           <el-form inline size="small" label-position="right">
             <el-row>
               <el-col :span="19">
-                <el-col v-bind="grid" style="width:auto">
+                <el-col style="width:auto">
                   <el-form-item label="文章标题：">
                     <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth" size="small" />
                   </el-form-item>
@@ -22,9 +22,8 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/cms/config/article/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="success" class="mr10">添加文章</el-button>
                   </router-link>
-                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -57,8 +56,8 @@
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 0" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text"  class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -66,7 +65,7 @@
             <router-link :to="{path: '/cms/config/article/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
+            <el-button size="mini" type="text" @click="handleDelete(row, $index)" style="color: red;">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

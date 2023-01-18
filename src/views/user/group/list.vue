@@ -61,14 +61,14 @@
         <el-table-column label="等级积分" prop="score" align="center"></el-table-column>
         <el-table-column label="等级状态" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text"  class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
         <el-table-column label="默认等级" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_default === 2" size="mini" type="text">非默认等级</el-button>
-            <el-button v-if="row.is_default === 1" size="mini" type="text">默认等级</el-button>
+            <el-button v-if="row.is_default === 2" size="mini" type="text"  class="show-disable-text">非默认等级</el-button>
+            <el-button v-if="row.is_default === 1" size="mini" type="text" class="show-enable-text">默认等级</el-button>
           </template>
         </el-table-column>
         <el-table-column label="等级描述" align="center">

@@ -133,7 +133,7 @@
         >
           <template slot-scope="{ row }">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -144,7 +144,7 @@
         >
           <template slot-scope="{ row }">
             <span v-if="row.is_search === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_search === 1">启用</span>
+            <span v-if="row.is_search === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
         <el-table-column

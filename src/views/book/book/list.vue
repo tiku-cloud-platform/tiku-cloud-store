@@ -121,7 +121,7 @@
         <el-table-column label="状态" width="100" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
         <el-table-column label="难度">

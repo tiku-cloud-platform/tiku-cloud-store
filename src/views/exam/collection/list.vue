@@ -232,8 +232,8 @@
           :show-overflow-tooltip="true"
         >
           <template slot-scope="{ row }">
-            <span v-if="row.is_recommend === 2" style="color: #e6a23c">否</span>
-            <span v-if="row.is_recommend === 1">是</span>
+            <span v-if="row.is_recommend === 2" class="show-disable-text">否</span>
+            <span v-if="row.is_recommend === 1" class="show-enable-text">是</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -244,7 +244,7 @@
         >
           <template slot-scope="{ row }">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
         <el-table-column

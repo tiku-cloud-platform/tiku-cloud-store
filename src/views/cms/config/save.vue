@@ -42,7 +42,7 @@
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio :label="1" class="radio">显示</el-radio>
-                <el-radio :label="0">不显示</el-radio>
+                <el-radio :label="2">不显示</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -105,7 +105,7 @@ export default {
           orders: 0,
           position: '',
           content: '',
-          is_show: 0
+          is_show: 2
         }
       }
     }

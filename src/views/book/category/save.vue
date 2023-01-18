@@ -69,9 +69,39 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
+            <el-form-item label="阅读积分：">
+              <el-input-number v-model="formValidate.read_score" :min="0" :max="10000" type="number" :step="0.01"
+                               :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="分享积分：">
+              <el-input-number v-model="formValidate.share_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2"/>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="点赞积分：">
+              <el-input-number v-model="formValidate.click_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2"/>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="收藏积分：">
+              <el-input-number v-model="formValidate.collection_score" :min="0" :max="10000" type="number"
+                               :step="0.01" :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="阅读积分(消耗)：">
+              <el-input-number v-model="formValidate.read_expend_score" :min="0" :max="10000" type="number"
+                               :step="0.01" :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
             <el-form-item label="显示顺序：">
-              <el-input v-model="formValidate.orders" :min="0" :max="1000000000" type="number" step="1"/>
-              <div class="image-size-require">最大顺序为1,000,000,000(只能是数字)</div>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" type="number" :step="1"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -101,7 +131,7 @@
 import MarkdownEditor from '@/components/MarkdownEditor'
 import ueditorFrom from '@/components/ueditorFrom'
 import { add, edit, show } from '@/api/book/content'
-import {  show as BookShow } from '@/api/book/book'
+import { show as BookShow } from '@/api/book/book'
 import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
 
@@ -136,7 +166,12 @@ export default {
         tags: '',
         source: '',
         orders: 0,
-        is_show: 1
+        is_show: 1,
+        read_score: 0,
+        share_score: 0,
+        click_score: 0,
+        collection_score: 0,
+        read_expend_score: 0
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入章节标题', trigger: 'blur' }],
@@ -175,7 +210,7 @@ export default {
     },
     // 查询数据详情
     getBookDetail() {
-      BookShow({uuid: this.formValidate.store_book_uuid}).then(res => {
+      BookShow({ uuid: this.formValidate.store_book_uuid }).then(res => {
         this.formValidate.author = res.data.author
         this.formValidate.source = res.data.source
       })
@@ -220,7 +255,12 @@ export default {
           tags: data.tags.toString(),
           source: data.source,
           orders: data.orders,
-          is_show: data.is_show
+          is_show: data.is_show,
+          read_score: data.read_score,
+          share_score: data.share_score,
+          click_score: data.click_score,
+          collection_score: data.collection_score,
+          read_expend_score: data.read_expend_score
         }
         this.isShow = true
       })
