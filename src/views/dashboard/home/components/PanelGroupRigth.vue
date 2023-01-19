@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { list } from '@/api/notice/index'
+import { list } from '@/api/notice'
 export default {
   components: {},
   data() {

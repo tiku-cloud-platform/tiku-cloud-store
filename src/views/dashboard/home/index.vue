@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { home } from '@/api/home/index'
+import { home } from '@/api/home'
 import PanelGroup from './components/PanelGroup'
 import PanelGroupRigth from './components/PanelGroupRigth'
 export default {

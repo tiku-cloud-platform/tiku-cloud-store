@@ -7,8 +7,8 @@
             <el-row>
               <el-col :span="24">
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="文章标题：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入文章标题" size="small" clearable/>
+                  <el-form-item label="配置标题：" prop="title">
+                    <el-input v-model="listQuery.title" placeholder="请输入轮播图配置标题" size="small" clearable/>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
@@ -16,30 +16,6 @@
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
                       <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
                                  :label="item.label"
-                      />
-                    </el-select>
-                  </el-form-item>
-                </el-col>
-                <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="跳转类型：" prop="type">
-                    <el-select v-model="listQuery.type" clearable placeholder="请选择">
-                      <el-option
-                        v-for="item in typeData"
-                        :key="item.value"
-                        :label="item.describe"
-                        :value="item.value"
-                      />
-                    </el-select>
-                  </el-form-item>
-                </el-col>
-                <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="显示位置：" prop="position">
-                    <el-select v-model="listQuery.position" clearable placeholder="请选择">
-                      <el-option
-                        v-for="item in positionData"
-                        :key="item.value"
-                        :label="item.describe"
-                        :value="item.value"
                       />
                     </el-select>
                   </el-form-item>
@@ -174,18 +150,10 @@ export default {
       },
       // 批量删除选中id
       selectionDelList: [],
-      positionData: [], // 显示位置
-      routerList: [] // 跳转类型
     }
   },
   mounted() {
     this.getList()
-    constantList({ title: 'wechat_banner' }).then(res => {
-      this.positionData = res.data.items
-    })
-    constantList({ title: 'wechat_banner_navi' }).then(res => {
-      this.typeData = res.data.items
-    })
   },
   methods: {
     reset() {

@@ -6,15 +6,15 @@ const userRouter = {
   meta: { title: '用户管理', icon: 'el-icon-user-solid' },
   children: [
     {
-      path: 'wechat_user',
+      path: 'user',
       name: '用户列表',
       component: () => import('@/views/user/user'),
       meta: { title: '用户列表', icon: 'el-icon-liebiao' }
     },
     {
-      path: 'group',
+      path: 'grade',
       name: '会员等级',
-      component: () => import('@/views/user/group/list'),
+      component: () => import('@/views/user/grade/list'),
       meta: { title: '会员等级', icon: 'el-icon-liebiao' }
     }
   ]

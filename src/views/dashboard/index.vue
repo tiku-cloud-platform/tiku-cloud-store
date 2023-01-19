@@ -1,18 +1,18 @@
 <template>
-  <div class="dashboard-container">
-    <component :is="currentRole" />
-  </div>
+<!--  <div class="dashboard-container">-->
+<!--    <component :is="currentRole" />-->
+<!--  </div>-->
 </template>
 
 <script>
-import adminDashboard from './home'
+// import adminDashboard from './home'
 
 export default {
   name: 'Dashboard',
-  components: { adminDashboard },
+  // components: { adminDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard'
+      //currentRole: 'adminDashboard'
     }
   }
 }

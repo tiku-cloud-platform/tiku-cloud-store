@@ -144,10 +144,8 @@
 </template>
 
 <script>
-import { list, del } from '@/api/user/group'
 import Pagination from '@/components/Pagination'
-import { add, edit, show } from '@/api/user/group'
-
+import { add, edit, list, del } from '@/api/user/grade'
 export default {
   name: 'UserGroupList',
   components: { Pagination },

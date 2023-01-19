@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function list(params) {
   return request({
-    url: 'store/user/group/list',
+    url: 'user/grade/list',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function list(params) {
 
 export function add(params) {
   return request({
-    url: '/store/user/group/create',
+    url: '/user/grade/create',
     method: 'post',
     data: params
   })
@@ -18,7 +18,7 @@ export function add(params) {
 
 export function edit(params) {
   return request({
-    url: '/store/user/group/update',
+    url: '/user/grade/update',
     method: 'put',
     params
   })
@@ -26,7 +26,7 @@ export function edit(params) {
 
 export function del(params) {
   return request({
-    url: '/store/user/group/delete',
+    url: '/user/grade/delete',
     method: 'delete',
     data: {
       uuid: params
@@ -34,10 +34,3 @@ export function del(params) {
   })
 }
 
-export function show(params) {
-  return request({
-    url: 'store/user/group/show',
-    method: 'get',
-    params
-  })
-}

@@ -87,12 +87,6 @@ const articleRouter = {
       meta: { title: '常量配置', icon: 'el-icon-xitongpeizhi' }
     },
     {
-      path: 'config/page',
-      name: '系统页面',
-      component: () => import('@/views/config/page/list'),
-      meta: { title: '系统页面', icon: 'el-icon-page' }
-    },
-    {
       path: 'banner/list',
       name: '轮播图管理',
       component: () => import('@/views/config/banner/list'),
