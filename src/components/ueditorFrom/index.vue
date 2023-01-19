@@ -68,7 +68,7 @@ export default {
             'insertunorderedlist', // 无序列表
             'rowspacingtop', // 段前距
             'rowspacingbottom', // 段后距
-            // 'insertvideo', // 视频
+            'insertvideo', // 视频
             // 'map', // Baidu地图
             'fontfamily', // 字体
             'fontsize', // 字号
