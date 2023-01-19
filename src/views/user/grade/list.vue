@@ -27,10 +27,10 @@
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="5">
+              <el-col>
                 <el-form-item>
-                  <el-button size="small" type="success" class="mr10" @click="showDialogTableVisible">添加会员等级</el-button>
-                  <el-button type="danger" @click="handleBatchDel">删除会员等级</el-button>
+                  <el-button size="small" type="success" class="mr10" @click="showDialogTableVisible">添加</el-button>
+                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
