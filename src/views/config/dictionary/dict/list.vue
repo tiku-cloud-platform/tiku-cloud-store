@@ -308,6 +308,7 @@ export default {
         if (valid) {
           if (this.form.uuid) {
             edit(this.form).then(async message => {
+              this.form.uuid = ""
               this.$message.success(message)
               this.handleClose()
             })

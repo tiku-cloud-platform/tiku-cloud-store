@@ -48,14 +48,14 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"/>
-        <el-table-column label="分组名称" align="center">
+        <el-table-column label="页面名称" align="center">
           <template slot-scope="{row}">
             {{ row.title }}
           </template>
         </el-table-column>
-        <el-table-column label="分组code" prop="code" align="center">
+        <el-table-column label="页面路径" prop="code" align="center">
           <template slot-scope="{row}">
-            {{ row.code }}
+            {{ row.path }}
           </template>
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -64,13 +64,7 @@
             <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="分组类型" width="auto" align="center" :show-overflow-tooltip="true">
-          <template slot-scope="{row}">
-            <el-button v-if="row.is_system === 2" size="mini" type="text">自定义</el-button>
-            <el-button v-if="row.is_system === 1" size="mini" type="text" style="color: #A5A8AD;">系统定义</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="分组描述" prop="remark" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="页面描述" prop="remark" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             {{ row.remark }}
           </template>
@@ -82,24 +76,12 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
-            <router-link :to="{path: '/setting/dict/dict/list/'+row.uuid}">
-              <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10">字典
-              </el-button>
-            </router-link>
             <el-button size="mini" type="text"
-                       @click="editForm(row)" v-if="row.is_system === 2"
-            >编辑
-            </el-button>
-            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
-                       @click="editForm(row)" v-if="row.is_system === 1"
+                       @click="editForm(row)"
             >编辑
             </el-button>
             <el-button size="mini" type="text" style="color:red"
-                       @click="handleDelete(row, $index)" v-if="row.is_system === 2"
-            >删除
-            </el-button>
-            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
-                       @click="handleDelete(row, $index)" v-if="row.is_system === 1"
+                       @click="handleDelete(row, $index)"
             >删除
             </el-button>
           </template>
@@ -115,19 +97,19 @@
     <!--    分组弹窗开始-->
     <div>
       <el-dialog
-        title="字典分组操作"
+        title="页面配置"
         :visible.sync="dialogVisible"
         width="30%"
         :before-close="handleClose"
       >
         <el-form ref="form" :model="form" label-width="80px" :rules="rulesForm">
-          <el-form-item prop="title" label="分组名称">
-            <el-input v-model="form.title" placeholder="请输入分组名称" maxlength="32" show-word-limit
+          <el-form-item prop="title" label="页面名称">
+            <el-input v-model="form.title" placeholder="请输入页面名称" maxlength="32" show-word-limit
                       :clearable="true"
             ></el-input>
           </el-form-item>
-          <el-form-item label="分组标识" prop="code">
-            <el-input v-model="form.code" placeholder="请输入分组标识" maxlength="20" :clearable="true" show-word-limit
+          <el-form-item label="页面路径" prop="path">
+            <el-input v-model="form.path" placeholder="请输入页面路径" maxlength="100" :clearable="true" show-word-limit
             ></el-input>
           </el-form-item>
           <el-form-item label="启用状态" prop="is_show">
@@ -136,8 +118,8 @@
               <el-radio :label="2">禁用</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="分组描述" prop="remark">
-            <el-input type="textarea" v-model="form.remark" placeholder="请输入分组描述信息" maxlength="50"
+          <el-form-item label="页面描述" prop="remark">
+            <el-input type="textarea" v-model="form.remark" placeholder="请输入页面描述信息" maxlength="50"
                       show-word-limit :clearable="true"
             ></el-input>
           </el-form-item>
@@ -153,17 +135,8 @@
 </template>
 
 <script>
-import { list, del, add, edit } from '@/api/dict/group'
+import { list, del, add, edit } from '@/api/page/page'
 import Pagination from '@/components/Pagination'
-
-let validGroupCode = (rule, value, callback) => {
-  let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/
-  if (!reg.test(value)) {
-    callback(new Error('分组标识必须是由4-20位字母+数字组合'))
-  } else {
-    callback()
-  }
-}
 
 export default {
   name: 'UserGroupList',
@@ -199,19 +172,17 @@ export default {
       form: {
         uuid: '',
         title: '',
-        code: '',
+        path: '',
         is_show: 2,
-        resource: '',
         remark: ''
       },
       // 表单验证规则
       rulesForm: {
-        code: [
-          { required: true, message: '分组标识不能为空', trigger: 'blur' },
-          { validator: validGroupCode, trigger: 'blur' }
+        path: [
+          { required: true, message: '页面路径不能为空', trigger: 'blur' },
         ],
         title: [
-          { required: true, message: '分组名称不能为空', trigger: 'blur', max: 20 }
+          { required: true, message: '页面名称不能为空', trigger: 'blur', max: 20 }
         ]
       }
     }

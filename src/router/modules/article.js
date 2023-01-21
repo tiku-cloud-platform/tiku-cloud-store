@@ -1,4 +1,5 @@
 import Layout from '@/layout'
+
 const articleRouter = {
   path: '/cms',
   component: Layout,
@@ -61,13 +62,6 @@ const articleRouter = {
       ]
     },
     {
-      path: 'banner/save/:uuid?',
-      name: '轮播图管理',
-      hidden: true,
-      component: () => import('@/views/config/banner/save'),
-      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
-    },
-    {
       path: 'menu/list',
       name: '菜单管理',
       component: () => import('@/views/config/menu/list'),
@@ -87,9 +81,30 @@ const articleRouter = {
       meta: { title: '常量配置', icon: 'el-icon-xitongpeizhi' }
     },
     {
+      path: 'page',
+      name: '页面配置',
+      component: () => import('@/views/config/page/list'),
+      meta: { title: '页面配置', icon: 'el-icon-document' },
+      children: [
+        {
+          path: 'config',
+          name: '页面配置',
+          component: () => import('@/views/config/page/list'),
+          meta: { title: '页面配置', icon: 'el-icon-document' }
+        }
+      ]
+    },
+    {
       path: 'banner/list',
       name: '轮播图管理',
       component: () => import('@/views/config/banner/list'),
+      meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
+    },
+    {
+      path: 'banner/save/:uuid?',
+      name: '轮播图管理',
+      hidden: true,
+      component: () => import('@/views/config/banner/save'),
       meta: { title: '轮播图管理', icon: 'el-icon-shuffling-banner' }
     }
   ]
