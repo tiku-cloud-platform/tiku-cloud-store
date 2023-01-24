@@ -251,7 +251,7 @@ export default {
           uuid: data.uuid,
           title: data.title,
           orders: data.orders,
-          position: data.position_position,
+          position_position: data.position_position,
           is_show: data.is_show,
           client_position: data.client_position,
         }
