@@ -69,9 +69,14 @@
             {{ row.remark }}
           </template>
         </el-table-column>
-        <el-table-column label="添加时间" width="auto" align="center">
+        <el-table-column label="创建时间" align="center">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -179,7 +184,7 @@ export default {
       // 表单验证规则
       rulesForm: {
         path: [
-          { required: true, message: '页面路径不能为空', trigger: 'blur' },
+          { required: true, message: '页面路径不能为空', trigger: 'blur' }
         ],
         title: [
           { required: true, message: '页面名称不能为空', trigger: 'blur', max: 20 }
@@ -250,7 +255,7 @@ export default {
         if (valid) {
           if (this.form.uuid) {
             edit(this.form).then(async message => {
-              this.form.uuid = ""
+              this.form.uuid = ''
               this.$message.success(message)
               this.handleClose()
             })

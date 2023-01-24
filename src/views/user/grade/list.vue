@@ -81,6 +81,11 @@
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
             <el-button type="text" size="mini" class="mr10" @click="editorForm(row)">编辑</el-button>

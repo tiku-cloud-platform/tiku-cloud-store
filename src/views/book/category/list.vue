@@ -173,10 +173,16 @@
                 <span>{{ row.updated_at }}</span>
               </template>
             </el-table-column>
+            <el-table-column label="创建人" align="center">
+              <template slot-scope="{row}">
+                <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+              </template>
+            </el-table-column>
             <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
               <template slot-scope="{row,$index}">
                 <el-button type="text" size="mini" class="mr10" @click="jumpAddContent(row.uuid)">编辑</el-button>
-                <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
+                <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除
+                </el-button>
               </template>
             </el-table-column>
           </el-table>

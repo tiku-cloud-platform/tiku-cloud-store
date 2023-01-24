@@ -199,7 +199,7 @@ export default {
     }
     this.listGroupCod('banner')
     this.listGroupCod('client_type')
-    this.listGroupCod('router1')
+    this.listGroupCod('router_1')
   },
   methods: {
     // 获取字典信息
@@ -209,7 +209,7 @@ export default {
           this.positionData = res.data.items
         } else if (code === 'client_type') {
           this.clientType = res.data.items
-        } else if (code === 'router1') {
+        } else if (code === 'router_1') {
           this.routerList = res.data.items
         }
       })

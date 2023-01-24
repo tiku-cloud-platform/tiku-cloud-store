@@ -189,7 +189,7 @@ export default {
     }
     this.listGroupCod('menu')
     this.listGroupCod('client_type')
-    this.listGroupCod('router1')
+    this.listGroupCod('router_1')
   },
   methods: {
     // 获取字典信息
@@ -197,7 +197,7 @@ export default {
       listGroupCode({ page: 1, size: 20, code: code }).then(res => {
         if (code === 'menu') {
           this.positionData = res.data.items
-        } else if (code === 'router1') {
+        } else if (code === 'router_1') {
           this.routerData = res.data.items
         }else if (code === 'client_type') {
           this.clientType = res.data.items

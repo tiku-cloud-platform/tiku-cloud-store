@@ -154,6 +154,16 @@
                       show-word-limit :clearable="true"
             ></el-input>
           </el-form-item>
+          <el-table-column label="创建时间" align="center">
+            <template slot-scope="{row}">
+              <span>{{ row.created_at }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="创建人" align="center">
+            <template slot-scope="{row}">
+              <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+            </template>
+          </el-table-column>
         </el-form>
         <span slot="footer" class="dialog-footer">
     <el-button @click="resetForm('form')">重 置</el-button>
@@ -308,7 +318,7 @@ export default {
         if (valid) {
           if (this.form.uuid) {
             edit(this.form).then(async message => {
-              this.form.uuid = ""
+              this.form.uuid = ''
               this.$message.success(message)
               this.handleClose()
             })

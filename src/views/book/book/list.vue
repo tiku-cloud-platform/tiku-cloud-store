@@ -134,6 +134,11 @@
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="更新时间" width="150" align="center">
           <template slot-scope="{row}">
             <span>{{ row.updated_at }}</span>

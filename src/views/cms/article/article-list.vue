@@ -93,7 +93,7 @@
         </el-table-column>
         <el-table-column label="分类" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.category_info.title }}</span>
+            <span>{{ row.category_info !== null ? row.category_info.title : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="作者" width="auto" align="center">
@@ -137,6 +137,16 @@
           <template slot-scope="{row}">
             <el-button v-if="row.is_publish === 2" size="mini" type="text"  class="show-disable-text">否</el-button>
             <el-button v-if="row.is_publish === 1" size="mini" type="text" class="show-enable-text">是</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">

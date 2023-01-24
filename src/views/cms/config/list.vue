@@ -8,12 +8,19 @@
               <el-col :span="19">
                 <el-col style="width:auto">
                   <el-form-item label="文章标题：">
-                    <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth" size="small" />
+                    <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth"
+                              size="small"
+                    />
                   </el-form-item>
                   <el-form-item label="配置描述：">
-                    <el-input v-model="listQuery.position" placeholder="请输入配置描述" clearable class="selWidth" size="small" />
+                    <el-input v-model="listQuery.position" placeholder="请输入配置描述" clearable class="selWidth"
+                              size="small"
+                    />
                   </el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
+                             @click="getList"
+                  >搜索
+                  </el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                 </el-col>
               </el-col>
@@ -56,8 +63,18 @@
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text"  class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
             <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -70,7 +87,9 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
+                    :limit.sync="listQuery.size" @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -79,6 +98,7 @@
 <script>
 import { list, del } from '@/api/cms/content'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'Article',
   components: { Pagination },
@@ -124,13 +144,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.selWidth{
+.selWidth {
   width: 300px;
 }
 
 .mr10 {
   margin-right: 10px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }

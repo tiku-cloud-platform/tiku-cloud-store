@@ -67,6 +67,16 @@
             <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/message/subscribe/wechat/save/'+row.uuid}">
