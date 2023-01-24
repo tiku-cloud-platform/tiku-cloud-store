@@ -8,13 +8,15 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="分类名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable />
+                    <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable/>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
+                                 :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
@@ -48,7 +50,7 @@
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" width="55"/>
         <!-- <el-table-column label="编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -75,6 +77,16 @@
             <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/exam/knowledge/save/'+row.uuid}">
@@ -85,7 +97,9 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
+                    :limit.sync="listQuery.size" @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -94,6 +108,7 @@
 <script>
 import { list, del } from '@/api/exam/knowledge'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ExamKnowledgeCategory',
   components: { Pagination },
@@ -177,9 +192,11 @@ export default {
 .mr10 {
   margin-right: 10px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .el-col-lg-12 {
   width: 30%;
 }

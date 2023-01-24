@@ -107,7 +107,7 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="auto" />
+        <el-table-column type="selection" width="auto"/>
         <!-- <el-table-column label="试卷编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -247,6 +247,16 @@
             <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column
           label="操作"
           align="center"
@@ -333,7 +343,9 @@
                   align="center"
                 >
                   <template slot-scope="scope">
-                    <el-input v-model="scope.orders" type="text" maxlength="100000" minlength="0" autosize placeholder="试题排序" />
+                    <el-input v-model="scope.orders" type="text" maxlength="100000" minlength="0" autosize
+                              placeholder="试题排序"
+                    />
                   </template>
                 </el-table-column>
                 <el-table-column
