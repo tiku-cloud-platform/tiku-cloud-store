@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function listAll() {
+    return request({
+    url: 'store/article/category/all',
+    method: 'get',
+    params
+  })
+}
 export function list(params) {
   return request({
     url: 'store/article/category/list',

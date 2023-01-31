@@ -13,28 +13,6 @@
                 </el-col>
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="文章分类：" prop="category_uuid">
-                    <!--                    <el-cascader-->
-                    <!--                      v-model="value"-->
-                    <!--                      :options="categoryData"-->
-                    <!--                      :show-all-levels="false"-->
-                    <!--                      :props="{ expandTrigger: 'hover' }"-->
-                    <!--                      @change="handleChange"-->
-                    <!--                    />-->
-                    <!--                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择" style="width: 90%">-->
-                    <!--                      <el-option-->
-                    <!--                        :label="sleOptions.title"-->
-                    <!--                        :value="sleOptions.uuid"-->
-                    <!--                        style="width: auto;height:200px;overflow: auto;background-color:#fff"-->
-                    <!--                      >-->
-                    <!--                        <el-tree-->
-                    <!--                          ref="tree2"-->
-                    <!--                          :data="categoryData"-->
-                    <!--                          :props="defaultProps"-->
-                    <!--                          highlight-current-->
-                    <!--                          @node-click="handleSelClick"-->
-                    <!--                        />-->
-                    <!--                      </el-option>-->
-                    <!--                    </el-select>-->
                     <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择分类状态" style="width: 90%">
                       <el-option
                         v-for="item in categoryData"

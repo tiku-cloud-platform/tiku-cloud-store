@@ -210,6 +210,16 @@
             <span>{{ row.exam_time }}</span>
           </template>
         </el-table-column>
+        <el-table-column
+          label="试题年份"
+          width="auto"
+          align="center"
+          :show-overflow-tooltip="true"
+        >
+          <template slot-scope="{ row }">
+            <span>{{ row.exam_year }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="出题人" width="auto" align="center" show-overflow-tooltip>
           <template slot-scope="{ row }">
             <span>{{ row.author }}</span>
