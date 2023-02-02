@@ -339,6 +339,8 @@ export default {
       this.drawer = true
       this.listLoading = true
       collectionList(this.listQuery).then(res => {
+        console.log('试卷分类弹窗---')
+        console.log('试卷分类弹窗', res)
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
         this.$nextTick(function() {

@@ -266,7 +266,6 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
-      console.log(this.formValidate)
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
@@ -309,6 +308,7 @@ export default {
           analysis: data.analysis
         }
       })
+      console.log(this.formValidate)
     },
 
     // 新增试题选项
