@@ -26,12 +26,6 @@
                   >搜索
                   </el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="5">
-                <el-form-item>
                   <router-link :to="{path: '/exam/library/option/save'}">
                     <el-button size="small" type="success" class="mr10">添加</el-button>
                   </router-link>
@@ -39,6 +33,16 @@
                 </el-form-item>
               </el-col>
             </el-row>
+<!--            <el-row>-->
+<!--              <el-col :span="5">-->
+<!--                <el-form-item>-->
+<!--                  <router-link :to="{path: '/exam/library/option/save'}">-->
+<!--                    <el-button size="small" type="success" class="mr10">添加</el-button>-->
+<!--                  </router-link>-->
+<!--                  <el-button type="danger" @click="handleBatchDel">删除</el-button>-->
+<!--                </el-form-item>-->
+<!--              </el-col>-->
+<!--            </el-row>-->
           </el-form>
         </div>
       </div>

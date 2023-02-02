@@ -47,3 +47,11 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+// 试题选项样式
+.item-option {
+  .el-form-item__content {
+    display: flex;
+    margin-left: 0 !important;
+  }
+}
