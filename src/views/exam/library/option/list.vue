@@ -33,16 +33,16 @@
                 </el-form-item>
               </el-col>
             </el-row>
-<!--            <el-row>-->
-<!--              <el-col :span="5">-->
-<!--                <el-form-item>-->
-<!--                  <router-link :to="{path: '/exam/library/option/save'}">-->
-<!--                    <el-button size="small" type="success" class="mr10">添加</el-button>-->
-<!--                  </router-link>-->
-<!--                  <el-button type="danger" @click="handleBatchDel">删除</el-button>-->
-<!--                </el-form-item>-->
-<!--              </el-col>-->
-<!--            </el-row>-->
+            <!--            <el-row>-->
+            <!--              <el-col :span="5">-->
+            <!--                <el-form-item>-->
+            <!--                  <router-link :to="{path: '/exam/library/option/save'}">-->
+            <!--                    <el-button size="small" type="success" class="mr10">添加</el-button>-->
+            <!--                  </router-link>-->
+            <!--                  <el-button type="danger" @click="handleBatchDel">删除</el-button>-->
+            <!--                </el-form-item>-->
+            <!--              </el-col>-->
+            <!--            </el-row>-->
           </el-form>
         </div>
       </div>
@@ -59,11 +59,11 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" align="center"/>
-        <el-table-column label="试题题目" width="auto" align="center" :show-overflow-tooltip="true">
-          <template slot-scope="{row}">
-            <span>{{ row.title }}</span>
-          </template>
-        </el-table-column>
+<!--        <el-table-column label="试题题目" width="auto" align="center" :show-overflow-tooltip="true">-->
+<!--          <template slot-scope="{row}">-->
+<!--            <span>{{ row.title }}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
         <!-- <el-table-column label="试题图片" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
