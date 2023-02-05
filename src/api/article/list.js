@@ -8,6 +8,14 @@ export function list(params) {
   })
 }
 
+export function show(params) {
+  return request({
+    url: 'store/article/show',
+    method: 'get',
+    params
+  })
+}
+
 export function add(params) {
   return request({
     url: '/store/article/create',

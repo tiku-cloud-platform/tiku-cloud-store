@@ -8,17 +8,30 @@
               <el-col :span="19">
                 <el-col style="width:auto">
                   <el-form-item label="文章标题：">
-                    <el-input v-model="listQuery.title" placeholder="请输入文章标题" clearable class="selWidth"
-                              size="small"
+                    <el-input
+                      v-model="listQuery.title"
+                      placeholder="请输入文章标题"
+                      clearable
+                      class="selWidth"
+                      size="small"
                     />
                   </el-form-item>
                   <el-form-item label="配置描述：">
-                    <el-input v-model="listQuery.position" placeholder="请输入配置描述" clearable class="selWidth"
-                              size="small"
+                    <el-input
+                      v-model="listQuery.position"
+                      placeholder="请输入配置描述"
+                      clearable
+                      class="selWidth"
+                      size="small"
                     />
                   </el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
-                             @click="getList"
+                  <el-button
+                    type="primary"
+                    icon="ios-search"
+                    label="default"
+                    class="mr15"
+                    size="small"
+                    @click="getList"
                   >搜索
                   </el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
@@ -46,6 +59,7 @@
         empty-text="暂无数据"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
+        <el-table-column type="selection" width="55" />
         <el-table-column label="内容编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -54,11 +68,6 @@
         <el-table-column label="文章标题" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="显示位置" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.position }}</span>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
@@ -82,13 +91,17 @@
             <router-link :to="{path: '/cms/config/article/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)" style="color: red;">删除</el-button>
+            <el-button size="mini" type="text" style="color: red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>

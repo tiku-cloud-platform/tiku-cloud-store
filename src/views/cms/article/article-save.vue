@@ -4,8 +4,13 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
-               @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
@@ -92,36 +97,56 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="分享积分：">
-              <el-input-number v-model="formValidate.share_score" :min="0" :max="10000" type="number" :step="0.01"
-                               :precision="2"
+              <el-input-number
+                v-model="formValidate.share_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="点赞积分：">
-              <el-input-number v-model="formValidate.click_score" :min="0" :max="10000" type="number" :step="0.01"
-                               :precision="2"
+              <el-input-number
+                v-model="formValidate.click_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="收藏积分：">
-              <el-input-number v-model="formValidate.collection_score" :min="0" :max="10000" type="number"
-                               :step="0.01" :precision="2"
+              <el-input-number
+                v-model="formValidate.collection_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="阅读积分(消耗)：">
-              <el-input-number v-model="formValidate.read_expend_score" :min="0" :max="10000" type="number"
-                               :step="0.01" :precision="2"
+              <el-input-number
+                v-model="formValidate.read_expend_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
         </el-row>
         <div class="dividerTitle">
           <span class="title">积分设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row>
           <el-col v-bind="grid">
@@ -145,10 +170,10 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">文章内容</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-form-item label="文章内容：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content"/>
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -160,7 +185,7 @@
 import ueditorFrom from '@/components/ueditorFrom'
 import { list as categoryList } from '@/api/article/category'
 // 内容
-import { add, edit, list } from '@/api/article/list'
+import { add, edit, show } from '@/api/article/list'
 import { formatLongDate } from '@/utils'
 import { getName } from '@/utils/auth'
 
@@ -300,8 +325,8 @@ export default {
     },
     // 文章详情
     getDetails() {
-      list({ uuid: this.$route.params.uuid }).then(async res => {
-        const data = res.data.items[0]
+      show({ uuid: this.$route.params.uuid }).then(async res => {
+        const data = res.data
         this.formValidate = {
           file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
           file_uuid: data.file_uuid,
