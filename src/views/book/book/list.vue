@@ -8,7 +8,7 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="教程名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入教程名称" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入教程名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -44,7 +44,7 @@
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <svg-icon
@@ -58,7 +58,9 @@
         <el-table-column label="封面" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info != null"><img
-              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"
+              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
+              width="50"
+              height="50"
             ></viewer>
           </template>
         </el-table-column>
@@ -158,8 +160,12 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>
@@ -252,8 +258,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {

@@ -62,14 +62,14 @@
       <!--      用户基础信息开始-->
       <el-table
         :key="tableKey"
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="list"
         empty-text="暂无数据"
         style="width: 100%"
         border
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <el-table-column
           label="用户等级"
           width="auto"

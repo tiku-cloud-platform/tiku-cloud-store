@@ -38,7 +38,7 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -150,8 +150,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {

@@ -140,8 +140,8 @@ export default {
       list().then(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(uuid, idx) {

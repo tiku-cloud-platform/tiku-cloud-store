@@ -245,8 +245,8 @@ export default {
         this.tableData.collect.channelSystemCount = res.data.channelSystemCount
         this.tableData.collect.todaySystemTotal = res.data.todaySystemTotal
         this.tableData.collect.todayChannelSystemTotal = res.data.todayChannelSystemTotal
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 重置
     resetForm() {

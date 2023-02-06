@@ -78,7 +78,7 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -90,7 +90,7 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" align="center"/>
+        <el-table-column type="selection" align="center" />
         <!--        <el-table-column label="编号" width="auto" :show-overflow-tooltip="true" align="center">-->
         <!--          <template slot-scope="{row}">-->
         <!--            <span>{{ row.uuid }}</span>-->
