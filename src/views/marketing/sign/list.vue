@@ -8,14 +8,17 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="分组名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="分组状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -47,7 +50,7 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <el-table-column label="签到天数" align="center">
           <template slot-scope="{row}">
             {{ '第' + row.num + '天' }}
@@ -88,13 +91,17 @@
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
           <template slot-scope="{row,$index}">
             <el-button size="mini" type="text" @click="editForm(row)">编辑</el-button>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)" style="color: red;">删除</el-button>
+            <el-button size="mini" type="text" style="color: red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>
@@ -109,11 +116,16 @@
       >
         <el-form ref="form" :model="form" label-width="80px" :rules="rulesForm">
           <el-form-item prop="num" label="签到天数">
-            <el-input-number v-model="form.num" :step="1" :max="100" :min="1" style="width: 100%;"></el-input-number>
+            <el-input-number v-model="form.num" :step="1" :max="100" :min="1" style="width: 100%;" />
           </el-form-item>
           <el-form-item label="配置积分" prop="score">
-            <el-input-number v-model="form.score" :step="0.01" :max="100" :min="1" style="width: 100%;"
-            ></el-input-number>
+            <el-input-number
+              v-model="form.score"
+              :step="0.01"
+              :max="100"
+              :min="1"
+              style="width: 100%;"
+            />
           </el-form-item>
           <el-form-item label="启用状态" prop="is_show">
             <el-radio-group v-model="form.is_show">
@@ -128,15 +140,20 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="签到描述" prop="remark">
-            <el-input type="textarea" v-model="form.remark" placeholder="请输入签到描述信息" maxlength="50"
-                      show-word-limit :clearable="true"
-            ></el-input>
+            <el-input
+              v-model="form.remark"
+              type="textarea"
+              placeholder="请输入签到描述信息"
+              maxlength="50"
+              show-word-limit
+              :clearable="true"
+            />
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-    <el-button @click="resetForm('form')">重 置</el-button>
-    <el-button type="primary" @click="onsubmit('form')">确 定</el-button>
-  </span>
+          <el-button @click="resetForm('form')">重 置</el-button>
+          <el-button type="primary" @click="onsubmit('form')">确 定</el-button>
+        </span>
       </el-dialog>
     </div>
     <!--    分组弹窗结束-->
@@ -147,8 +164,8 @@
 import { list, del, add, edit } from '@/api/sign/sign'
 import Pagination from '@/components/Pagination'
 
-let validNumber = (rule, value, callback) => {
-  let reg = /^[0-9]{1,3}$/
+const validNumber = (rule, value, callback) => {
+  const reg = /^[0-9]{1,3}$/
   if (!reg.test(value)) {
     callback(new Error('签到天数为1-100'))
   } else {
@@ -281,6 +298,7 @@ export default {
     // 显示添加弹窗
     addDialog() {
       this.dialogVisible = true
+      this.$refs['form'].resetFields()
     },
     // 关闭弹窗
     handleClose() {

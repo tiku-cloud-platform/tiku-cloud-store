@@ -85,12 +85,16 @@
         </el-table-column>
         <el-table-column label="获取方式" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.key_info.describe }}</span>
+            <span>{{ row.title }}</span>
           </template>
         </el-table-column>
         <el-table-column label="获取来源" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.title }}</span>
+            <span v-if="row.client_type ===1 ">微信小程序</span>
+            <span v-if="row.client_type ===2 ">微信公众号</span>
+            <span v-if="row.client_type ===3 ">iOS客户端</span>
+            <span v-if="row.client_type ===4 ">Android客户端</span>
+            <span v-if="row.client_type ===5 ">PC端</span>
           </template>
         </el-table-column>
         <el-table-column label="积分分值" width="auto" align="center">
@@ -106,10 +110,10 @@
         </el-table-column>
       </el-table>
       <div style="display: flex; justify-content: right; margin-bottom: 20px;margin-right: 20px;">
-        <div style="margin-top: 38px; justify-content: left;">
-          <span style="color:red;">消耗积分：{{ expend }}</span>
-          <span style="margin-left:20px;color:#1890ff;">获取积分：{{ income }}</span>
-        </div>
+        <!--        <div style="margin-top: 38px; justify-content: left;">-->
+        <!--          <span style="color:red;">消耗积分：{{ expend }}</span>-->
+        <!--          <span style="margin-left:20px;color:#1890ff;">获取积分：{{ income }}</span>-->
+        <!--        </div>-->
         <pagination v-show="tableData.total>0" class="page" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
       </div>
     </el-card>
@@ -181,8 +185,8 @@ export default {
           this.income = res.data.income
         }
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     }
   }
 }
