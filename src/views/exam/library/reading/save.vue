@@ -181,13 +181,6 @@
         </div>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="答案解析：">
-              <ueditor-exam v-model="formValidate.analysis" :content="formValidate.analysis" style="height: 200px;" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
             <el-form-item label="试题描述：">
               <ueditor-exam v-model="formValidate.remark" :content="formValidate.remark" style="height: 200px;" />
             </el-form-item>
@@ -197,6 +190,13 @@
           <el-col :span="24">
             <el-form-item label="试题答案：" prop="content">
               <ueditor-exam v-model="formValidate.content" :content="formValidate.content" style="height: 200px;" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="答案解析：">
+              <ueditor-exam v-model="formValidate.analysis" :content="formValidate.analysis" style="height: 200px;" />
             </el-form-item>
           </el-col>
         </el-row>
