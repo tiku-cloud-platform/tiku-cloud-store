@@ -13,9 +13,9 @@ const bookRouter = {
       children: [
         {
           path: 'list',
-          name: '教程管理',
+          name: '在线教程',
           component: () => import('@/views/book/book/list'),
-          meta: { title: '教程管理', icon: 'el-icon-reading' }
+          meta: { title: '在线教程', icon: 'el-icon-reading' }
         },
         {
           path: 'save/:uuid?',
