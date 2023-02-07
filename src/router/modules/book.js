@@ -2,14 +2,14 @@ import Layout from '@/layout'
 const bookRouter = {
   path: '/book',
   component: Layout,
-  name: '教程管理',
-  meta: { title: '教程管理', icon: 'el-icon-reading' },
+  name: '知识付费',
+  meta: { title: '知识付费', icon: 'el-icon-reading' },
   children: [
     {
       path: 'book',
-      name: '书籍管理',
+      name: '在线教程',
       component: () => import('@/views/book/index'),
-      meta: { title: '书籍管理', icon: 'el-icon-reading' },
+      meta: { title: '在线教程', icon: 'el-icon-reading' },
       children: [
         {
           path: 'list',
