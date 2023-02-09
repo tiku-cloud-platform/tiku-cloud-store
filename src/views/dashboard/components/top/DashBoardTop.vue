@@ -9,11 +9,11 @@
           </div>
           <div>
             <el-row style="font-size: 20px; font-weight: 400;margin-bottom: 30px;">
-              <span>434.01</span>
+              <span>156</span>
             </el-row>
             <el-row :gutter="2">
-              <el-col :span="8">日环比 2888.04% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: red;" /></el-col>
-              <el-col :span="8">日环比 2888.04% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" />
+              <el-col :span="8">日环比 20.89% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" /></el-col>
+              <el-col :span="8">月环比 12.09% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" />
               </el-col>
             </el-row>
           </div>
@@ -21,7 +21,7 @@
           <div>
             <el-row>
               <el-col :span="12"><span>本月销售额</span></el-col>
-              <el-col :span="12" style="text-align: right;"><span>12365.36</span></el-col>
+              <el-col :span="12" style="text-align: right;"><span>8978.32</span></el-col>
             </el-row>
           </div>
         </el-card>
@@ -34,11 +34,11 @@
           </div>
           <div>
             <el-row style="font-size: 20px; font-weight: 400;margin-bottom: 30px;">
-              <span>434.01</span>
+              <span>894</span>
             </el-row>
             <el-row :gutter="2">
-              <el-col :span="8">日环比 2888.04% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: red;" /></el-col>
-              <el-col :span="8">日环比 2888.04% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" />
+              <el-col :span="8">日环比 23.32% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" /></el-col>
+              <el-col :span="8">月环比 45.63% &nbsp;&nbsp;<i class="el-icon-caret-top" style="color: green;" />
               </el-col>
             </el-row>
           </div>
@@ -46,7 +46,7 @@
           <div>
             <el-row>
               <el-col :span="12"><span>本月会员答题总量</span></el-col>
-              <el-col :span="12" style="text-align: right;"><span>12365.36</span></el-col>
+              <el-col :span="12" style="text-align: right;"><span>15687</span></el-col>
             </el-row>
           </div>
         </el-card>

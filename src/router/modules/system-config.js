@@ -40,7 +40,7 @@ const settingRouter = {
           meta: { title: '字典明细', icon: 'el-icon-guanwangshijuan' }
         }
       ]
-    },
+    }
   ]
 }
 

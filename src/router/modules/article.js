@@ -37,6 +37,20 @@ const articleRouter = {
           hidden: true,
           component: () => import('@/views/cms/article/article-save'),
           meta: { title: '添加文章', icon: 'el-icon-liebiao' }
+        },
+        {
+          path: 'keywords',
+          name: '推荐搜索',
+          component: () => import('@/views/cms/article/keywords/index'),
+          meta: { title: '推荐搜索', icon: 'el-icon-guanwangshijuan' },
+          children: [
+            {
+              path: 'list',
+              name: '推荐搜索',
+              component: () => import('@/views/cms/article/keywords/list'),
+              meta: { title: '推荐搜索', icon: 'el-icon-guanwangshijuan' }
+            }
+          ]
         }
       ]
     },
