@@ -109,7 +109,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/exam/knowledge/list` })
+      this.$router.back()
     },
     // 提交数据
     onsubmit(name) {

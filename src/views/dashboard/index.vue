@@ -10,7 +10,7 @@
       <order-chart />
     </el-col>
     <el-col>
-      <!--      <exam-chart />-->
+      <exam-chart />
     </el-col>
   </div>
 </template>

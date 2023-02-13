@@ -8,21 +8,29 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="试题名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入试题名称" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入试题名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
                 </el-col>
                 <el-form-item>
-                  <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
-                             @click="getList"
+                  <el-button
+                    type="primary"
+                    icon="ios-search"
+                    label="default"
+                    class="mr15"
+                    size="small"
+                    @click="getList"
                   >搜索
                   </el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
@@ -58,12 +66,12 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" align="center"/>
-<!--        <el-table-column label="试题题目" width="auto" align="center" :show-overflow-tooltip="true">-->
-<!--          <template slot-scope="{row}">-->
-<!--            <span>{{ row.title }}</span>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <el-table-column type="selection" align="center" />
+        <!--        <el-table-column label="试题题目" width="auto" align="center" :show-overflow-tooltip="true">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.title }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <!-- <el-table-column label="试题图片" width="70" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
@@ -76,9 +84,12 @@
         </el-table-column>
         <el-table-column label="难易程度" width="130" align="center">
           <template slot-scope="{row}" style="display: flex">
-            <span style="justify-content: center;display: flex;"><svg-icon v-for="n in + row.level" :key="n"
-                                                                           style="float: left" icon-class="xingxing"
-                                                                           class="meta-item__icon"
+            <span style="justify-content: center;display: flex;"><svg-icon
+              v-for="n in + row.level"
+              :key="n"
+              style="float: left"
+              icon-class="xingxing"
+              class="meta-item__icon"
             /></span>
           </template>
         </el-table-column>
@@ -118,8 +129,12 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>

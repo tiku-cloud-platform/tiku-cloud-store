@@ -4,27 +4,36 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
-               @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid" class="mr50">
             <el-form-item label="菜单名称：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="建议四个字符，不能超过6个字符" maxlength="6"
-                        element-id="title" style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.title"
+                placeholder="建议四个字符，不能超过6个字符"
+                maxlength="6"
+                element-id="title"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
-          <el-col v-bind="grid"  class="mr50">
+          <el-col v-bind="grid" class="mr50">
             <el-form-item label="显示端口：" prop="client_position">
               <el-select v-model="formValidate.client_position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
                   v-for="(item, index) in clientType"
-                  :key="item.uuid"
+                  :key="index"
                   :label="item.title"
                   :value="item.uuid"
                 />
@@ -43,7 +52,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col v-bind="grid"  class="mr50">
+          <el-col v-bind="grid" class="mr50">
             <el-form-item label="跳转类型：" prop="type">
               <el-select v-model="formValidate.type" clearable placeholder="请选择" style="width: 90%">
                 <el-option
@@ -55,10 +64,13 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col v-bind="grid"  class="mr50">
+          <el-col v-bind="grid" class="mr50">
             <el-form-item label="跳转地址：" prop="url" label-for="url">
-              <el-input v-model.trim="formValidate.url" placeholder="请输入 例：/pages/index/index" element-id="title"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.url"
+                placeholder="请输入 例：/pages/index/index"
+                element-id="title"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
@@ -67,7 +79,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url"></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
             </el-form-item>
@@ -75,12 +87,12 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row>
           <el-col :span="24">
             <el-form-item label="排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -175,7 +187,7 @@ export default {
           orders: '',
           position_position: '',
           is_show: 1,
-          client_position: '',
+          client_position: ''
         }
       }
     }
@@ -199,7 +211,7 @@ export default {
           this.positionData = res.data.items
         } else if (code === 'router_1') {
           this.routerData = res.data.items
-        }else if (code === 'client_type') {
+        } else if (code === 'client_type') {
           this.clientType = res.data.items
         }
       })
@@ -253,7 +265,7 @@ export default {
           orders: data.orders,
           position_position: data.position_position,
           is_show: data.is_show,
-          client_position: data.client_position,
+          client_position: data.client_position
         }
       })
     }

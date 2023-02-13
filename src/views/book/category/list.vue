@@ -29,14 +29,20 @@
                         <!--  <span style="font-size: 14px;color: #3889b1">（{{ data.title }}）</span>-->
                       </div>
                       <span class="el-ic">
-                        <i v-if="!data.parent_uuid" class="el-icon-circle-plus-outline" title="添加"
-                           @click.stop="onAdd(data.uuid)"
+                        <i
+                          v-if="!data.parent_uuid"
+                          class="el-icon-circle-plus-outline"
+                          title="添加"
+                          @click.stop="onAdd(data.uuid)"
                         />
-                        <svg-icon icon-class="add" class="icon-space"/>
-                        <i v-if="node.label !== '全部分类'" class="el-icon-edit" title="修改"
-                           @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)"
+                        <svg-icon icon-class="add" class="icon-space" />
+                        <i
+                          v-if="node.label !== '全部分类'"
+                          class="el-icon-edit"
+                          title="修改"
+                          @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)"
                         />
-                        <svg-icon icon-class="detail" class="icon-space"/>
+                        <svg-icon icon-class="detail" class="icon-space" />
                         <i
                           v-if="!data.children && node.label !== '全部分类'"
                           class="el-icon-delete"
@@ -56,17 +62,27 @@
         <el-card class="box-card" shadow="never">
           <div slot="header" class="clearfix">
             <div class="container">
-              <el-form ref="searchForm" :model="contentQuery" inline size="small" label-position="right"
+              <el-form
+                ref="searchForm"
+                :model="contentQuery"
+                inline
+                size="small"
+                label-position="right"
               >
                 <el-row>
                   <el-col :span="14">
                     <el-col v-bind="grid" style="width:auto">
                       <el-form-item label="章节名称：" prop="title">
-                        <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable/>
+                        <el-input v-model="contentQuery.title" placeholder="请输入" size="small" clearable />
                       </el-form-item>
                     </el-col>
-                    <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
-                               @click="getContentList"
+                    <el-button
+                      type="primary"
+                      icon="ios-search"
+                      label="default"
+                      class="mr15"
+                      size="small"
+                      @click="getContentList"
                     >搜索
                     </el-button>
                     <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
@@ -100,7 +116,7 @@
             :tree-props="{children: 'children'}"
             @selection-change="handleSelectionChange"
           >
-            <el-table-column type="selection" width="55"/>
+            <el-table-column type="selection" width="55" />
             <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
               <template slot-scope="{row}">
                 <svg-icon
@@ -187,8 +203,12 @@
             </el-table-column>
           </el-table>
           <div class="block">
-            <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="contentQuery.page"
-                        :limit.sync="contentQuery.size" @pagination="getContentList"
+            <pagination
+              v-show="tableData.total>0"
+              :total="tableData.total"
+              :page.sync="contentQuery.page"
+              :limit.sync="contentQuery.size"
+              @pagination="getContentList"
             />
           </div>
         </el-card>
@@ -198,12 +218,7 @@
 </template>
 
 <script>
-import {
-  list as categoryList,
-  add as categoryAdd,
-  del as categoryDel,
-  edit
-} from '@/api/book/category'
+import { list as categoryList, add as categoryAdd, del as categoryDel, edit } from '@/api/book/category'
 import { list as contentList } from '@/api/book/content'
 import Pagination from '@/components/Pagination'
 
@@ -394,7 +409,7 @@ export default {
         })
       }
       this.$modalSure().then(() => {
-        del(this.selectionDelList.join(',')).then(res => {
+        categoryDel(this.selectionDelList.join(',')).then(res => {
           this.$message({ message: res.message, type: 'success' })
         })
         this.getList()

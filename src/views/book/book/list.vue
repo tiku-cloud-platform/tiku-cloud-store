@@ -128,7 +128,7 @@
         </el-table-column>
         <el-table-column label="难度">
           <template slot-scope="{row}">
-            <el-rate v-model="row.level" style="display: contents;" disabled/>
+            <el-rate v-model="row.level" style="display: contents;" disabled />
           </template>
         </el-table-column>
         <el-table-column label="创建时间" width="150" align="center">

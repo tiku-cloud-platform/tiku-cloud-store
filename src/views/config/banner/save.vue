@@ -4,12 +4,17 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
-               @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -17,7 +22,7 @@
               <el-select v-model="formValidate.client_position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
                   v-for="(item, index) in clientType"
-                  :key="item.uuid"
+                  :key="index"
                   :label="item.title"
                   :value="item.uuid"
                 />
@@ -29,7 +34,7 @@
               <el-select v-model="formValidate.position_position" clearable placeholder="请选择" style="width: 90%">
                 <el-option
                   v-for="(item, index) in positionData"
-                  :key="item.uuid"
+                  :key="index"
                   :label="item.title"
                   :value="item.uuid"
                 />
@@ -38,8 +43,12 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="轮播标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" maxlength="32"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.title"
+                placeholder="请输入"
+                element-id="title"
+                maxlength="32"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
@@ -57,8 +66,11 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="跳转地址：" prop="url" label-for="url">
-              <el-input v-model.trim="formValidate.url" placeholder="请输入 例：/pages/index/index" element-id="title"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.url"
+                placeholder="请输入 例：/pages/index/index"
+                element-id="title"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
@@ -67,7 +79,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="bannerImgUrl"></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
               <div class="image-size-require">推荐图片尺寸为900*380(px)</div>
@@ -76,12 +88,12 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row>
           <el-col :span="24">
             <el-form-item label="排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -102,9 +114,8 @@
 
 <script>
 // 常量配置
-import { list as constantList } from '@/api/system/const'
 // 内容
-import { add, edit, position, show } from '@/api/banner'
+import { add, edit, show } from '@/api/banner'
 // 字典
 import { listGroupCode } from '@/api/dict/dict'
 
@@ -266,7 +277,7 @@ export default {
           client_position: data.client_position
         }
       })
-    },
+    }
   }
 }
 </script>

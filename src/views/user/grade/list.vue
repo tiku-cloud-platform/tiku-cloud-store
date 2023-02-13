@@ -8,14 +8,17 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="等级名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="启用状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -47,27 +50,29 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
-        <el-table-column label="等级名称" prop="title" align="center"></el-table-column>
+        <el-table-column type="selection" width="55" />
+        <el-table-column label="等级名称" prop="title" align="center" />
         <el-table-column label="等级icon" align="center">
           <template slot-scope="scope">
             <viewer>
-              <img :src="scope.row.icon.file_url+scope.row.icon.file_name"
-                   height="50" alt=""
+              <img
+                :src="scope.row.icon.file_url+scope.row.icon.file_name"
+                height="50"
+                alt=""
               >
             </viewer>
           </template>
         </el-table-column>
-        <el-table-column label="等级积分" prop="score" align="center"></el-table-column>
+        <el-table-column label="等级积分" prop="score" align="center" />
         <el-table-column label="等级状态" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text"  class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
             <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
         <el-table-column label="默认等级" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_default === 2" size="mini" type="text"  class="show-disable-text">非默认等级</el-button>
+            <el-button v-if="row.is_default === 2" size="mini" type="text" class="show-disable-text">非默认等级</el-button>
             <el-button v-if="row.is_default === 1" size="mini" type="text" class="show-enable-text">默认等级</el-button>
           </template>
         </el-table-column>
@@ -94,8 +99,12 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>
@@ -105,12 +114,17 @@
       <el-dialog title="会员等级设置" :visible.sync="dialogTableVisible" width="30%" :before-close="handleClose">
         <el-form ref="formValidate" :model="formValidate" :rules="rulesForm" label-width="100px">
           <el-form-item label="等级名称" prop="title">
-            <el-input v-model="formValidate.title" maxlength="20" show-word-limit></el-input>
+            <el-input v-model="formValidate.title" maxlength="20" show-word-limit />
           </el-form-item>
           <el-form-item label="初始积分" prop="score">
-            <el-input-number v-model="formValidate.score" :min="1" :max="100000" label="初始积分" :step="0.01"
-                             style="width: 100%;"
-            ></el-input-number>
+            <el-input-number
+              v-model="formValidate.score"
+              :min="1"
+              :max="100000"
+              label="初始积分"
+              :step="0.01"
+              style="width: 100%;"
+            />
             <span>当用户积分达到该值时，用户自动升级为该等级。</span>
           </el-form-item>
           <el-form-item label="是否默认" prop="is_default">
@@ -130,12 +144,12 @@
             <div class="upLoadPicBox" @click="modalPicTap('1')">
               <div v-if="formValidate.file_uuid" class="pictrue"><img :src="bannerImgUrl" alt=""></div>
               <div v-else class="upLoad">
-                <i class="el-icon-camera cameraIconfont"/>
+                <i class="el-icon-camera cameraIconfont" />
               </div>
             </div>
           </el-form-item>
           <el-form-item label="等级描述" prop="remark">
-            <el-input type="textarea" v-model="formValidate.remark" maxlength="100" show-word-limit></el-input>
+            <el-input v-model="formValidate.remark" type="textarea" maxlength="100" show-word-limit />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit('formValidate')">提交</el-button>

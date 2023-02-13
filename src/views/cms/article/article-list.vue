@@ -101,19 +101,19 @@
         </el-table-column>
         <el-table-column label="是否置顶" width="auto" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_top === 2" size="mini" type="text"  style="color: #A5A8AD;">否</el-button>
+            <el-button v-if="row.is_top === 2" size="mini" type="text" style="color: #A5A8AD;">否</el-button>
             <el-button v-if="row.is_top === 1" size="mini" type="text">是</el-button>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text"  class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
             <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
         <el-table-column label="发布" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_publish === 2" size="mini" type="text"  class="show-disable-text">否</el-button>
+            <el-button v-if="row.is_publish === 2" size="mini" type="text" class="show-disable-text">否</el-button>
             <el-button v-if="row.is_publish === 1" size="mini" type="text" class="show-enable-text">是</el-button>
           </template>
         </el-table-column>
@@ -132,7 +132,7 @@
             <router-link :to="{path: '/cms/article/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)" style="color: red;">删除</el-button>
+            <el-button size="mini" type="text" style="color: red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

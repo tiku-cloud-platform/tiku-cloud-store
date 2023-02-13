@@ -4,12 +4,18 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" label-position="left" :model="formValidate" label-width="120px"
-               :rules="ruleValidate" @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        label-position="left"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -39,7 +45,7 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试卷名称：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" maxlength="100" style="width: 90%" clearable show-word-limit/>
+              <el-input v-model.trim="formValidate.title" placeholder="请输入" maxlength="100" style="width: 90%" clearable show-word-limit />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -50,8 +56,7 @@
                 placeholder="试题年份"
                 style="width: 90%;"
                 value-format="yyyy-MM-dd"
-              >
-              </el-date-picker>
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -68,7 +73,7 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="难易等级：" prop="level">
-              <el-rate v-model="formValidate.level" style="display: contents;"/>
+              <el-rate v-model="formValidate.level" style="display: contents;" />
             </el-form-item>
           </el-col>
           <el-col>
@@ -76,7 +81,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="file_url"></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
             </el-form-item>
@@ -84,47 +89,61 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试卷出题人：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入" maxlength="32" show-word-limit
-                        style="width: 90%"/>
+              <el-input
+                v-model.trim="formValidate.author"
+                placeholder="请输入"
+                maxlength="32"
+                show-word-limit
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试卷审核人：" prop="audit_author" label-for="audit_author">
-              <el-input v-model.trim="formValidate.audit_author" placeholder="请输入" maxlength="32" show-word-limit
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.audit_author"
+                placeholder="请输入"
+                maxlength="32"
+                show-word-limit
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试卷链接：" prop="resource_url" label-for="resource_url">
-              <el-input v-model.trim="formValidate.resource_url" placeholder="请输入试卷链接地址" clearable maxlength="255" show-word-limit
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.resource_url"
+                placeholder="请输入试卷链接地址"
+                clearable
+                maxlength="255"
+                show-word-limit
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="显示排序：">
-              <el-input-number v-model="formValidate.orders" :min="0"/>
+              <el-input-number v-model="formValidate.orders" :min="0" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="最大问答题数量：">
-              <el-input-number v-model="formValidate.max_reading_total" :min="0" :max="50"/>
+              <el-input-number v-model="formValidate.max_reading_total" :min="0" :max="50" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="最大选择题数量：">
-              <el-input-number v-model="formValidate.max_option_total" :min="0" :max="50"/>
+              <el-input-number v-model="formValidate.max_option_total" :min="0" :max="50" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="最大判断题数量：">
-              <el-input-number v-model="formValidate.max_judge_total" :min="0" :max="10"/>
+              <el-input-number v-model="formValidate.max_judge_total" :min="0" :max="10" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -148,10 +167,10 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">试卷介绍</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-form-item label="试卷介绍：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content"/>
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -223,7 +242,7 @@ export default {
         max_option_total: 50,
         max_judge_total: 10,
         resource_url: '',
-        exam_year: '',
+        exam_year: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请填写试卷名称', trigger: 'blur' }],

@@ -22,15 +22,15 @@
               公司名称：{{ userInfo.company_name }}
             </div>
             <div class="mt20 info">
-              <svg-icon icon-class="email"  class-name="store-icon" />
+              <svg-icon icon-class="email" class-name="store-icon" />
               公司邮箱：{{ userInfo.email }}
             </div>
             <div class="mt20 info">
-              <svg-icon icon-class="phone"  class-name="store-icon" />
+              <svg-icon icon-class="phone" class-name="store-icon" />
               公司电话：{{ userInfo.company_tel }}
             </div>
             <div class="mt20 info">
-              <svg-icon icon-class="time"  class-name="store-icon" />
+              <svg-icon icon-class="time" class-name="store-icon" />
               过期时间：{{ userInfo.expire_time }}
             </div>
           </div>

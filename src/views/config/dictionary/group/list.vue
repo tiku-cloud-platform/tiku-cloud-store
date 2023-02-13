@@ -8,14 +8,17 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="分组名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="分组状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -47,7 +50,7 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <el-table-column label="分组名称" align="center">
           <template slot-scope="{row}">
             {{ row.title }}
@@ -91,28 +94,49 @@
               <el-button type="text" size="mini" style="color: #e6a23c;" class="mr10">字典
               </el-button>
             </router-link>
-            <el-button size="mini" type="text"
-                       @click="editForm(row)" v-if="row.is_system === 2"
+            <el-button
+              v-if="row.is_system === 2"
+              size="mini"
+              type="text"
+              @click="editForm(row)"
             >编辑
             </el-button>
-            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
-                       @click="editForm(row)" v-if="row.is_system === 1"
+            <el-button
+              v-if="row.is_system === 1"
+              size="mini"
+              type="text"
+              style="color:#A5A8AD"
+              :disabled="true"
+              @click="editForm(row)"
             >编辑
             </el-button>
-            <el-button size="mini" type="text" style="color:red"
-                       @click="handleDelete(row, $index)" v-if="row.is_system === 2"
+            <el-button
+              v-if="row.is_system === 2"
+              size="mini"
+              type="text"
+              style="color:red"
+              @click="handleDelete(row, $index)"
             >删除
             </el-button>
-            <el-button size="mini" type="text" style="color:#A5A8AD" :disabled="true"
-                       @click="handleDelete(row, $index)" v-if="row.is_system === 1"
+            <el-button
+              v-if="row.is_system === 1"
+              size="mini"
+              type="text"
+              style="color:#A5A8AD"
+              :disabled="true"
+              @click="handleDelete(row, $index)"
             >删除
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>
@@ -127,13 +151,22 @@
       >
         <el-form ref="form" :model="form" label-width="80px" :rules="rulesForm">
           <el-form-item prop="title" label="分组名称">
-            <el-input v-model="form.title" placeholder="请输入分组名称" maxlength="32" show-word-limit
-                      :clearable="true"
-            ></el-input>
+            <el-input
+              v-model="form.title"
+              placeholder="请输入分组名称"
+              maxlength="32"
+              show-word-limit
+              :clearable="true"
+            />
           </el-form-item>
           <el-form-item label="分组标识" prop="code">
-            <el-input v-model="form.code" placeholder="请输入分组标识" maxlength="20" :clearable="true" show-word-limit
-            ></el-input>
+            <el-input
+              v-model="form.code"
+              placeholder="请输入分组标识"
+              maxlength="20"
+              :clearable="true"
+              show-word-limit
+            />
           </el-form-item>
           <el-form-item label="启用状态" prop="is_show">
             <el-radio-group v-model="form.is_show">
@@ -142,15 +175,20 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="分组描述" prop="remark">
-            <el-input type="textarea" v-model="form.remark" placeholder="请输入分组描述信息" maxlength="50"
-                      show-word-limit :clearable="true"
-            ></el-input>
+            <el-input
+              v-model="form.remark"
+              type="textarea"
+              placeholder="请输入分组描述信息"
+              maxlength="50"
+              show-word-limit
+              :clearable="true"
+            />
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-    <el-button @click="resetForm('form')">重 置</el-button>
-    <el-button type="primary" @click="onsubmit('form')">确 定</el-button>
-  </span>
+          <el-button @click="resetForm('form')">重 置</el-button>
+          <el-button type="primary" @click="onsubmit('form')">确 定</el-button>
+        </span>
       </el-dialog>
     </div>
     <!--    分组弹窗结束-->
@@ -161,8 +199,8 @@
 import { list, del, add, edit } from '@/api/dict/group'
 import Pagination from '@/components/Pagination'
 
-let validGroupCode = (rule, value, callback) => {
-  let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/
+const validGroupCode = (rule, value, callback) => {
+  const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/
   if (!reg.test(value)) {
     callback(new Error('分组标识必须是由4-20位字母+数字组合'))
   } else {
@@ -284,7 +322,7 @@ export default {
         if (valid) {
           if (this.form.uuid) {
             edit(this.form).then(async message => {
-              this.form.uuid = ""
+              this.form.uuid = ''
               this.$message.success(message)
               this.handleClose()
             })

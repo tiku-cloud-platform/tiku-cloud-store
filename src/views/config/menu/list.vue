@@ -8,14 +8,17 @@
               <el-col :span="24">
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="菜单名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -44,8 +47,13 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small"
-                           @click="getList()"
+                <el-button
+                  type="primary"
+                  icon="ios-search"
+                  label="default"
+                  class="mr15"
+                  size="small"
+                  @click="getList()"
                 >搜索
                 </el-button>
                 <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
@@ -75,7 +83,7 @@
         show-header
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <!-- <el-table-column label="菜单编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -83,8 +91,10 @@
         </el-table-column> -->
         <el-table-column label="菜单图片" width="70" align="center">
           <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50"
-                         height="50"
+            <viewer><img
+              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
+              width="50"
+              height="50"
             ></viewer>
           </template>
         </el-table-column>
@@ -144,8 +154,12 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>

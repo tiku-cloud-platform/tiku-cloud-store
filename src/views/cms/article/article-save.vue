@@ -14,12 +14,12 @@
       >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="文章标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%"/>
+              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
@@ -49,12 +49,12 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="文章作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入" element-id="author" style="width: 90%"/>
+              <el-input v-model.trim="formValidate.author" placeholder="请输入" element-id="author" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="文章来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入" element-id="source" style="width: 90%"/>
+              <el-input v-model.trim="formValidate.source" placeholder="请输入" element-id="source" style="width: 90%" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
@@ -62,7 +62,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url"></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
             </el-form-item>
@@ -70,7 +70,7 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">积分设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -85,13 +85,18 @@
               />
             </el-form-item>
             <el-form-item label="文章排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="阅读积分：">
-              <el-input-number v-model="formValidate.read_score" :min="0" :max="10000" type="number" :step="0.01"
-                               :precision="2"
+              <el-input-number
+                v-model="formValidate.read_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>

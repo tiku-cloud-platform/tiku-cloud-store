@@ -13,33 +13,42 @@
       >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
-          <el-divider></el-divider>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="章节标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入标题" element-id="title"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.title"
+                placeholder="请输入标题"
+                element-id="title"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入作者" element-id="author"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.author"
+                placeholder="请输入作者"
+                element-id="author"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入来源" element-id="source"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.source"
+                placeholder="请输入来源"
+                element-id="source"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="章节标签：" prop="tags" label-for="tags">
-              <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%"/>
+              <el-input v-model.trim="formValidate.tags" placeholder="请输入标签" element-id="tags" style="width: 90%" />
               <div class="image-size-require">多个标签使用","分割</div>
             </el-form-item>
           </el-col>
@@ -56,7 +65,7 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -70,55 +79,70 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="阅读积分：">
-              <el-input-number v-model="formValidate.read_score" :min="0" :max="10000" type="number" :step="0.01"
-                               :precision="2"
+              <el-input-number
+                v-model="formValidate.read_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="分享积分：">
-              <el-input-number v-model="formValidate.share_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2"/>
+              <el-input-number v-model="formValidate.share_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="点赞积分：">
-              <el-input-number v-model="formValidate.click_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2"/>
+              <el-input-number v-model="formValidate.click_score" :min="0" :max="10000" type="number" :step="0.01" :precision="2" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="收藏积分：">
-              <el-input-number v-model="formValidate.collection_score" :min="0" :max="10000" type="number"
-                               :step="0.01" :precision="2"
+              <el-input-number
+                v-model="formValidate.collection_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="阅读积分(消耗)：">
-              <el-input-number v-model="formValidate.read_expend_score" :min="0" :max="10000" type="number"
-                               :step="0.01" :precision="2"
+              <el-input-number
+                v-model="formValidate.read_expend_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="显示顺序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" type="number" :step="1"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" type="number" :step="1" />
             </el-form-item>
           </el-col>
         </el-row>
         <div class="dividerTitle">
           <span class="title">章节简介</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-form-item label="章节简介：" prop="intro">
-          <el-input v-model="formValidate.intro" type="textarea"/>
+          <el-input v-model="formValidate.intro" type="textarea" />
         </el-form-item>
         <div class="dividerTitle">
           <span class="title">章节内容</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-form-item label="章节内容：" prop="content">
           <!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content"/>
+          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -128,16 +152,14 @@
 
 <script>
 // 内容
-import MarkdownEditor from '@/components/MarkdownEditor'
 import ueditorFrom from '@/components/ueditorFrom'
 import { add, edit, show } from '@/api/book/content'
 import { show as BookShow } from '@/api/book/book'
-import { getName } from '@/utils/auth'
 import { list as categoryList } from '@/api/book/category'
 
 export default {
   name: 'BookContentSave',
-  components: { MarkdownEditor, ueditorFrom },
+  components: { ueditorFrom },
   data() {
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.store_book_category_uuid) {

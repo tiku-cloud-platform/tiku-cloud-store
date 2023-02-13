@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
-export function listAll() {
-    return request({
+export function listAll(params) {
+  return request({
     url: 'store/article/category/all',
     method: 'get',
     params

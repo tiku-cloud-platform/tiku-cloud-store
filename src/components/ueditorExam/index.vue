@@ -102,7 +102,7 @@ export default {
             // 'edittable', // 表格属性
             // 'edittd', // 单元格属性
             // 'help', // 帮助
-            'fullscreen', // 全屏
+            'fullscreen' // 全屏
             // 'directionalityltr', // 从左向右输入
             // 'directionalityrtl', // 从右向左输入
             // 'pagebreak' // 分页

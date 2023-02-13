@@ -18,7 +18,7 @@
             <el-row>
               <el-col v-bind="grid" :span="5">
                 <el-form-item>
-                  <el-button type="success"  @click="handleCreate">添加</el-button>
+                  <el-button type="success" @click="handleCreate">添加</el-button>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
               </el-col>
@@ -30,10 +30,10 @@
       <el-table
         :key="tableKey"
         ref="store"
+        v-loading="listLoading"
         empty-text="暂无数据"
         show-header
         border
-        v-loading="listLoading"
         :data="list"
         row-key="uuid"
         :tree-props="{children: 'children'}"

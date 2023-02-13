@@ -170,6 +170,14 @@
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <template slot-scope="{ row }">
+            <router-link :to="{path: '/user/detail/'+row.uuid}">
+              <el-button type="text" size="mini" class="mr10">详情</el-button>
+            </router-link>
+            <el-button size="mini" type="text" style="color:red;">禁用</el-button>
+          </template>
+        </el-table-column>
       </el-table>
       <!--      用户基础信息结束-->
       <pagination

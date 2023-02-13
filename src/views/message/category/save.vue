@@ -4,17 +4,22 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
-               @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="消息标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%"/>
+              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -22,9 +27,9 @@
           <el-col v-bind="grid">
             <el-form-item label="分类图片：" prop="file_uuid">
               <div class="upLoadPicBox" @click="modalPicTap('1')">
-                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.img_url"></div>
+                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.img_url" alt=""></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
             </el-form-item>
@@ -32,12 +37,12 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row>
           <el-col :span="24">
             <el-form-item label="排序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="10000"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="10000" />
             </el-form-item>
           </el-col>
           <el-col :span="24">

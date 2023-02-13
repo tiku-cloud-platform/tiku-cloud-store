@@ -70,8 +70,8 @@ const marketingRouter = {
       path: 'sign/list',
       name: '签到配置',
       component: () => import('@/views/marketing/sign/list'),
-      meta: { title: '签到配置', icon: 'el-icon-xitongpeizhi' },
-    },
+      meta: { title: '签到配置', icon: 'el-icon-xitongpeizhi' }
+    }
   ]
 }
 

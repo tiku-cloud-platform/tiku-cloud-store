@@ -4,45 +4,62 @@
       <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
         返回
       </el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate"
-               @submit.native.prevent
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
       >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="书籍名称：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入名称" element-id="title"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.title"
+                placeholder="请输入名称"
+                element-id="title"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍作者：" prop="author" label-for="author">
-              <el-input v-model.trim="formValidate.author" placeholder="请输入书籍作者" element-id="author"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.author"
+                placeholder="请输入书籍作者"
+                element-id="author"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍来源：" prop="source" label-for="source">
-              <el-input v-model.trim="formValidate.source" placeholder="请输入是来源" element-id="source"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.source"
+                placeholder="请输入是来源"
+                element-id="source"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍标签：" prop="tags" label-for="tags">
-              <el-input v-model.trim="formValidate.tags" placeholder="请输入书籍标签" element-id="tags"
-                        style="width: 90%"
+              <el-input
+                v-model.trim="formValidate.tags"
+                placeholder="请输入书籍标签"
+                element-id="tags"
+                style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="书籍难度：" prop="level">
-              <el-rate v-model="formValidate.level" style="display: contents;"/>
+              <el-rate v-model="formValidate.level" style="display: contents;" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
@@ -50,7 +67,7 @@
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url" alt=""></div>
                 <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont"/>
+                  <i class="el-icon-camera cameraIconfont" />
                 </div>
               </div>
             </el-form-item>
@@ -58,7 +75,7 @@
         </el-row>
         <div class="dividerTitle">
           <span class="title">其他设置</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
@@ -72,17 +89,17 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="显示顺序：">
-              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000"/>
+              <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
               <div class="image-size-require">最大顺序为1,000,000,000</div>
             </el-form-item>
           </el-col>
         </el-row>
         <div class="dividerTitle">
           <span class="title">书籍简介</span>
-          <el-divider/>
+          <el-divider />
         </div>
         <el-form-item label="书籍简介：" prop="intro">
-          <ueditor-from v-model="formValidate.intro" :content="formValidate.intro"/>
+          <ueditor-from v-model="formValidate.intro" :content="formValidate.intro" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>

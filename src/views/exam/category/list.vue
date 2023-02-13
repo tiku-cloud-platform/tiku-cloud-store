@@ -8,14 +8,17 @@
               <el-col :span="19">
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="分类名称：" prop="title">
-                    <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable/>
+                    <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -23,8 +26,11 @@
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="是否推荐：" prop="is_recommend">
                     <el-select v-model="listQuery.is_recommend" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isRecommend" :key="item.key" :value="item.value"
-                                 :label="item.label"
+                      <el-option
+                        v-for="item in this.$store.getters.isRecommend"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
                       />
                     </el-select>
                   </el-form-item>
@@ -61,7 +67,7 @@
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"/>
+        <el-table-column type="selection" width="55" />
         <!-- <el-table-column label="编号" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.uuid }}</span>
@@ -114,8 +120,12 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page"
-                    :limit.sync="listQuery.size" @pagination="getList"
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
         />
       </div>
     </el-card>
