@@ -42,21 +42,21 @@ export function publishWeChat(title) {
  * @param title
  * @returns {Promise<unknown>}
  */
-export function modePromptBox(title, defaultValue) {
-  return new Promise((resolve, reject) => {
-    this.$prompt(title, '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      inputValue: defaultValue !== '' && defaultValue ? defaultValue : '',
-      inputPattern: /^\s*[\s\S]{1,20}\s*$/,
-      inputErrorMessage: '请输入分组名称'
-    }).then(({ value }) => {
-      resolve(value)
-    }).catch(() => {
-      this.$message({ type: 'info', message: '取消输入' })
-    })
-  })
-}
+// export function modePromptBox(title, defaultValue) {
+//   return new Promise((resolve, reject) => {
+//     this.$prompt(title, '提示', {
+//       confirmButtonText: '确定',
+//       cancelButtonText: '取消',
+//       inputValue: defaultValue !== '' && defaultValue ? defaultValue : '',
+//       inputPattern: /^\s*[\s\S]{1,20}\s*$/,
+//       inputErrorMessage: '请输入分组名称'
+//     }).then(({ value }) => {
+//       resolve(value)
+//     }).catch(() => {
+//       this.$message({ type: 'info', message: '取消输入' })
+//     })
+//   })
+// }
 
 export function handleDealFilter(arr, key, replaceKey) {
   const newArr = []
@@ -67,4 +67,7 @@ export function handleDealFilter(arr, key, replaceKey) {
     newArr.push(item)
   })
   return newArr
+}
+
+export class modePromptBox {
 }

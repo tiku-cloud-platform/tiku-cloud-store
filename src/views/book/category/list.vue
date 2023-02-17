@@ -22,6 +22,7 @@
                     :filter-node-method="filterNode"
                     :props="defaultProps"
                     :highlight-current="true"
+                    :accordion="true"
                   >
                     <div slot-scope="{ node, data}" class="custom-tree-node" @click.stop="handleNodeClick(data.uuid)">
                       <div>
@@ -40,11 +41,11 @@
                           v-if="node.label !== '全部分类'"
                           class="el-icon-edit"
                           title="修改"
-                          @click.stop="onEdit(data.uuid, data.parent_uuid, data.title)"
+                          @click.stop="onEdit(data)"
                         />
                         <svg-icon icon-class="detail" class="icon-space" />
                         <i
-                          v-if="!data.children && node.label !== '全部分类'"
+                          v-if="data.children !== undefined && data.children.length === 0 && node.label !== '全部分类'"
                           class="el-icon-delete"
                           title="删除"
                           @click.stop="() => onDelete(data.uuid)"
@@ -214,11 +215,41 @@
         </el-card>
       </el-col>
     </el-row>
+
+    <el-dialog
+      title="章节目录设置"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <el-form ref="bookCategoryTemp" :model="bookCategoryTemp" :rules="ruleValidate" label-width="80px">
+        <el-form-item label="上级分类" prop="parent_uuid">
+          <el-select v-model="bookCategoryTemp.parent_uuid" placeholder="请选择上级分类" style="width: 100%;" clearable>
+            <el-option
+              v-for="item in categoryParentAll"
+              :key="item.uuid"
+              :label="item.title"
+              :value="item.uuid"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="分类名称" prop="title">
+          <el-input v-model="bookCategoryTemp.title" aria-required="true" show-word-limit clearable style="width: 100%;" />
+        </el-form-item>
+        <el-form-item label="分类排序" prop="orders">
+          <el-input-number v-model="bookCategoryTemp.orders" :min="1" :max="10000" label="分类排序" style="width: 100%;" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit('bookCategoryTemp')">提交</el-button>
+          <el-button @click="handleClose">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { list as categoryList, add as categoryAdd, del as categoryDel, edit } from '@/api/book/category'
+import { list as categoryList, add as categoryAdd, del as categoryDel, edit, parentAll } from '@/api/book/category'
 import { list as contentList } from '@/api/book/content'
 import Pagination from '@/components/Pagination'
 
@@ -227,6 +258,7 @@ export default {
   components: { Pagination },
   data() {
     return {
+      dialogVisible: false,
       treeData: [],
       treeData2: [],
       filterText: '',
@@ -273,12 +305,17 @@ export default {
         children: 'children',
         label: 'title'
       },
+      categoryParentAll: [],
       bookCategoryTemp: {
         store_book_uuid: '',
         parent_uuid: '',
         title: '',
         is_show: 1,
-        orders: 1
+        orders: 1,
+        uuid: ''
+      },
+      ruleValidate: {
+        title: [{ required: true, message: '请输入分类名称', trigger: 'blur' }]
       }
     }
   },
@@ -319,6 +356,11 @@ export default {
       if (!value) return true
       return data.title.indexOf(value) !== -1
     },
+    getParentAll() {
+      parentAll({ store_book_uuid: this.bookCategoryTemp.store_book_uuid }).then(res => {
+        this.categoryParentAll = res.data
+      })
+    },
     // 点击分类
     handleNodeClick(uuid) {
       this.contentQuery.store_book_category_uuid = uuid
@@ -326,20 +368,64 @@ export default {
     },
     async onAdd(uuid) {
       if (Number(uuid) !== 0) this.bookCategoryTemp.parent_uuid = uuid
-      this.bookCategoryTemp.title = await this.$modePromptBox('添加分类名称')
+      this.dialogVisible = true
+      this.getParentAll()
+      // this.bookCategoryTemp.title = await this.$modePromptBox('添加分类名称')
+      // categoryAdd(this.bookCategoryTemp).then(({ message }) => {
+      //   this.$message.success(message)
+      //   this.getCategoryList()
+      // })
+    },
+    handleClose() {
+      this.resetForm()
+    },
+    resetForm() {
+      this.dialogVisible = false
+      this.bookCategoryTemp.uuid = ''
+      this.bookCategoryTemp.title = ''
+      this.bookCategoryTemp.orders = ''
+      this.bookCategoryTemp.parent_uuid = ''
+    },
+    onSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          if (this.bookCategoryTemp.uuid) {
+            edit(this.bookCategoryTemp).then(async message => {
+              this.bookCategoryTemp.uuid = ''
+              this.$message.success(message)
+              this.resetForm()
+              this.getCategoryList()
+            })
+          } else {
+            categoryAdd(this.bookCategoryTemp).then((message) => {
+              this.$message.success(message)
+              this.resetForm()
+              this.getCategoryList()
+            })
+          }
+        } else {
+          return false
+        }
+      })
+    },
+    addCategory() {
       categoryAdd(this.bookCategoryTemp).then(({ message }) => {
         this.$message.success(message)
         this.getCategoryList()
       })
     },
-    async onEdit(uuid, parent_uuid, title) {
-      this.bookCategoryTemp.title = await this.$modePromptBox('修改分类名称', title)
-      this.bookCategoryTemp.uuid = uuid
-      this.bookCategoryTemp.parent_uuid = parent_uuid
-      edit(this.bookCategoryTemp).then(({ message }) => {
-        this.$message.success(message)
-        this.getCategoryList()
-      })
+    async onEdit(data) {
+      // this.bookCategoryTemp.title = await this.$modePromptBox('修改分类名称', title)
+      this.bookCategoryTemp.uuid = data.uuid
+      this.bookCategoryTemp.parent_uuid = data.parent_uuid
+      this.bookCategoryTemp.title = data.title
+      this.bookCategoryTemp.orders = data.orders
+      this.dialogVisible = true
+      this.getParentAll()
+      // edit(this.bookCategoryTemp).then(({ message }) => {
+      //   this.$message.success(message)
+      //   this.getCategoryList()
+      // })
     },
     // 删除
     onDelete(uuid) {

@@ -23,9 +23,9 @@ Vue.prototype.$md5 = md5
 
 // 自定义方法
 import '@/libs/plugins'
-import { modalSure, modePromptBox, publishWeChat } from '@/libs/public'
+import { modalSure, publishWeChat } from '@/libs/public'
 Vue.prototype.$modalSure = modalSure
-Vue.prototype.$modePromptBox = modePromptBox
+// Vue.prototype.$modePromptBox = modePromptBox
 Vue.prototype.$publishWeChat = publishWeChat
 // 复制文本
 import VueClipboard from 'vue-clipboard2'
