@@ -44,8 +44,8 @@ export default {
             // 'formatmatch', // 格式刷
             // 'removeformat', // 清除格式
             'cleardoc', // 清空文档
-            // 'unlink', // 取消链接
-            // 'link', // 超链接
+            'unlink', // 取消链接
+            'link', // 超链接
             // 'emotion', // 表情
             // 'spechars', // 特殊字符
             // 'searchreplace', // 查询替换
@@ -68,8 +68,8 @@ export default {
             // 'justifyright', // 居右对齐
             // 'justifycenter', // 居中对齐
             // 'justifyjustify', // 两端对齐
-            // 'insertorderedlist', // 有序列表
-            // 'insertunorderedlist', // 无序列表
+            'insertorderedlist', // 有序列表
+            'insertunorderedlist', // 无序列表
             // 'rowspacingtop', // 段前距
             // 'rowspacingbottom', // 段后距
             // 'insertvideo', // 视频
@@ -81,7 +81,7 @@ export default {
             // 'insertcode', // 代码语言
             // 'snapscreen', // 截图
             // 'print', // 打印
-            // 'preview', // 预览
+            'preview', // 预览
             // 'time', // 时间
             // 'date', // 日期
             // 'inserttable', // 插入表格
