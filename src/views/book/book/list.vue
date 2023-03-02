@@ -147,7 +147,7 @@
             <span>{{ row.updated_at }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+        <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width" fixed="right">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/book/book/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
