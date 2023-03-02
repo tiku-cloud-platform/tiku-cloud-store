@@ -40,6 +40,7 @@
         empty-text="暂无数据"
         show-header
         stripe
+        fixed="right"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"

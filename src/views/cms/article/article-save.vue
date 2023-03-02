@@ -177,6 +177,16 @@
           <span class="title">文章内容</span>
           <el-divider />
         </div>
+        <el-form-item label="文章简介" prop="content_desc">
+          <el-input
+            v-model="form.content_desc"
+            type="textarea"
+            placeholder="请输入文章简介"
+            maxlength="100"
+            show-word-limit
+            :clearable="true"
+          />
+        </el-form-item>
         <el-form-item label="文章内容：" prop="content">
           <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
@@ -243,10 +253,12 @@ export default {
         share_score: 0,
         click_score: 0,
         collection_score: 0,
-        read_expend_score: 0
+        read_expend_score: 0,
+        content_desc: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入新闻标题', trigger: 'blur' }],
+        content_desc: [{ required: true, message: '请输入文章简介', trigger: 'blur' }],
         article_category_uuid: [{ required: true, validator: validateArticleCategory, trigger: 'change' }],
         publish_date: [{ required: true, validator: validatePublishDate, trigger: 'change' }],
         content: [{ required: true, message: '请输入新闻内容', trigger: 'blur' }],
@@ -349,7 +361,8 @@ export default {
           share_score: data.share_score,
           click_score: data.click_score,
           collection_score: data.collection_score,
-          read_expend_score: data.read_expend_score
+          read_expend_score: data.read_expend_score,
+          content_desc: data.content_desc
         }
       })
     }
