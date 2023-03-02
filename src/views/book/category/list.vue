@@ -195,7 +195,7 @@
                 <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+            <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width" fixed="right">
               <template slot-scope="{row,$index}">
                 <el-button type="text" size="mini" class="mr10" @click="jumpAddContent(row.uuid)">编辑</el-button>
                 <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除
