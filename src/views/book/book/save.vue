@@ -98,6 +98,9 @@
           <span class="title">书籍简介</span>
           <el-divider />
         </div>
+        <el-form-item label="书籍概要：" prop="content_desc">
+          <el-input v-model="formValidate.content_desc" show-word-limit maxlength="64" clearable type="textarea" />
+        </el-form-item>
         <el-form-item label="书籍简介：" prop="intro">
           <ueditor-from v-model="formValidate.intro" :content="formValidate.intro" />
         </el-form-item>
@@ -150,10 +153,12 @@ export default {
         is_top: 1,
         level: 1,
         intro: '',
-        tags: ''
+        tags: '',
+        content_desc: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入书籍标题', trigger: 'blur' }],
+        content_desc: [{ required: true, message: '请输入书籍概要', trigger: 'blur' }],
         // intro: [{ required: true, message: '请输入书籍内容', trigger: 'blur' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
         author: [{ required: true, message: '请输入书籍作者', trigger: 'blur' }],
@@ -247,7 +252,8 @@ export default {
           is_show: data.is_show,
           is_top: data.is_top,
           level: data.level,
-          tags: data.tags.toString()
+          tags: data.tags.toString(),
+          content_desc: data.content_desc
         }
       })
     }
