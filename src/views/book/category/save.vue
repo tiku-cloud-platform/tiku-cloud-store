@@ -141,7 +141,7 @@
           <el-divider />
         </div>
         <el-form-item label="章节内容：" prop="content">
-          <!--          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />-->
+          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />
           <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
@@ -153,13 +153,14 @@
 <script>
 // 内容
 import ueditorFrom from '@/components/ueditorFrom'
+import MarkdownEditor from '@/components/MarkdownEditor'
 import { add, edit, show } from '@/api/book/content'
 import { show as BookShow } from '@/api/book/book'
 import { list as categoryList } from '@/api/book/category'
 
 export default {
   name: 'BookContentSave',
-  components: { ueditorFrom },
+  components: { ueditorFrom, MarkdownEditor },
   data() {
     const validateFileUuid = (rule, value, callback) => {
       if (this.formValidate.store_book_category_uuid) {
