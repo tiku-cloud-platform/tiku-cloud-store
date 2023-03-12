@@ -141,8 +141,8 @@
           <el-divider />
         </div>
         <el-form-item label="章节内容：" prop="content">
-          <markdown-editor v-if="isShow" v-model="formValidate.content" :initial-value="formValidate.content" />
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-if="formValidate.content_type === 2" v-model="formValidate.content" :initial-value="formValidate.content" />
+          <ueditor-from v-if="formValidate.content_type === 1" v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -194,7 +194,8 @@ export default {
         share_score: 0,
         click_score: 0,
         collection_score: 0,
-        read_expend_score: 0
+        read_expend_score: 0,
+        content_type: 1
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入章节标题', trigger: 'blur' }],
@@ -283,7 +284,8 @@ export default {
           share_score: data.share_score,
           click_score: data.click_score,
           collection_score: data.collection_score,
-          read_expend_score: data.read_expend_score
+          read_expend_score: data.read_expend_score,
+          content_type: data.content_type
         }
         this.isShow = true
       })
