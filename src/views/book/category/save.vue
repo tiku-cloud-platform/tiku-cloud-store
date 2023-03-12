@@ -140,9 +140,13 @@
           <span class="title">章节内容</span>
           <el-divider />
         </div>
+        <el-form-item label="编辑器类型：" prop="content_type">
+          <el-radio v-model="formValidate.content_type" label="1">ueditor</el-radio>
+          <el-radio v-model="formValidate.content_type" label="2">markdown</el-radio>
+        </el-form-item>
         <el-form-item label="章节内容：" prop="content">
-          <markdown-editor v-if="formValidate.content_type === 2" v-model="formValidate.content" :initial-value="formValidate.content" />
           <ueditor-from v-if="formValidate.content_type === 1" v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-if="formValidate.content_type === 2" v-model="formValidate.content" :initial-value="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -199,6 +203,7 @@ export default {
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入章节标题', trigger: 'blur' }],
+        content_type: [{ required: true, message: '请选择编辑器格式', trigger: 'blur' }],
         // intro: [{ required: true, message: '简介不能为空', trigger: 'blur' }],
         author: [{ required: true, message: '请输入章节作者', trigger: 'blur' }],
         source: [{ required: true, message: '请输入章节来源', trigger: 'blur' }],
