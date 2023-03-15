@@ -145,8 +145,8 @@
           <el-radio v-model="formValidate.content_type" label="2">markdown</el-radio>
         </el-form-item>
         <el-form-item label="章节内容：" prop="content">
-          <ueditor-from v-if="formValidate.content_type == '1'" v-model="formValidate.content" :content="formValidate.content" />
-          <markdown-editor v-if="formValidate.content_type == '2'" v-model="formValidate.content" :initial-value="formValidate.content" />
+          <ueditor-from v-if="formValidate.content_type == 1" v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-if="formValidate.content_type == 2" v-model="formValidate.content" :initial-value="formValidate.content" />
           <div>
             {{ formValidate.content_type }}
           </div>
