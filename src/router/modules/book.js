@@ -32,6 +32,13 @@ const bookRouter = {
           hidden: true
         },
         {
+          path: 'evaluate/list/:uuid',
+          name: 'EvaluateList',
+          component: () => import('@/views/book/evaluate/list'),
+          meta: { title: '教程点评', icon: 'el-icon-reading' },
+          hidden: true
+        },
+        {
           path: 'category/save',
           name: 'bookContentSave',
           component: () => import('@/views/book/category/save'),

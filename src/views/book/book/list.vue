@@ -45,7 +45,7 @@
         :tree-props="{children: 'children'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" width="50" />
         <el-table-column label="编号" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <svg-icon
@@ -56,80 +56,49 @@
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="封面" width="70" align="center">
-          <template slot-scope="scope">
-            <viewer v-if="scope.row.cover_file_info != null"><img
-              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
-              width="50"
-              height="50"
-            ></viewer>
-          </template>
-        </el-table-column>
-        <el-table-column label="书名" width="auto" align="center" :show-overflow-tooltip="true">
+        <!--        <el-table-column label="封面" width="70" align="center">-->
+        <!--          <template slot-scope="scope">-->
+        <!--            <viewer v-if="scope.row.cover_file_info != null"><img-->
+        <!--              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"-->
+        <!--              width="50"-->
+        <!--              height="50"-->
+        <!--            ></viewer>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <el-table-column label="书名" width="200" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="作者" width="auto" align="center" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span>{{ row.author }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="来源" width="auto" align="center" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span>{{ row.source }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="标签" width="auto" align="center">
-          <template slot-scope="{row}">
-            <el-tag
-              v-for="(name, ix) in row.tags"
-              :key="ix"
-              size="mini"
-            >
-              {{ name }}
-            </el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="收藏" width="auto" align="center">
+        <el-table-column label="收藏" align="center">
           <template slot-scope="{row}">
             <span>{{ row.collection_number }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="点赞" width="auto" align="center">
+        <el-table-column label="点赞" align="center">
           <template slot-scope="{row}">
             <span>{{ row.click_number }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="阅读" width="auto" align="center">
+        <el-table-column label="阅读" align="center">
           <template slot-scope="{row}">
             <span>{{ row.read_number }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="评分" width="auto" align="center">
+        <el-table-column label="评分" align="center">
           <template slot-scope="{row}">
             <span>{{ row.score }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="章节" width="auto" align="center">
+        <el-table-column label="章节" align="center">
           <template slot-scope="{row}">
             <span>{{ row.numbers }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="顺序" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.orders }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="状态" width="100" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="状态" align="center">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
             <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="难度">
-          <template slot-scope="{row}">
-            <el-rate v-model="row.level" style="display: contents;" disabled />
           </template>
         </el-table-column>
         <el-table-column label="创建时间" width="150" align="center">
@@ -142,18 +111,16 @@
             <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="更新时间" width="150" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.updated_at }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width" fixed="right">
+        <el-table-column label="操作" align="center" width="auto" class-name="small-padding fixed-width" fixed="right">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/book/book/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
             <router-link :to="{path: '/book/book/category/list/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">章节</el-button>
+            </router-link>
+            <router-link :to="{path: '/book/book/evaluate/list/'+row.uuid}">
+              <el-button type="text" size="mini" class="mr10">点评</el-button>
             </router-link>
             <!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
