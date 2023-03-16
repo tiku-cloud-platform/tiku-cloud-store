@@ -18,7 +18,7 @@
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="书籍名称：" prop="title" label-for="title">
+            <el-form-item label="教程名称：" prop="title" label-for="title">
               <el-input
                 v-model.trim="formValidate.title"
                 placeholder="请输入名称"
@@ -28,17 +28,17 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍作者：" prop="author" label-for="author">
+            <el-form-item label="教程作者：" prop="author" label-for="author">
               <el-input
                 v-model.trim="formValidate.author"
-                placeholder="请输入书籍作者"
+                placeholder="请输入教程作者"
                 element-id="author"
                 style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍来源：" prop="source" label-for="source">
+            <el-form-item label="教程来源：" prop="source" label-for="source">
               <el-input
                 v-model.trim="formValidate.source"
                 placeholder="请输入是来源"
@@ -48,22 +48,22 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍标签：" prop="tags" label-for="tags">
+            <el-form-item label="教程标签：" prop="tags" label-for="tags">
               <el-input
                 v-model.trim="formValidate.tags"
-                placeholder="请输入书籍标签"
+                placeholder="请输入教程标签"
                 element-id="tags"
                 style="width: 90%"
               />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="书籍难度：" prop="level">
+            <el-form-item label="教程难度：" prop="level">
               <el-rate v-model="formValidate.level" style="display: contents;" />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid" class="mr50">
-            <el-form-item label="书籍封面：" prop="file_uuid">
+            <el-form-item label="教程封面：" prop="file_uuid">
               <div class="upLoadPicBox" @click="modalPicTap('1')">
                 <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.file_url" alt=""></div>
                 <div v-else class="upLoad">
@@ -88,6 +88,25 @@
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
+            <el-form-item label="是否推荐：">
+              <el-radio-group v-model="formValidate.is_recommend">
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="教程版本：" prop="version" label-for="version">
+              <el-input
+                v-model.trim="formValidate.version"
+                placeholder="请输入版本号"
+                element-id="version"
+                style="width: 90%"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
             <el-form-item label="显示顺序：">
               <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
               <div class="image-size-require">最大顺序为1,000,000,000</div>
@@ -95,13 +114,13 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">书籍简介</span>
+          <span class="title">教程简介</span>
           <el-divider />
         </div>
-        <el-form-item label="书籍概要：" prop="content_desc">
+        <el-form-item label="教程概要：" prop="content_desc">
           <el-input v-model="formValidate.content_desc" show-word-limit maxlength="64" clearable type="textarea" />
         </el-form-item>
-        <el-form-item label="书籍简介：" prop="intro">
+        <el-form-item label="教程简介：" prop="intro">
           <ueditor-from v-model="formValidate.intro" :content="formValidate.intro" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
@@ -124,7 +143,7 @@ export default {
       if (this.formValidate.file_uuid) {
         callback()
       } else {
-        callback(new Error('请上传书籍图片'))
+        callback(new Error('请上传教程图片'))
       }
     }
     const validateLevel = (rule, value, callback) => {
@@ -154,15 +173,18 @@ export default {
         level: 1,
         intro: '',
         tags: '',
-        content_desc: ''
+        content_desc: '',
+        is_recommend: 2,
+        version: ''
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入书籍标题', trigger: 'blur' }],
-        content_desc: [{ required: true, message: '请输入书籍概要', trigger: 'blur' }],
-        // intro: [{ required: true, message: '请输入书籍内容', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入教程标题', trigger: 'blur' }],
+        version: [{ required: true, message: '请输入教程版本号', trigger: 'blur' }],
+        content_desc: [{ required: true, message: '请输入教程概要', trigger: 'blur' }],
+        // intro: [{ required: true, message: '请输入教程内容', trigger: 'blur' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
-        author: [{ required: true, message: '请输入书籍作者', trigger: 'blur' }],
-        source: [{ required: true, message: '请输入书籍来源', trigger: 'blur' }],
+        author: [{ required: true, message: '请输入教程作者', trigger: 'blur' }],
+        source: [{ required: true, message: '请输入教程来源', trigger: 'blur' }],
         level: [{ required: true, validator: validateLevel, trigger: 'blur' }]
       },
       categoryData: [],
@@ -236,7 +258,7 @@ export default {
         }
       })
     },
-    // 书籍详情
+    // 教程详情
     getDetails() {
       show({ uuid: this.$route.params.uuid }).then(async res => {
         const data = res.data
@@ -253,7 +275,9 @@ export default {
           is_top: data.is_top,
           level: data.level,
           tags: data.tags.toString(),
-          content_desc: data.content_desc
+          content_desc: data.content_desc,
+          is_recommend: data.is_recommend,
+          version: data.version
         }
       })
     }
