@@ -9,7 +9,7 @@ const bookRouter = {
       path: 'book',
       name: '在线教程',
       component: () => import('@/views/book/index'),
-      meta: { title: '在线教程', icon: 'el-icon-reading' },
+      meta: { title: '在线教程', icon: 'el-icon-collection' },
       children: [
         {
           path: 'list',
@@ -50,6 +50,27 @@ const bookRouter = {
           name: 'bookCate',
           component: () => import('@/views/book/cate/list'),
           meta: { title: '教程类目', icon: 'el-icon-reading' },
+          hidden: true
+        }
+      ]
+    },
+    {
+      path: 'attache',
+      name: '资源文档',
+      component: () => import('@/views/book/index'),
+      meta: { title: '资源文档', icon: 'el-icon-reading' },
+      children: [
+        {
+          path: 'list',
+          name: 'AttacheList',
+          component: () => import('@/views/book/attache_list/list'),
+          meta: { title: '附件列表', icon: 'el-icon-files' }
+        },
+        {
+          path: 'cate/list',
+          name: 'AttacheCate',
+          component: () => import('@/views/book/attache_cate/list'),
+          meta: { title: '附件分类', icon: 'el-icon-reading' },
           hidden: true
         }
       ]

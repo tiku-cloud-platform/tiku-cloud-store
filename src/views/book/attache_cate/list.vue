@@ -23,18 +23,6 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-col v-bind="grid" style="width: auto;">
-                  <el-form-item label="是否推荐：" prop="is_home">
-                    <el-select v-model="listQuery.is_home" clearable placeholder="请选择">
-                      <el-option
-                        v-for="item in this.$store.getters.isShow"
-                        :key="item.key"
-                        :value="item.value"
-                        :label="item.label"
-                      />
-                    </el-select>
-                  </el-form-item>
-                </el-col>
                 <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">
                   搜索
                 </el-button>
@@ -117,7 +105,7 @@
     </el-card>
 
     <el-dialog
-      title="章节目录设置"
+      title="附件分类设置"
       :visible.sync="dialogVisible"
       width="30%"
       :before-close="handleClose"
@@ -143,13 +131,6 @@
             </el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="首页推荐：" prop="is_home">
-          <el-radio-group v-model="bookCategoryTemp.is_home">
-            <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
-              {{ item.label }}
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
         <el-form-item label="分类排序" prop="orders">
           <el-input-number v-model="bookCategoryTemp.orders" :min="1" :max="10000" label="分类排序" style="width: 100%;" />
         </el-form-item>
@@ -163,10 +144,10 @@
 </template>
 
 <script>
-import { list, del, add, edit, parentAll } from '@/api/book/cate'
+import { list, del, add, edit, parentAll } from '@/api/attache/cate'
 import Pagination from '@/components/Pagination'
 export default {
-  name: 'BookCate',
+  name: 'AttacheCate',
   components: { Pagination },
   data() {
     return {
@@ -174,7 +155,6 @@ export default {
         page: 1,
         size: 20,
         title: '',
-        is_home: '',
         is_show: ''
       },
       tableData: {
@@ -194,13 +174,11 @@ export default {
       dialogVisible: false,
       categoryParentAll: [],
       bookCategoryTemp: {
-        store_book_uuid: '',
         parent_uuid: null,
         title: '',
         is_show: 1,
         orders: 1,
-        uuid: '',
-        is_home: 2
+        uuid: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入分类名称', trigger: 'blur' }]
