@@ -102,9 +102,20 @@
                 v-model.trim="formValidate.version"
                 placeholder="请输入版本号"
                 element-id="version"
-                style="width: 90%"
+                style="width: 40%"
               />
             </el-form-item>
+            <el-col v-bind="grid">
+              <el-form-item label="教程分类：" prop="cate_uuid" label-for="cate_uuid">
+                <el-cascader
+                  v-model="formValidate.cate_uuid"
+                  :options="categoryData"
+                  :props="{ expandTrigger: 'hover' }"
+                  style="width: 100%"
+                  @change="handleChange"
+                />
+              </el-form-item>
+            </el-col>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="显示顺序：">
@@ -134,7 +145,7 @@
 import { add, edit, show } from '@/api/book/book'
 import { getName } from '@/utils/auth'
 import ueditorFrom from '@/components/ueditorFrom'
-
+import { treeAll } from '@/api/book/cate'
 export default {
   name: 'ArticleSave',
   components: { ueditorFrom },
@@ -175,7 +186,8 @@ export default {
         tags: '',
         content_desc: '',
         is_recommend: 2,
-        version: ''
+        version: '',
+        cate_uuid: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入教程标题', trigger: 'blur' }],
@@ -185,7 +197,8 @@ export default {
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
         author: [{ required: true, message: '请输入教程作者', trigger: 'blur' }],
         source: [{ required: true, message: '请输入教程来源', trigger: 'blur' }],
-        level: [{ required: true, validator: validateLevel, trigger: 'blur' }]
+        level: [{ required: true, validator: validateLevel, trigger: 'blur' }],
+        cate_uuid: [{ required: true, message: '教程分类不能为空', trigger: 'blur' }]
       },
       categoryData: [],
       sleOptions: {
@@ -212,11 +225,44 @@ export default {
     if (this.$route.params.uuid) {
       this.getDetails()
     }
+    this.getCateTree()
   },
   methods: {
     // 返回
     back() {
       this.$router.back()
+    },
+    // 获取教程分类
+    getCateTree() {
+      treeAll().then(res => {
+        const data = res.data
+        const newArr = []
+        // 格式化级联选择器的数据格式
+        data.map((item, index) => {
+          newArr.push({
+            value: item.uuid,
+            label: item.title
+          })
+          if (item.children) {
+            newArr[index]['children'] = []
+            item.children.map((citem, cindex) => {
+              newArr[index]['children'].push({
+                value: citem.uuid,
+                label: citem.title
+              })
+            })
+          }
+        })
+        this.categoryData = newArr
+      })
+    },
+    // 选择书籍分类
+    handleChange(value) {
+      if (value.length !== 1) {
+        this.formValidate.cate_uuid = value[1] // 有子集就返回第二个值
+      } else {
+        this.formValidate.cate_uuid = value[0] // 没子集就是第一个值
+      }
     },
     modalPicTap(tit) {
       const _this = this
@@ -277,7 +323,8 @@ export default {
           tags: data.tags.toString(),
           content_desc: data.content_desc,
           is_recommend: data.is_recommend,
-          version: data.version
+          version: data.version,
+          cate_uuid: data.cate_uuid
         }
       })
     }

@@ -44,6 +44,13 @@ const bookRouter = {
           component: () => import('@/views/book/category/save'),
           meta: { title: '教程章节', icon: 'el-icon-reading' },
           hidden: true
+        },
+        {
+          path: 'cate/list',
+          name: 'bookCate',
+          component: () => import('@/views/book/cate/list'),
+          meta: { title: '教程类目', icon: 'el-icon-reading' },
+          hidden: true
         }
       ]
     }

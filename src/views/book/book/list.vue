@@ -20,10 +20,13 @@
             <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <router-link :to="{path: '/book/book/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                  <router-link :to="{path: '/book/book/cate/list'}">
+                    <el-button size="small" type="primary" class="mr10">教程分类</el-button>
                   </router-link>
-                  <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
+                  <router-link :to="{path: '/book/book/save'}">
+                    <el-button size="small" type="primary" class="mr10">添加教程</el-button>
+                  </router-link>
+                  <el-button type="danger" size="small" @click="handleBatchDel">删除教程</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -65,6 +68,11 @@
         <!--            ></viewer>-->
         <!--          </template>-->
         <!--        </el-table-column>-->
+        <el-table-column label="分类" align="center" :show-overflow-tooltip="true">
+          <template slot-scope="{row}">
+            <span>{{ row.cate != null ? row.cate.title : '' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="书名" width="200" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
