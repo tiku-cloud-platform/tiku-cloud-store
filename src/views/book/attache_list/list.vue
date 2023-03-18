@@ -250,6 +250,7 @@ export default {
   methods: {
     handleClose() {
       this.dialogVisible = false
+      this.$refs['attacheForm'].resetFields()
     },
     showAttacheForm() {
       this.dialogVisible = true
