@@ -22,6 +22,7 @@ export default {
     // 配置项
     props: {
       type: Object,
+      // eslint-disable-next-line vue/require-valid-default-prop
       default: {
         value: 'parent_uuid', // ID字段名
         label: 'title', // 显示名称
@@ -30,6 +31,7 @@ export default {
     },
 
     // 选项列表数据(树形结构的对象数组)
+    // eslint-disable-next-line vue/require-valid-default-prop
     options: { type: Array, default: [] },
 
     // 初始值
@@ -74,6 +76,7 @@ export default {
         const scrollWrap = document.querySelectorAll('.el-scrollbar .el-select-dropdown__wrap')[0]
         const scrollBar = document.querySelectorAll('.el-scrollbar .el-scrollbar__bar')
         scrollWrap.style.cssText = 'margin: 0px; max-height: none; overflow: hidden;'
+        // eslint-disable-next-line no-return-assign
         scrollBar.forEach(ele => ele.style.width = 0)
       })
     },

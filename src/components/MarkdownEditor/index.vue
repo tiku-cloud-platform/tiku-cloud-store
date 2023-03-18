@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" ref="tuiEditor" style="min-height: 1000px;"/>
+  <div :id="id" ref="tuiEditor" style="min-height: 1000px;" />
 </template>
 
 <script>

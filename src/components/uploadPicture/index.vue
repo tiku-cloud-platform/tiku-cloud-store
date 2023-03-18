@@ -204,7 +204,7 @@ export default {
     // 添加分组
     async onAdd(uuid) {
       if (Number(uuid) !== 0) this.temp.parent_uuid = uuid
-      this.temp.title = '添加分组'
+      this.temp.title = await this.$modePromptBox('添加分组名称')
       groupAdd(this.temp).then(({ message }) => {
         this.$message.success(message)
         this.getGroupList()
@@ -212,7 +212,7 @@ export default {
     },
     // 编辑分组
     async onEdit(uuid, parent_uuid, title) {
-      this.temp.title = '修改分组'
+      this.temp.title = await this.$modePromptBox('修改分组名称', title)
       this.temp.uuid = uuid
       this.temp.parent_uuid = parent_uuid
       groupEdit(this.temp).then(({ message }) => {
