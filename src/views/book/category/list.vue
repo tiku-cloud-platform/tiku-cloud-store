@@ -95,7 +95,7 @@
                       <!--  <router-link :to="{path: '/cms/book/book/save'}">
                         <el-button size="small" type="success" class="mr10">添加</el-button>jumpAddContent
                       </router-link>-->
-                      <el-button size="small" type="success" class="mr10" @click="jumpAddContent('')">添加</el-button>
+                      <el-button size="small" type="success" class="mr10" @click="jumpAddContent('')">添加内容</el-button>
                       <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
                     </el-form-item>
                   </el-col>

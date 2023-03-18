@@ -31,7 +31,7 @@
               <el-col :span="8">
                 <el-form-item>
                   <router-link :to="{path: '/cms/article/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加文章</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
                   <el-button type="warning" size="small" @click="handleBatchPub">微信收录</el-button>

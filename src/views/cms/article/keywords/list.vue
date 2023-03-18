@@ -32,7 +32,7 @@
             <el-row>
               <el-col :span="5">
                 <el-form-item>
-                  <el-button size="small" type="success" class="mr10" @click="addDialog">添加</el-button>
+                  <el-button size="small" type="primary" class="mr10" @click="addDialog">添加搜索词</el-button>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
               </el-col>

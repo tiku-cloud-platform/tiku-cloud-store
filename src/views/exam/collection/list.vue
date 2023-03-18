@@ -79,9 +79,9 @@
                   <router-link :to="{ path: '/exam/collection/save' }">
                     <el-button
                       size="small"
-                      type="success"
+                      type="primary"
                       class="mr10"
-                    >添加
+                    >添加试题集
                     </el-button>
                   </router-link>
                   <el-button

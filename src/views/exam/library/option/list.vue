@@ -35,7 +35,7 @@
                   </el-button>
                   <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
                   <router-link :to="{path: '/exam/library/option/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加选择题</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>

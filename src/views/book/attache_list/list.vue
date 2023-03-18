@@ -261,7 +261,7 @@ export default {
       this.attacheForm = row
       this.attacheForm.file_url = row.cover.file_url + row.cover.file_name
     },
-    // copy渠道编号
+    // 复制链接地址
     copyChannelId(id) {
       (function() {
         document.oncopy = function(e) {
@@ -283,6 +283,7 @@ export default {
                 this.$message.success('更新成功')
                 this.getList()
                 this.handleClose()
+                this.attacheForm.uuid = ''
                 this.$refs['attacheForm'].resetFields()
                 return
               }

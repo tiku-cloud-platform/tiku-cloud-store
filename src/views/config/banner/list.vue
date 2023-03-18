@@ -33,7 +33,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/cms/banner/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加轮播图</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>

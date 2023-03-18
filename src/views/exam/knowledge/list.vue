@@ -7,7 +7,7 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分类名称：" prop="title">
+                  <el-form-item label="名称：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
@@ -31,7 +31,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/exam/knowledge/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加知识</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>

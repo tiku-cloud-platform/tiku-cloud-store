@@ -61,9 +61,9 @@
                   <router-link :to="{ path: '/exam/library/reading/save' }">
                     <el-button
                       size="small"
-                      type="success"
+                      type="primary"
                       class="mr10"
-                    >添加
+                    >添加问答题
                     </el-button>
                   </router-link>
                   <el-button
