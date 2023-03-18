@@ -179,7 +179,7 @@
         </div>
         <el-form-item label="文章简介" prop="content_desc">
           <el-input
-            v-model="form.content_desc"
+            v-model="formValidate.content_desc"
             type="textarea"
             placeholder="请输入文章简介"
             maxlength="100"
