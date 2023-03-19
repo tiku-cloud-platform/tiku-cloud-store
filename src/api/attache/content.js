@@ -8,6 +8,13 @@ export function list(params) {
   })
 }
 
+export function show(params) {
+  return request({
+    url: '/attache/show',
+    method: 'get',
+    params
+  })
+}
 export function add(params) {
   return request({
     url: '/attache/create',

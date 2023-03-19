@@ -67,6 +67,13 @@ const bookRouter = {
           meta: { title: '附件列表', icon: 'el-icon-files' }
         },
         {
+          path: 'add/:uuid?',
+          name: 'AttacheAdd',
+          hidden: true,
+          component: () => import('@/views/book/attache_list/add'),
+          meta: { title: '添加附件', icon: 'el-icon-files' }
+        },
+        {
           path: 'cate/list',
           name: 'AttacheCate',
           component: () => import('@/views/book/attache_cate/list'),

@@ -23,7 +23,9 @@
                   <router-link :to="{path: '/book/attache/cate/list'}">
                     <el-button size="small" type="primary" class="mr10">附件分类</el-button>
                   </router-link>
-                  <el-button size="small" type="primary" class="mr10" @click="showAttacheForm">添加附件</el-button>
+                  <router-link :to="{path: '/book/attache/add'}">
+                    <el-button size="small" type="primary" class="mr10">添加附件</el-button>
+                  </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除附件</el-button>
                 </el-form-item>
               </el-col>
@@ -66,7 +68,7 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="内容" width="200" align="center" :show-overflow-tooltip="true">
+        <el-table-column label="链接" width="200" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <svg-icon
               icon-class="copy"
@@ -99,7 +101,9 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="auto" class-name="small-padding fixed-width" fixed="right">
           <template slot-scope="{row,$index}">
-            <el-button type="text" size="mini" class="mr10" @click="showEditForm(row)">编辑</el-button>
+            <router-link :to="{path: '/book/attache/add/' + row.uuid}">
+              <el-button type="text" size="mini" class="mr10">编辑</el-button>
+            </router-link>
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
           </template>
         </el-table-column>
@@ -114,73 +118,13 @@
         />
       </div>
     </el-card>
-
-    <el-dialog
-      title="附件内容设置"
-      :visible.sync="dialogVisible"
-      width="40%"
-      :before-close="handleClose"
-    >
-      <el-form ref="attacheForm" :model="attacheForm" :rules="ruleValidate" label-width="80px">
-        <el-form-item label="附件封面" prop="file_uuid">
-          <div class="upLoadPicBox" @click="modalPicTap('1')">
-            <div v-if="attacheForm.file_uuid" class="pictrue"><img :src="attacheForm.file_url"></div>
-            <div v-else class="upLoad">
-              <i class="el-icon-camera cameraIconfont" />
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="附件分类" prop="cate_uuid">
-          <el-cascader
-            v-model="attacheForm.cate_uuid"
-            :options="categoryData"
-            :props="{ expandTrigger: 'hover' }"
-            style="width: 100%"
-            @change="handleChange"
-          />
-        </el-form-item>
-        <el-form-item label="附件名称" prop="title">
-          <el-input v-model="attacheForm.title" aria-required="true" show-word-limit clearable style="width: 100%;" />
-        </el-form-item>
-        <el-form-item label="附件内容" prop="content">
-          <el-input v-model="attacheForm.content" type="textarea" aria-required="true" show-word-limit clearable style="width: 100%;" />
-        </el-form-item>
-        <el-form-item label="是否显示" prop="is_show">
-          <el-radio-group v-model="attacheForm.is_show">
-            <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
-              {{ item.label }}
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="附件类型" prop="type">
-          <el-select v-model="attacheForm.type" placeholder="请选择附件类型" style="width: 100%;">
-            <el-option
-              v-for="item in typeList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="显示顺序" prop="orders">
-          <el-input-number v-model="attacheForm.orders" :min="1" :max="100000000" label="显示顺序" style="width: 100%;" />
-        </el-form-item>
-        <el-form-item label="下载次数" prop="download_number">
-          <el-input-number v-model="attacheForm.download_number" :min="0" :max="100000000" label="现在次数" style="width: 100%;" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit('attacheForm')">提交</el-button>
-          <el-button @click="handleClose">取消</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { list, del, add, edit } from '@/api/attache/content'
+
 import Pagination from '@/components/Pagination'
-import { treeAll } from '@/api/attache/cate'
+import { list, del } from '@/api/attache/content'
 export default {
   name: 'AttacheCate',
   components: { Pagination },
@@ -204,64 +148,19 @@ export default {
         sm: 24,
         xs: 24
       },
-      typeList: [
-        { label: 'Word文档', value: 1 },
-        { label: 'PDF文档', value: 2 },
-        { label: '视频文档', value: 3 },
-        { label: '网站文档', value: 4 },
-        { label: '工具文档', value: 5 },
-        { label: '其他文档', value: 6 }
-      ],
-      dialogVisible: false,
       // 批量删除选中id
       selectionDelList: [],
-      categoryData: [],
       sleOptions: {
         title: '',
         uuid: ''
       },
-      defaultProps: [],
-      attacheForm: {
-        file_uuid: '',
-        cate_uuid: '',
-        title: '',
-        content: '',
-        is_show: 1,
-        orders: 1,
-        uuid: '',
-        type: 6,
-        file_url: '',
-        download_number: 0
-      },
-      ruleValidate: {
-        file_uuid: [{ required: true, message: '请上传附件封面', trigger: 'blur' }],
-        title: [{ required: true, message: '请输入附件名称', trigger: 'blur' }],
-        cate_uuid: [{ required: true, message: '请选择附件类型', trigger: 'blur' }],
-        content: [{ required: true, message: '请填写附件内容', trigger: 'blur' }],
-        is_show: [{ required: true, message: '请选择附件显示状态', trigger: 'blur' }],
-        type: [{ required: true, message: '请选择附件类型', trigger: 'blur' }],
-        orders: [{ required: true, message: '请选择附件显示顺序', trigger: 'blur' }]
-      }
+      defaultProps: []
     }
   },
   mounted() {
     this.getList()
   },
   methods: {
-    handleClose() {
-      this.dialogVisible = false
-      this.attacheForm = {}
-    },
-    showAttacheForm() {
-      this.dialogVisible = true
-      this.getCateTree()
-    },
-    showEditForm(row) {
-      this.dialogVisible = true
-      this.getCateTree()
-      this.attacheForm = row
-      this.attacheForm.file_url = row.cover.file_url + row.cover.file_name
-    },
     // 复制链接地址
     copyChannelId(id) {
       (function() {
@@ -274,75 +173,6 @@ export default {
       document.execCommand('Copy')
       this.$message.success('复制成功')
     },
-    // 创建提交
-    onSubmit(name) {
-      this.$refs[name].validate(valid => {
-        if (valid) {
-          if (this.attacheForm.uuid) {
-            edit(this.attacheForm).then(res => {
-              if (res.code === 1000) {
-                this.$message.success('更新成功')
-                this.getList()
-                this.handleClose()
-                this.attacheForm.uuid = ''
-                this.$refs['attacheForm'].resetFields()
-                return
-              }
-              this.$message.error('更新失败')
-            })
-          } else {
-            add(this.attacheForm).then(res => {
-              if (res.code === 1000) {
-                this.$message.success('创建成功')
-                this.getList()
-                this.handleClose()
-                this.$refs['attacheForm'].resetFields()
-                return
-              }
-              this.$message.error('创建失败')
-            })
-          }
-        } else {
-          return false
-        }
-      })
-    },
-    // 选择附件分类
-    handleChange(value) {
-      if (value.length !== 1) {
-        this.attacheForm.cate_uuid = value[1] // 有子集就返回第二个值
-      } else {
-        this.attacheForm.cate_uuid = value[0] // 没子集就是第一个值
-      }
-    },
-    reset() {
-      this.$refs['searchForm'].resetFields()
-      this.getList()
-    },
-    // 获取附件分类
-    getCateTree() {
-      treeAll().then(res => {
-        const data = res.data
-        const newArr = []
-        // 格式化级联选择器的数据格式
-        data.map((item, index) => {
-          newArr.push({
-            value: item.uuid,
-            label: item.title
-          })
-          if (item.children) {
-            newArr[index]['children'] = []
-            item.children.map((citem, cindex) => {
-              newArr[index]['children'].push({
-                value: citem.uuid,
-                label: citem.title
-              })
-            })
-          }
-        })
-        this.categoryData = newArr
-      })
-    },
     // 列表
     getList() {
       this.listLoading = true
@@ -351,13 +181,6 @@ export default {
         this.tableData.total = res.data.total
         this.listLoading = false
       })
-    },
-    modalPicTap(tit) {
-      const _this = this
-      this.$modalUpload(function(img) {
-        _this.attacheForm.file_uuid = img.file_uuid
-        _this.attacheForm.file_url = img.file_url
-      }, tit)
     },
     // 删除
     handleDelete(row, idx) {
