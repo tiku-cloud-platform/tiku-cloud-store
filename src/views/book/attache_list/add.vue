@@ -70,9 +70,26 @@
               v-model="attacheForm.download_number"
               :min="0"
               :max="100000000"
-              label="现在次数"
+              label="下载次数"
               style="width: 100%;"
             />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="grid">
+          <el-form-item label="下载积分" prop="score">
+            <el-input-number
+              v-model="attacheForm.score"
+              :min="0"
+              :max="1000"
+              step="0.01"
+              label="下载积分"
+              style="width: 100%;"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col v-bind="grid">
+          <el-form-item label="跳转地址" prop="url">
+            <el-input v-model="attacheForm.url" aria-required="true" show-word-limit clearable style="width: 100%;" />
           </el-form-item>
         </el-col>
         <el-col v-bind="grid">
@@ -153,7 +170,9 @@ export default {
         type: 6,
         file_url: '',
         download_number: 0,
-        attache_content: ''
+        attache_content: '',
+        score: 0.00,
+        url: ''
       },
       ruleValidate: {
         file_uuid: [{ required: true, message: '请上传附件封面', trigger: 'blur' }],
@@ -163,7 +182,8 @@ export default {
         content: [{ required: true, message: '请填写附件内容', trigger: 'blur' }],
         is_show: [{ required: true, message: '请选择附件显示状态', trigger: 'blur' }],
         type: [{ required: true, message: '请选择附件类型', trigger: 'blur' }],
-        orders: [{ required: true, message: '请选择附件显示顺序', trigger: 'blur' }]
+        orders: [{ required: true, message: '请选择附件显示顺序', trigger: 'blur' }],
+        score: [{ required: true, message: '积分不能为空', trigger: 'blur' }]
       }
     }
   },
