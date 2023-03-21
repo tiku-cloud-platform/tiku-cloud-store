@@ -33,7 +33,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <el-button size="small" type="primary" class="mr10" @click="addDialog">添加分组</el-button>
-                  <el-button type="danger" @click="handleBatchDel">删除</el-button>
+                  <el-button type="danger" @click="handleBatchDel">删除分组</el-button>
                 </el-form-item>
               </el-col>
             </el-row>
