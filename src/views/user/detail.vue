@@ -56,7 +56,10 @@
                 <el-button type="text" style="color: #333;">注册日期: {{ userInfo.created_at }}</el-button>
               </el-col>
               <el-col :span="4">
-                <el-button type="text" style="color: #333;">注册IP: {{ userInfo.register_ip }}</el-button>
+                <el-button type="text" style="color: #333;">注册IP: {{ userInfo.mini.register_ip }}</el-button>
+              </el-col>
+              <el-col :span="4">
+                <el-button type="text" style="color: #333;">登录IP: {{ userInfo.mini.login_ip }}</el-button>
               </el-col>
               <el-col :span="4">
                 <el-button type="text" style="color: #333;">用户地址: {{ userInfo.address }}</el-button>
