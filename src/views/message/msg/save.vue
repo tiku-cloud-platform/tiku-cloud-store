@@ -40,7 +40,7 @@
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio :label="1" class="radio">显示</el-radio>
-                <el-radio :label="0">不显示</el-radio>
+                <el-radio :label="2">不显示</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -86,7 +86,7 @@ export default {
         title: '',
         platform_message_category_uuid: '',
         content: '',
-        is_show: 1
+        is_show: 2
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入标题', trigger: 'blur' }],

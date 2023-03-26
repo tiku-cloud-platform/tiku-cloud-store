@@ -168,7 +168,7 @@ export default {
         title: '',
         file_uuid: '',
         orders: '',
-        is_show: 1,
+        is_show: 2,
         miniprogram_state: '',
         lang: '',
         template_id: '',

@@ -1,28 +1,25 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">文章信息</span>
           <el-divider />
         </div>
-        <el-row :gutter="10">
+        <el-row :span="24">
           <el-col v-bind="grid">
             <el-form-item label="文章标题：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" placeholder="请输入" element-id="title" style="width: 90%" />
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid" class="mr50">
-            <el-form-item label="文章位置：" prop="position">
-              <el-select v-model="formValidate.position" clearable placeholder="注意：同一个位置只能添加一篇文章" style="width: 90%">
-                <el-option
-                  v-for="item in positionData"
-                  :key="item.value"
-                  :label="item.describe"
-                  :value="item.value"
-                />
-              </el-select>
+              <el-input v-model.trim="formValidate.title" placeholder="请输入" maxlength="100" show-word-limit clearable element-id="title" style="width: 100%" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -38,16 +35,16 @@
           <el-divider />
         </div>
         <el-row>
-          <el-col :span="24">
+          <el-col>
             <el-form-item label="排序：">
               <el-input-number v-model="formValidate.orders" :min="0" :max="10" />
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <el-col>
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
                 <el-radio :label="1" class="radio">显示</el-radio>
-                <el-radio :label="0">不显示</el-radio>
+                <el-radio :label="2">不显示</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -63,18 +60,12 @@ import ueditorFrom from '@/components/ueditorFrom'
 // 常量配置
 import { list as constantList } from '@/api/system/const'
 // 内容
-import { add, edit, list } from '@/api/cms/content'
+import { add, edit, show } from '@/api/cms/content'
+
 export default {
   name: 'ConfigEdit',
   components: { ueditorFrom },
   data() {
-    const validatePosition = (rule, value, callback) => {
-      if (!this.formValidate.position) {
-        callback(new Error('请选择文章位置'))
-      } else {
-        callback()
-      }
-    }
     return {
       grid: {
         xl: 10,
@@ -85,14 +76,14 @@ export default {
       },
       formValidate: {
         title: '',
-        position: '',
         orders: 0,
         content: '',
         is_show: 1
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
-        position: [{ required: true, validator: validatePosition, trigger: 'change' }],
+        position: [{ required: true, message: '请输入配置描述', trigger: 'blur' }],
+        // position: [{ required: true, validator: validatePosition, trigger: 'change' }],
         content: [{ required: true, message: '请输入文章内容', trigger: 'change' }]
       },
       tempRoute: {},
@@ -109,7 +100,7 @@ export default {
           orders: 0,
           position: '',
           content: '',
-          is_show: 0
+          is_show: 2
         }
       }
     }
@@ -118,7 +109,7 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   mounted() {
-    this.getConstantList()
+    // this.getConstantList()
     if (this.$route.params.id) {
       this.setTagsViewTitle()
       this.getDetails()
@@ -127,7 +118,7 @@ export default {
   methods: {
     // 返回
     back() {
-      this.$router.push({ path: `/cms/config/article/list` })
+      this.$router.back()
     },
     // 所有文章显示位置
     getConstantList() {
@@ -158,14 +149,14 @@ export default {
             edit(this.formValidate).then(async message => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/cms/config/list` })
+                this.$router.go(-1)
               }, 500)
             })
           } else {
             add(this.formValidate).then((message) => {
               this.$message.success(message)
               setTimeout(() => {
-                this.$router.push({ path: `/cms/config/list` })
+                this.$router.go(-1)
               }, 500)
             })
           }
@@ -176,13 +167,12 @@ export default {
     },
     // 文章详情
     getDetails() {
-      list({ uuid: this.$route.params.id }).then(async res => {
-        const data = res.data.items[0]
+      show({ uuid: this.$route.params.id }).then(async res => {
+        const data = res.data
         this.formValidate = {
           uuid: data.uuid,
           title: data.title,
           orders: data.orders,
-          position: data.position_show.value,
           content: data.content,
           is_show: data.is_show
         }

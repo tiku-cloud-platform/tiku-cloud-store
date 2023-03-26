@@ -7,14 +7,19 @@
             <el-row>
               <el-col :span="19">
                 <el-col v-bind="grid" style="width:auto;">
-                  <el-form-item label="分类名称：" prop="title">
+                  <el-form-item label="名称：" prop="title">
                     <el-input v-model="listQuery.title" placeholder="请输入分类名称" size="small" clearable />
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width:auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
@@ -26,7 +31,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/exam/knowledge/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加知识</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
@@ -36,7 +41,7 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -72,7 +77,17 @@
         <el-table-column label="状态" width="auto" align="center">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -85,7 +100,13 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -94,6 +115,7 @@
 <script>
 import { list, del } from '@/api/exam/knowledge'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ExamKnowledgeCategory',
   components: { Pagination },
@@ -135,8 +157,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {
@@ -177,9 +199,11 @@ export default {
 .mr10 {
   margin-right: 10px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .el-col-lg-12 {
   width: 30%;
 }

@@ -14,11 +14,18 @@
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">
+                  搜索
+                </el-button>
                 <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
             </el-row>
@@ -26,7 +33,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/cms/article/category/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加分类</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
@@ -36,28 +43,16 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
         empty-text="暂无数据"
-        border="true"
+        :border="true"
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <!--        row-key="uuid"-->
-        <!--        :tree-props="{children: 'children'}"-->
-<!--        <el-table-column type="selection" width="55" />-->
-        <!-- <el-table-column label="编号" width="auto" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.uuid }}</span>
-          </template>
-        </el-table-column> -->
-<!--        <el-table-column label="分类图片" width="70" align="center">-->
-<!--          <template slot-scope="scope">-->
-<!--            <viewer v-if="scope.row.cover_file_info != null"><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <el-table-column type="selection" width="55" />
         <el-table-column label="分类名称" width="auto" align="center">
           <template slot-scope="{row}">
             <span>{{ row.title }}</span>
@@ -70,21 +65,37 @@
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width" fixed="right">
           <template slot-scope="{row,$index}">
             <router-link :to="{path: '/cms/article/category/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
+            <el-button size="mini" type="text" style="color: red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -93,6 +104,7 @@
 <script>
 import { list, del } from '@/api/article/category'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ArticleCategoryList',
   components: { Pagination },
@@ -136,8 +148,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {
@@ -175,12 +187,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.selWidth{
+.selWidth {
   width: 300px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .mr10 {
   margin-right: 10px;
 }

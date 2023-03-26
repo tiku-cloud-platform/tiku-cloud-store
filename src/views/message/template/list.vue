@@ -28,6 +28,7 @@
           </el-form>
         </div>
       </div>
+      <!--      表格开始-->
       <el-table
         v-loading="listLoading"
         :data="tableData.data"
@@ -62,8 +63,18 @@
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -75,6 +86,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <!--      表格结束-->
       <div class="block">
         <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
       </div>
@@ -119,11 +131,10 @@ export default {
     getList() {
       this.listLoading = true
       list(this.listQuery).then(res => {
-        console.log(res)
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 重置
     resetForm() {

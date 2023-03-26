@@ -17,20 +17,20 @@
           <div class="nick-name">{{ userInfo.name }}</div>
           <div class="mt10">富在术数，不在劳身；利在势居，不在力耕。</div>
           <div style="text-align: left;">
-            <div class="mt10 info">
-              <svg-icon icon-class="peoples" />
+            <div class="mt20 info">
+              <svg-icon icon-class="peoples" class-name="store-icon" />
               公司名称：{{ userInfo.company_name }}
             </div>
-            <div class="mt10 info">
-              <svg-icon icon-class="email" />
+            <div class="mt20 info">
+              <svg-icon icon-class="email" class-name="store-icon" />
               公司邮箱：{{ userInfo.email }}
             </div>
-            <div class="mt10 info">
-              <svg-icon icon-class="phone" />
+            <div class="mt20 info">
+              <svg-icon icon-class="phone" class-name="store-icon" />
               公司电话：{{ userInfo.company_tel }}
             </div>
-            <div class="mt10 info">
-              <svg-icon icon-class="time" />
+            <div class="mt20 info">
+              <svg-icon icon-class="time" class-name="store-icon" />
               过期时间：{{ userInfo.expire_time }}
             </div>
           </div>
@@ -244,6 +244,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .store-icon {
+    font-size: 18px;
+  }
+
   .divBox {
     display: flex;
   }

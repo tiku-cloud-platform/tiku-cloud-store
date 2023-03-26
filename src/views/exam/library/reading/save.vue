@@ -1,8 +1,17 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
           <el-divider />
@@ -10,17 +19,36 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试题题目：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" type="textarea" autosize placeholder="请输入试题题目" maxlength="1000" style="width: 90%" />
+              <el-input
+                v-model.trim="formValidate.title"
+                type="textarea"
+                autosize
+                placeholder="请输入试题题目"
+                maxlength="1000"
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="消耗积分：" prop="tips_expend_score">
-              <el-input-number v-model="formValidate.tips_expend_score" :min="0" :precision="2" :step="0.1" style="width: 90%" />
+              <el-input-number
+                v-model="formValidate.tips_expend_score"
+                :min="0"
+                :precision="2"
+                :step="0.1"
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="奖励积分：" prop="answer_income_score">
-              <el-input-number v-model="formValidate.answer_income_score" :min="0" :precision="2" :step="0.1" style="width: 90%" />
+              <el-input-number
+                v-model="formValidate.answer_income_score"
+                :min="0"
+                :precision="2"
+                :step="0.1"
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -36,7 +64,14 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试题分类：" prop="category">
-              <el-select v-model="formValidate.category" multiple filterable clearable placeholder="请选择" style="width: 90%">
+              <el-select
+                v-model="formValidate.category"
+                multiple
+                filterable
+                clearable
+                placeholder="请选择"
+                style="width: 90%"
+              >
                 <el-option-group
                   v-for="group in categoryData"
                   :key="group.title"
@@ -55,7 +90,14 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试题知识点：" prop="tag">
-              <el-select v-model="formValidate.tag" multiple clearable filterable placeholder="请选择" style="width: 90%">
+              <el-select
+                v-model="formValidate.tag"
+                multiple
+                clearable
+                filterable
+                placeholder="请选择"
+                style="width: 90%"
+              >
                 <el-option-group
                   v-for="group in knowledgeData"
                   :key="group.title"
@@ -79,7 +121,14 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="视频链接：" prop="video_url" label-for="video_url">
-              <el-input v-model.trim="formValidate.video_url" type="text" autosize placeholder="相关视频链接" maxlength="500" style="width: 90%" />
+              <el-input
+                v-model.trim="formValidate.video_url"
+                type="text"
+                autosize
+                placeholder="相关视频链接"
+                maxlength="500"
+                style="width: 90%"
+              />
               <div class="input-alter">直接放入第三方平台的视频链接，支持.mp4格式。</div>
             </el-form-item>
           </el-col>
@@ -91,7 +140,12 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试题出处：" prop="source_author" label-for="source_author">
-              <el-input v-model.trim="formValidate.source_author" placeholder="请输入" maxlength="32" style="width: 90%" />
+              <el-input
+                v-model.trim="formValidate.source_author"
+                placeholder="请输入"
+                maxlength="32"
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
@@ -102,16 +156,22 @@
           <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="item in this.$store.getters.isShow" :key="item.label" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="item in this.$store.getters.isShow" :key="item.label" :label="item.value">{{
+                  item.label
+                }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="搜索状态：">
               <el-radio-group v-model="formValidate.is_search">
-                <el-radio v-for="item in this.$store.getters.isSearch" :key="item.label" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="item in this.$store.getters.isSearch" :key="item.label" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
-              <div class="input-alter">设置为显示状态，将在试题搜索页中展现；设置为禁用，则只会在时间的试题列表页中显示。</div>
+              <div class="input-alter">设置为显示状态，将在试题搜索页中展现；设置为禁用，则只会在时间的试题列表页中显示。
+              </div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -121,15 +181,22 @@
         </div>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="试题解析：">
-              <el-input v-model="formValidate.analysis" autosize type="textarea" />
+            <el-form-item label="试题描述：">
+              <ueditor-exam v-model="formValidate.remark" :content="formValidate.remark" style="height: 200px;" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="试题描述：" prop="content">
-              <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+            <el-form-item label="试题答案：" prop="content">
+              <ueditor-exam v-model="formValidate.content" :content="formValidate.content" style="height: 200px;" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="答案解析：">
+              <ueditor-exam v-model="formValidate.analysis" :content="formValidate.analysis" style="height: 200px;" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -151,8 +218,18 @@
               <el-input v-model="listQuery.title" placeholder="请输入试卷名称" size="small" clearable />
             </el-col>
             <el-col :span="4" style="margin-left:10px;">
-              <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getCollectionList">搜索</el-button>
-              <el-button icon="ios-search" label="default" class="mr15" size="small" @click="getCollectionListReset">重置</el-button>
+              <el-button
+                type="primary"
+                icon="ios-search"
+                label="default"
+                class="mr15"
+                size="small"
+                @click="getCollectionList"
+              >搜索
+              </el-button>
+              <el-button icon="ios-search" label="default" class="mr15" size="small" @click="getCollectionListReset">
+                重置
+              </el-button>
             </el-col>
           </el-row>
         </el-form>
@@ -184,12 +261,25 @@
         </el-table-column>
         <el-table-column label="封面" width="70" align="center">
           <template slot-scope="scope">
-            <viewer><img :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name" width="50" height="50"></viewer>
+            <viewer>
+              <img
+                :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
+                width="50"
+                height="50"
+                alt=""
+              ></viewer>
           </template>
         </el-table-column>
         <el-table-column label="难易程度" width="130" align="center">
           <template slot-scope="{row}" style="display: flex">
-            <span style="justify-content: center;display: flex;"><svg-icon v-for="n in + row.level" :key="n" style="float: left" icon-class="xingxing" class="meta-item__icon" /></span>
+            <span style="justify-content: center;display: flex;">
+              <svg-icon
+                v-for="n in + row.level"
+                :key="n"
+                style="float: left"
+                icon-class="xingxing"
+                class="meta-item__icon"
+              /></span>
           </template>
         </el-table-column>
         <el-table-column label="答题人数" width="auto" align="center">
@@ -231,14 +321,21 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :page-size="1" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getCollectionList" />
+        <pagination
+          v-show="tableData.total>0"
+          :page-size="1"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getCollectionList"
+        />
       </div>
     </el-drawer>
   </div>
 </template>
 
 <script>
-import ueditorFrom from '@/components/ueditorFrom'
+import ueditorExam from '@/components/ueditorExam'
 // 内容
 import { show, add, edit } from '@/api/exam/reading'
 // 试题分类
@@ -250,9 +347,10 @@ import { list as knowledgeList } from '@/api/exam/knowledge'
 import { list as collectionList } from '@/api/exam/collection'
 import Pagination from '@/components/Pagination'
 import { getName } from '@/utils/auth'
+
 export default {
   name: 'SaveExamReading',
-  components: { Pagination, ueditorFrom },
+  components: { Pagination, ueditorExam },
   data() {
     const validateLevel = (rule, value, callback) => {
       if (this.formValidate.level) {
@@ -285,7 +383,8 @@ export default {
         is_search: 2,
         category: [],
         content: '',
-        video_url: ''
+        video_url: '',
+        remark: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请填写分类名称', trigger: 'blur' }],
@@ -348,8 +447,8 @@ export default {
             }
           }
         })
+        this.listLoading = false
       })
-      this.listLoading = false
     },
 
     // 重置试卷分类筛选
@@ -375,7 +474,7 @@ export default {
     },
     // 返回
     back() {
-      this.$router.push({ path: `/exam/library/reading/list` })
+      this.$router.back()
     },
     // 提交数据
     onsubmit(name) {
@@ -421,7 +520,8 @@ export default {
           source_url: data.source_url,
           source_author: data.source_author,
           video_url: data.video_url,
-          is_search: data.is_search
+          is_search: data.is_search,
+          remark: data.remark
         }
       })
     }

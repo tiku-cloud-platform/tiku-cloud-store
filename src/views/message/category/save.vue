@@ -1,8 +1,17 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
           <el-divider />
@@ -18,7 +27,7 @@
           <el-col v-bind="grid">
             <el-form-item label="分类图片：" prop="file_uuid">
               <div class="upLoadPicBox" @click="modalPicTap('1')">
-                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.img_url"></div>
+                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="formValidate.img_url" alt=""></div>
                 <div v-else class="upLoad">
                   <i class="el-icon-camera cameraIconfont" />
                 </div>
@@ -39,7 +48,9 @@
           <el-col :span="24">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -53,6 +64,7 @@
 <script>
 // 内容
 import { add, edit, list } from '@/api/message/category'
+
 export default {
   name: 'SaveMessageCategory',
   data() {
@@ -96,7 +108,7 @@ export default {
           title: '',
           file_uuid: '',
           orders: '',
-          is_show: 0
+          is_show: 2
         }
       }
     }

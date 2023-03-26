@@ -64,8 +64,18 @@
         </el-table-column>
         <el-table-column label="启用状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="text" type="text" style="color:red;">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="text" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="text" type="text" class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="text" type="text" class="show-enable-text">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -126,8 +136,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 重置
     reset() {

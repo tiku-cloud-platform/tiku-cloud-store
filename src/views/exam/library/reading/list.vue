@@ -45,12 +45,14 @@
                   class="mr15"
                   size="small"
                   @click="getList"
-                >搜索</el-button>
+                >搜索
+                </el-button>
                 <el-button
                   class="ResetSearch mr10"
                   size="small"
                   @click="reset()"
-                >重置</el-button>
+                >重置
+                </el-button>
               </el-col>
             </el-row>
             <el-row>
@@ -59,14 +61,16 @@
                   <router-link :to="{ path: '/exam/library/reading/save' }">
                     <el-button
                       size="small"
-                      type="success"
+                      type="primary"
                       class="mr10"
-                    >添加</el-button>
+                    >添加问答题
+                    </el-button>
                   </router-link>
                   <el-button
                     type="danger"
                     @click="handleBatchDel"
-                  >删除</el-button>
+                  >删除
+                  </el-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -74,7 +78,7 @@
         </div>
       </div>
       <el-table
-        :loading="listLoading"
+        v-loading="listLoading"
         :data="tableData.data"
         style="width: 100%"
         size="small"
@@ -86,12 +90,12 @@
         :header-cell-style="{background:'#eef1f6',color:'#606266'}"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" align="center"/>
-<!--        <el-table-column label="编号" width="auto" :show-overflow-tooltip="true" align="center">-->
-<!--          <template slot-scope="{row}">-->
-<!--            <span>{{ row.uuid }}</span>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <el-table-column type="selection" align="center" />
+        <!--        <el-table-column label="编号" width="auto" :show-overflow-tooltip="true" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.uuid }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column
           label="试题题目"
           width="auto"
@@ -133,7 +137,7 @@
         >
           <template slot-scope="{ row }">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -144,7 +148,17 @@
         >
           <template slot-scope="{ row }">
             <span v-if="row.is_search === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_search === 1">启用</span>
+            <span v-if="row.is_search === 1" class="show-enable-text">启用</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -162,7 +176,8 @@
               type="text"
               style="color:red;"
               @click="handleDelete(row, $index)"
-            >删除</el-button>
+            >删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -182,6 +197,7 @@
 <script>
 import { list, del } from '@/api/exam/reading'
 import Pagination from '@/components/Pagination'
+
 export default {
   name: 'ExamReading',
   components: { Pagination },
@@ -276,9 +292,11 @@ export default {
   overflow: hidden;
   margin-left: -2px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .mr10 {
   margin-right: 10px;
 }

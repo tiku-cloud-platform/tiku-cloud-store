@@ -68,3 +68,7 @@ export function handleDealFilter(arr, key, replaceKey) {
   })
   return newArr
 }
+
+// export class modePromptBox {
+//   modePromptBox: modePromptBox
+// }

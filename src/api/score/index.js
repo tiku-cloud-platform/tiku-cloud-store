@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function history(params) {
   return request({
-    url: 'store/score/history/list',
+    url: 'score/history/list',
     method: 'get',
     params
   })

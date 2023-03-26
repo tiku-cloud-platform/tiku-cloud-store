@@ -1,8 +1,17 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">基础信息</span>
           <el-divider />
@@ -60,7 +69,7 @@
           </el-col>
         </el-row>
         <div class="dividerTitle">
-          <span class="title">其他设置</span>
+          <span class="title">积分设置</span>
           <el-divider />
         </div>
         <el-row :gutter="10">
@@ -77,20 +86,89 @@
             </el-form-item>
             <el-form-item label="文章排序：">
               <el-input-number v-model="formValidate.orders" :min="0" :max="1000000000" />
-              <div class="image-size-require">最大顺序为1,000,000,000</div>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
+            <el-form-item label="阅读积分：">
+              <el-input-number
+                v-model="formValidate.read_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="分享积分：">
+              <el-input-number
+                v-model="formValidate.share_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="点赞积分：">
+              <el-input-number
+                v-model="formValidate.click_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="收藏积分：">
+              <el-input-number
+                v-model="formValidate.collection_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="阅读积分(消耗)：">
+              <el-input-number
+                v-model="formValidate.read_expend_score"
+                :min="0"
+                :max="10000"
+                type="number"
+                :step="0.01"
+                :precision="2"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="dividerTitle">
+          <span class="title">积分设置</span>
+          <el-divider />
+        </div>
+        <el-row>
+          <el-col v-bind="grid">
             <el-form-item label="显示状态：">
               <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="是否置顶：">
               <el-radio-group v-model="formValidate.is_top">
-                <el-radio v-for="(item, index) in this.$store.getters.isTop" :key="index" :label="item.value">{{ item.label }}</el-radio>
+                <el-radio v-for="(item, index) in this.$store.getters.isTop" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -99,6 +177,16 @@
           <span class="title">文章内容</span>
           <el-divider />
         </div>
+        <el-form-item label="文章简介" prop="content_desc">
+          <el-input
+            v-model="formValidate.content_desc"
+            type="textarea"
+            placeholder="请输入文章简介"
+            maxlength="100"
+            show-word-limit
+            :clearable="true"
+          />
+        </el-form-item>
         <el-form-item label="文章内容：" prop="content">
           <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
         </el-form-item>
@@ -112,9 +200,10 @@
 import ueditorFrom from '@/components/ueditorFrom'
 import { list as categoryList } from '@/api/article/category'
 // 内容
-import { add, edit, list } from '@/api/article/list'
+import { add, edit, show } from '@/api/article/list'
 import { formatLongDate } from '@/utils'
 import { getName } from '@/utils/auth'
+
 export default {
   name: 'ArticleSave',
   components: { ueditorFrom },
@@ -159,10 +248,17 @@ export default {
         content: '',
         publish_date: formatLongDate(new Date()),
         is_show: 1,
-        is_top: 1
+        is_top: 1,
+        read_score: 0,
+        share_score: 0,
+        click_score: 0,
+        collection_score: 0,
+        read_expend_score: 0,
+        content_desc: ''
       },
       ruleValidate: {
         title: [{ required: true, message: '请输入新闻标题', trigger: 'blur' }],
+        content_desc: [{ required: true, message: '请输入文章简介', trigger: 'blur' }],
         article_category_uuid: [{ required: true, validator: validateArticleCategory, trigger: 'change' }],
         publish_date: [{ required: true, validator: validatePublishDate, trigger: 'change' }],
         content: [{ required: true, message: '请输入新闻内容', trigger: 'blur' }],
@@ -246,8 +342,8 @@ export default {
     },
     // 文章详情
     getDetails() {
-      list({ uuid: this.$route.params.uuid }).then(async res => {
-        const data = res.data.items[0]
+      show({ uuid: this.$route.params.uuid }).then(async res => {
+        const data = res.data
         this.formValidate = {
           file_url: data.cover_file_info !== null ? data.cover_file_info.file_url + data.cover_file_info.file_name : '',
           file_uuid: data.file_uuid,
@@ -260,7 +356,13 @@ export default {
           publish_date: data.publish_date,
           article_category_uuid: data.article_category_uuid,
           is_show: data.is_show,
-          is_top: data.is_top
+          is_top: data.is_top,
+          read_score: data.read_score,
+          share_score: data.share_score,
+          click_score: data.click_score,
+          collection_score: data.collection_score,
+          read_expend_score: data.read_expend_score,
+          content_desc: data.content_desc
         }
       })
     }

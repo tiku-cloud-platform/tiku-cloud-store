@@ -35,6 +35,9 @@ export default {
     color: red;
 }
 .show-disable-text {
-  color: #e6a23c;
+  color: #A5A8AD !important;
+}
+.show-enable-text {
+  color: #67C23A !important;
 }
 </style>

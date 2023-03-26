@@ -13,28 +13,6 @@
                 </el-col>
                 <el-col v-bind="grid" style="width:auto">
                   <el-form-item label="文章分类：" prop="category_uuid">
-                    <!--                    <el-cascader-->
-                    <!--                      v-model="value"-->
-                    <!--                      :options="categoryData"-->
-                    <!--                      :show-all-levels="false"-->
-                    <!--                      :props="{ expandTrigger: 'hover' }"-->
-                    <!--                      @change="handleChange"-->
-                    <!--                    />-->
-                    <!--                    <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择" style="width: 90%">-->
-                    <!--                      <el-option-->
-                    <!--                        :label="sleOptions.title"-->
-                    <!--                        :value="sleOptions.uuid"-->
-                    <!--                        style="width: auto;height:200px;overflow: auto;background-color:#fff"-->
-                    <!--                      >-->
-                    <!--                        <el-tree-->
-                    <!--                          ref="tree2"-->
-                    <!--                          :data="categoryData"-->
-                    <!--                          :props="defaultProps"-->
-                    <!--                          highlight-current-->
-                    <!--                          @node-click="handleSelClick"-->
-                    <!--                        />-->
-                    <!--                      </el-option>-->
-                    <!--                    </el-select>-->
                     <el-select v-model="listQuery.category_uuid" clearable placeholder="请选择分类状态" style="width: 90%">
                       <el-option
                         v-for="item in categoryData"
@@ -53,7 +31,7 @@
               <el-col :span="8">
                 <el-form-item>
                   <router-link :to="{path: '/cms/article/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加文章</el-button>
                   </router-link>
                   <el-button type="danger" size="small" @click="handleBatchDel">删除</el-button>
                   <el-button type="warning" size="small" @click="handleBatchPub">微信收录</el-button>
@@ -93,7 +71,7 @@
         </el-table-column>
         <el-table-column label="分类" width="auto" align="center">
           <template slot-scope="{row}">
-            <span>{{ row.category_info.title }}</span>
+            <span>{{ row.category_info !== null ? row.category_info.title : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="作者" width="auto" align="center">
@@ -123,20 +101,30 @@
         </el-table-column>
         <el-table-column label="是否置顶" width="auto" align="center">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_top === 2" size="mini" type="text">否</el-button>
+            <el-button v-if="row.is_top === 2" size="mini" type="text" style="color: #A5A8AD;">否</el-button>
             <el-button v-if="row.is_top === 1" size="mini" type="text">是</el-button>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_show === 2" size="mini" type="text">禁用</el-button>
-            <el-button v-if="row.is_show === 1" size="mini" type="text">启用</el-button>
+            <el-button v-if="row.is_show === 2" size="mini" type="text" class="show-disable-text">禁用</el-button>
+            <el-button v-if="row.is_show === 1" size="mini" type="text" class="show-enable-text">启用</el-button>
           </template>
         </el-table-column>
         <el-table-column label="发布" width="auto" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
-            <el-button v-if="row.is_publish === 2" size="mini" type="text">否</el-button>
-            <el-button v-if="row.is_publish === 1" size="mini" type="text">是</el-button>
+            <el-button v-if="row.is_publish === 2" size="mini" type="text" class="show-disable-text">否</el-button>
+            <el-button v-if="row.is_publish === 1" size="mini" type="text" class="show-enable-text">是</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -144,7 +132,7 @@
             <router-link :to="{path: '/cms/article/save/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">编辑</el-button>
             </router-link>
-            <el-button size="mini" type="text" @click="handleDelete(row, $index)">删除</el-button>
+            <el-button size="mini" type="text" style="color: red;" @click="handleDelete(row, $index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -197,30 +185,6 @@ export default {
   },
   mounted() {
     this.getList()
-    // 获取文章分类
-    /* categoryList().then(res => {
-      const data = res.data.items
-      const categoryData = []
-      for (let i = 0; i < data.length; i++) {
-        const children = []
-        if (data[i].children) {
-          for (let j = 0; j < data[i].children.length; j++) {
-            const children_info = {
-              value: data[i].children[j].uuid,
-              label: data[i].children[j].title
-            }
-            children.push(children_info)
-          }
-        }
-        const info = {
-          value: data[i].uuid,
-          label: data[i].title,
-          children: children
-        }
-        categoryData.push(info)
-      }
-      this.categoryData = categoryData
-    })*/
     categoryList().then(res => {
       this.categoryData = res.data.items
     })
@@ -247,8 +211,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {

@@ -14,18 +14,30 @@
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="显示状态：" prop="is_show">
                     <el-select v-model="listQuery.is_show" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isShow" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option
+                        v-for="item in this.$store.getters.isShow"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
                 <el-col v-bind="grid" style="width: auto;">
                   <el-form-item label="是否推荐：" prop="is_recommend">
                     <el-select v-model="listQuery.is_recommend" clearable placeholder="请选择">
-                      <el-option v-for="item in this.$store.getters.isRecommend" :key="item.key" :value="item.value" :label="item.label" />
+                      <el-option
+                        v-for="item in this.$store.getters.isRecommend"
+                        :key="item.key"
+                        :value="item.value"
+                        :label="item.label"
+                      />
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">搜索</el-button>
+                <el-button type="primary" icon="ios-search" label="default" class="mr15" size="small" @click="getList">
+                  搜索
+                </el-button>
                 <el-button class="ResetSearch mr10" size="small" @click="reset()">重置</el-button>
               </el-col>
             </el-row>
@@ -33,7 +45,7 @@
               <el-col :span="5">
                 <el-form-item>
                   <router-link :to="{path: '/exam/category/save'}">
-                    <el-button size="small" type="success" class="mr10">添加</el-button>
+                    <el-button size="small" type="primary" class="mr10">添加分类</el-button>
                   </router-link>
                   <el-button type="danger" @click="handleBatchDel">删除</el-button>
                 </el-form-item>
@@ -79,13 +91,23 @@
         <el-table-column label="是否推荐" width="auto" align="center">
           <template slot-scope="{row}">
             <span v-if="row.is_recommend === 2" class="show-disable-text">否</span>
-            <span v-if="row.is_recommend === 1">是</span>
+            <span v-if="row.is_recommend === 1" class="show-enable-text">是</span>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="auto" align="center">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
-            <span v-if="row.is_show === 1">启用</span>
+            <span v-if="row.is_show === 1" class="show-enable-text">启用</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建时间" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="创建人" align="center">
+          <template slot-scope="{row}">
+            <span>{{ row.creator !== null ? row.creator.name : '' }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -98,7 +120,13 @@
         </el-table-column>
       </el-table>
       <div class="block">
-        <pagination v-show="tableData.total>0" :total="tableData.total" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList" />
+        <pagination
+          v-show="tableData.total>0"
+          :total="tableData.total"
+          :page.sync="listQuery.page"
+          :limit.sync="listQuery.size"
+          @pagination="getList"
+        />
       </div>
     </el-card>
   </div>
@@ -149,8 +177,8 @@ export default {
       list(this.listQuery).then(res => {
         this.tableData.data = res.data.items
         this.tableData.total = res.data.total
+        this.listLoading = false
       })
-      this.listLoading = false
     },
     // 删除
     handleDelete(row, idx) {
@@ -191,9 +219,11 @@ export default {
 .mr10 {
   margin-right: 10px;
 }
+
 ::v-deep .el-card__body {
   padding: 0 !important;
 }
+
 .el-col-lg-12 {
   width: 30%;
 }

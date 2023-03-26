@@ -1,41 +1,104 @@
 <template>
   <div class="divBox">
     <el-card class="box-card">
-      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">返回</el-button>
-      <el-form ref="formValidate" class="form" :model="formValidate" label-width="120px" :rules="ruleValidate" @submit.native.prevent>
+      <el-button icon="el-icon-arrow-left" size="mini" class="pan-back-btn" style="margin-bottom: 20px;" @click="back">
+        返回
+      </el-button>
+      <el-form
+        id="form"
+        ref="formValidate"
+        class="form"
+        :model="formValidate"
+        label-width="120px"
+        :rules="ruleValidate"
+        @submit.native.prevent
+      >
         <div class="dividerTitle">
           <span class="title mr10">基本信息</span>
           <el-divider />
         </div>
         <el-row :gutter="10">
-          <el-col v-bind="grid">
+          <el-col>
             <el-form-item label="试题题目：" prop="title" label-for="title">
-              <el-input v-model.trim="formValidate.title" type="textarea" autosize placeholder="请输入试题题目" maxlength="1000" style="width: 90%" />
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
-            <el-form-item label="消耗积分：" prop="tips_expend_score">
-              <el-input-number v-model="formValidate.tips_expend_score" :min="0" :precision="2" :step="0.1" style="width: 90%" />
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
-            <el-form-item label="奖励积分：" prop="answer_income_score">
-              <el-input-number v-model="formValidate.answer_income_score" :min="0" :precision="2" :step="0.1" style="width: 90%" />
-            </el-form-item>
-          </el-col>
-          <el-col v-bind="grid">
-            <el-form-item label="试题难度：" prop="level">
-              <el-rate v-model="formValidate.level" style="display: contents;" />
+              <ueditor-exam
+                v-model="formValidate.title"
+                :content="formValidate.title"
+                :ueditor-from-height="'100'"
+                style="width: 100%"
+              />
+              <!--              <el-input v-model.trim="formValidate.title" type="textarea" autosize placeholder="请输入试题题目" maxlength="1000" style="width: 90%" />-->
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="试卷封面：" prop="file_uuid">
-              <div class="upLoadPicBox" @click="modalPicTap('1')">
-                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="file_url"></div>
-                <div v-else class="upLoad">
-                  <i class="el-icon-camera cameraIconfont" />
+            <el-form-item label="试题解析：">
+              <ueditor-exam
+                v-model="formValidate.analysis"
+                :content="formValidate.analysis"
+                :ueditor-from-height="'100'"
+                style="width: 100%"
+              />
+            </el-form-item>
+          </el-col>
+          <!--          <el-col>-->
+          <!--            <el-form-item label="试卷封面：" prop="file_uuid">-->
+          <!--              <div class="upLoadPicBox" @click="modalPicTap('1')">-->
+          <!--                <div v-if="formValidate.file_uuid" class="pictrue"><img :src="file_url"></div>-->
+          <!--                <div v-else class="upLoad">-->
+          <!--                  <i class="el-icon-camera cameraIconfont" />-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </el-form-item>-->
+          <!--          </el-col>-->
+        </el-row>
+        <div class="dividerTitle">
+          <span class="title mr10">试题选项</span>
+          <el-divider />
+        </div>
+        <el-row :gutter="10">
+          <el-col>
+            <!--  试题选项-->
+            <div v-for="(options, index) in formValidate.option_item" :key="index" class="item-option">
+              <el-form-item
+                :prop="'option_item.' + index + '.title'"
+                :rules="{ required: true, message: '答案不能为空', trigger: 'blur' }"
+              >
+                <div v-for="(item, indexs) in answerOptions" :key="indexs">
+                  <el-checkbox
+                    v-if="item.key === index"
+                    :key="indexs"
+                    v-model="options.is_check"
+                    :label="'选项'+item.value"
+                    :true-label="1"
+                    :false-label="2"
+                    style="margin-right: 10px;"
+                    border
+                  />
                 </div>
-              </div>
+                <el-input
+                  :model="options.check = index === 0 ? 'A' : index === 1 ? 'B' : index === 2 ? 'C' : index === 3 ? 'D' : index === 4 ? 'E' : index === 5 ? 'F' : ''"
+                  style="display: none;"
+                />
+                <!-- <el-input v-model="options.title" placeholder="请输入" class="options" type="textarea" autosize />-->
+                <ueditor-exam
+                  v-model="options.title"
+                  class="options"
+                  :content="options.title"
+                  :ueditor-from-height="'100'"
+                  style="width: 100%"
+                />
+                <el-button
+                  icon="el-icon-delete"
+                  class="item-options-del-btn"
+                  type="danger"
+                  @click.prevent="removeOptions(options)"
+                >移除
+                </el-button>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col>
+            <el-form-item>
+              <el-button type="primary" icon="el-icon-plus" @click="addOptions">新增</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -46,7 +109,14 @@
         <el-row :gutter="10">
           <el-col v-bind="grid">
             <el-form-item label="试题分类：" prop="category">
-              <el-select v-model="formValidate.category" multiple filterable clearable placeholder="请选择" style="width: 90%">
+              <el-select
+                v-model="formValidate.category"
+                multiple
+                filterable
+                clearable
+                placeholder="请选择"
+                style="width: 90%"
+              >
                 <el-option-group
                   v-for="group in categoryData"
                   :key="group.title"
@@ -65,7 +135,14 @@
           </el-col>
           <el-col v-bind="grid">
             <el-form-item label="试题知识点：" prop="tag">
-              <el-select v-model="formValidate.tag" multiple clearable filterable placeholder="请选择" style="width: 90%">
+              <el-select
+                v-model="formValidate.tag"
+                multiple
+                clearable
+                filterable
+                placeholder="请选择"
+                style="width: 90%"
+              >
                 <el-option-group
                   v-for="group in knowledgeData"
                   :key="group.title"
@@ -92,7 +169,12 @@
               <!--                  :value="item.uuid"-->
               <!--                />-->
               <!--              </el-select>-->
-              <select-page :select.sync="formValidate.collection" url="store/exam/collection/relation" :group="false" :multiple="true" />
+              <select-page
+                :select.sync="formValidate.collection"
+                url="store/exam/collection/relation"
+                :group="false"
+                :multiple="true"
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -102,49 +184,39 @@
         </div>
         <el-row :gutter="10">
           <el-col v-bind="grid">
-            <el-form-item label="显示状态：">
-              <el-radio-group v-model="formValidate.is_show">
-                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">{{ item.label }}</el-radio>
-              </el-radio-group>
+            <el-form-item label="消耗积分：" prop="tips_expend_score">
+              <el-input-number
+                v-model="formValidate.tips_expend_score"
+                :min="0"
+                :precision="2"
+                :step="0.1"
+                style="width: 90%"
+              />
             </el-form-item>
           </el-col>
           <el-col v-bind="grid">
-            <el-form-item label="试题解析：">
-              <el-input v-model="formValidate.analysis" autosize type="textarea" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <div class="dividerTitle">
-          <span class="title mr10">试题选项</span>
-          <el-divider />
-        </div>
-        <el-row :gutter="10">
-          <el-col>
-            <el-form-item
-              v-for="(options, index) in formValidate.option_item"
-              :key="index"
-              :prop="'option_item.' + index + '.title'"
-              :rules="{ required: true, message: '答案不能为空', trigger: 'blur' }"
-            >
-              <el-checkbox
-                v-for="(item, indexs) in answerOptions"
-                v-if="item.key === index"
-                :key="indexs"
-                v-model="options.is_check"
-                :label="'选项'+item.value"
-                :true-label="1"
-                :false-label="2"
-                style="margin-right: 10px;"
-                border
+            <el-form-item label="奖励积分：" prop="answer_income_score">
+              <el-input-number
+                v-model="formValidate.answer_income_score"
+                :min="0"
+                :precision="2"
+                :step="0.1"
+                style="width: 90%"
               />
-              <el-input v-model="options.check = index === 0 ? 'A' : index === 1 ? 'B' : index === 2 ? 'C' : index === 3 ? 'D' : index === 4 ? 'E' : index === 5 ? 'F' : ''" style="display: none;" />
-              <el-input v-model="options.title" placeholder="请输入" class="options" type="textarea" autosize />
-              <el-button icon="el-icon-delete" type="danger" @click.prevent="removeOptions(options)">移除</el-button>
             </el-form-item>
           </el-col>
-          <el-col>
-            <el-form-item>
-              <el-button type="primary" icon="el-icon-plus" @click="addOptions">新增</el-button>
+          <el-col v-bind="grid">
+            <el-form-item label="试题难度：" prop="level">
+              <el-rate v-model="formValidate.level" style="display: contents;" />
+            </el-form-item>
+          </el-col>
+          <el-col v-bind="grid">
+            <el-form-item label="显示状态：">
+              <el-radio-group v-model="formValidate.is_show">
+                <el-radio v-for="(item, index) in this.$store.getters.isShow" :key="index" :label="item.value">
+                  {{ item.label }}
+                </el-radio>
+              </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
@@ -155,6 +227,7 @@
 </template>
 
 <script>
+import ueditorExam from '@/components/ueditorExam'
 // 内容
 import { show, add, edit } from '@/api/exam/option'
 // 试题分类
@@ -164,9 +237,10 @@ import { list as knowledgeList } from '@/api/exam/knowledge'
 // 试题试卷
 import { list as collectionList } from '@/api/exam/collection'
 import SelectPage from '@/components/SelectPage'
+
 export default {
   name: 'SaveOption',
-  components: { SelectPage },
+  components: { SelectPage, ueditorExam },
   data() {
     const validateLevel = (rule, value, callback) => {
       if (this.formValidate.level) {
@@ -262,7 +336,6 @@ export default {
     },
     // 提交数据
     onsubmit(name) {
-      console.log(this.formValidate)
       this.$refs[name].validate((valid) => {
         if (valid) {
           if (this.$route.params.uuid) {
@@ -343,8 +416,9 @@ export default {
   padding: 9px 20px 9px 10px;
 }
 
-.options {
-  width: 30%;
-  margin-right: 10px;
+.item-options-del-btn {
+  height: 35px;
+  margin-left: 20px;
 }
+
 </style>

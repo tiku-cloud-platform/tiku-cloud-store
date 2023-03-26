@@ -6,12 +6,13 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import examRouter from './modules/exam'
-import systemConfigRouter from './modules/system-config'
+import settingRouter from './modules/system-config'
 import userRouter from './modules/user'
 import articleRouter from './modules/article'
 import fileRouter from './modules/file'
 import messageRouter from './modules/message'
 import marketingRouter from './modules/marketing'
+import bookRouter from './modules/book'
 
 export const constantRoutes = [
   {
@@ -54,10 +55,11 @@ export const constantRoutes = [
   userRouter,
   examRouter,
   articleRouter,
+  bookRouter,
   fileRouter,
   messageRouter,
   marketingRouter,
-  systemConfigRouter,
+  settingRouter,
   {
     path: '/setting/uploadPicture',
     component: () => import('@/components/uploadPicture/index.vue'),
