@@ -59,11 +59,10 @@
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="封面" width="70" align="center">
+        <el-table-column label="封面" align="center">
           <template slot-scope="scope">
             <viewer v-if="scope.row.cover_file_info != null"><img
               :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
-              width="70"
               height="70"
             ></viewer>
           </template>
