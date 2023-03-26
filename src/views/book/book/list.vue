@@ -59,15 +59,15 @@
             <span>{{ row.uuid }}</span>
           </template>
         </el-table-column>
-        <!--        <el-table-column label="封面" width="70" align="center">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            <viewer v-if="scope.row.cover_file_info != null"><img-->
-        <!--              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"-->
-        <!--              width="50"-->
-        <!--              height="50"-->
-        <!--            ></viewer>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
+        <el-table-column label="封面" width="70" align="center">
+          <template slot-scope="scope">
+            <viewer v-if="scope.row.cover_file_info != null"><img
+              :src="scope.row.cover_file_info.file_url+scope.row.cover_file_info.file_name"
+              width="50"
+              height="70"
+            ></viewer>
+          </template>
+        </el-table-column>
         <el-table-column label="分类" align="center" :show-overflow-tooltip="true">
           <template slot-scope="{row}">
             <span>{{ row.cate != null ? row.cate.title : '' }}</span>
@@ -78,31 +78,31 @@
             <span>{{ row.title }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="收藏" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.collection_number }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="点赞" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.click_number }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="阅读" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.read_number }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="评分" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.score }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="章节" align="center">
-          <template slot-scope="{row}">
-            <span>{{ row.numbers }}</span>
-          </template>
-        </el-table-column>
+        <!--        <el-table-column label="收藏" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.collection_number }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <!--        <el-table-column label="点赞" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.click_number }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <!--        <el-table-column label="阅读" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.read_number }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <!--        <el-table-column label="评分" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.score }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
+        <!--        <el-table-column label="章节" align="center">-->
+        <!--          <template slot-scope="{row}">-->
+        <!--            <span>{{ row.numbers }}</span>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column label="状态" align="center">
           <template slot-scope="{row}">
             <span v-if="row.is_show === 2" class="show-disable-text">禁用</span>
@@ -130,7 +130,6 @@
             <router-link :to="{path: '/book/book/evaluate/list/'+row.uuid}">
               <el-button type="text" size="mini" class="mr10">点评</el-button>
             </router-link>
-            <!--            <el-button type="text" size="mini" class="mr10" @click="jumpCategory(row.uuid)">书籍</el-button>-->
             <el-button size="mini" type="text" style="color: red" @click="handleDelete(row, $index)"> 删除</el-button>
           </template>
         </el-table-column>
