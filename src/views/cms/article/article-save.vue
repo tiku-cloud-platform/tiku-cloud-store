@@ -187,8 +187,13 @@
             :clearable="true"
           />
         </el-form-item>
+        <el-form-item label="编辑器类型：" prop="content_type">
+          <el-radio v-model="formValidate.content_type" label="1">ueditor</el-radio>
+          <el-radio v-model="formValidate.content_type" label="2">markdown</el-radio>
+        </el-form-item>
         <el-form-item label="文章内容：" prop="content">
-          <ueditor-from v-model="formValidate.content" :content="formValidate.content" />
+          <ueditor-from v-if="formValidate.content_type === 1" v-model="formValidate.content" :content="formValidate.content" />
+          <markdown-editor v-if="formValidate.content_type === 2" v-model="formValidate.content" :initial-value="formValidate.content" />
         </el-form-item>
         <el-button type="primary" class="submission" @click="onsubmit('formValidate')">提交</el-button>
       </el-form>
@@ -198,6 +203,7 @@
 
 <script>
 import ueditorFrom from '@/components/ueditorFrom'
+import MarkdownEditor from '@/components/MarkdownEditor'
 import { list as categoryList } from '@/api/article/category'
 // 内容
 import { add, edit, show } from '@/api/article/list'
@@ -206,11 +212,11 @@ import { getName } from '@/utils/auth'
 
 export default {
   name: 'ArticleSave',
-  components: { ueditorFrom },
+  components: { ueditorFrom, MarkdownEditor },
   data() {
     const validateArticleCategory = (rule, value, callback) => {
       if (!this.formValidate.article_category_uuid) {
-        callback(new Error('请选择新闻分类'))
+        callback(new Error('请选择文章分类'))
       } else {
         callback()
       }
@@ -226,7 +232,7 @@ export default {
       if (this.formValidate.file_uuid) {
         callback()
       } else {
-        callback(new Error('请上传新闻图片'))
+        callback(new Error('请上传文章图片'))
       }
     }
     return {
@@ -254,17 +260,19 @@ export default {
         click_score: 0,
         collection_score: 0,
         read_expend_score: 0,
-        content_desc: ''
+        content_desc: '',
+        content_type: 1
       },
       ruleValidate: {
-        title: [{ required: true, message: '请输入新闻标题', trigger: 'blur' }],
+        title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }],
+        content_type: [{ required: true, message: '请选择编辑器格式', trigger: 'blur' }],
         content_desc: [{ required: true, message: '请输入文章简介', trigger: 'blur' }],
         article_category_uuid: [{ required: true, validator: validateArticleCategory, trigger: 'change' }],
         publish_date: [{ required: true, validator: validatePublishDate, trigger: 'change' }],
-        content: [{ required: true, message: '请输入新闻内容', trigger: 'blur' }],
+        content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }],
         file_uuid: [{ required: true, validator: validateFileUuid, trigger: 'change' }],
-        author: [{ required: true, message: '请输入新闻作者', trigger: 'blur' }],
-        source: [{ required: true, message: '请输入新闻来源', trigger: 'blur' }]
+        author: [{ required: true, message: '请输入文章作者', trigger: 'blur' }],
+        source: [{ required: true, message: '请输入文章来源', trigger: 'blur' }]
       },
       categoryData: [],
       sleOptions: {
@@ -362,7 +370,8 @@ export default {
           click_score: data.click_score,
           collection_score: data.collection_score,
           read_expend_score: data.read_expend_score,
-          content_desc: data.content_desc
+          content_desc: data.content_desc,
+          content_type: data.content_type
         }
       })
     }
